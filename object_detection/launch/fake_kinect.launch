@@ -1,0 +1,11 @@
+<launch>
+
+  <node name="fake_kinect_camera_info" pkg="object_detection" type="fake_kinect" output="screen" />
+
+  <node name="fake_kinect_images" pkg="image_transport" type="republish" args="compressed in:=/head_mount_kinect/depth/image_raw raw out:=/fake_kinect/depth/image_raw" output="screen" respawn="false">
+  
+  <remap from="head_mount_kinect/depth/camera_info" to="fake_kinect/depth/camera_info" />
+  
+  </node>
+
+</launch>

@@ -1,0 +1,8 @@
+<launch>
+
+  <include file="$(find planning)/launch/demo.launch"/>
+  
+  <node name="planning_scene_tutorial" pkg="planning" type="planning_scene_tutorial" respawn="false" output="screen">
+  </node>
+  
+</launch>

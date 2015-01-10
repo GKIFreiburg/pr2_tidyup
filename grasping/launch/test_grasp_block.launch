@@ -1,0 +1,9 @@
+<launch>
+
+ <node name="test_grasps" pkg="grasping" type="test_grasp_block" output="screen">
+    <rosparam command="load" file="$(find moveit_simple_grasps)/config/pr2_grasp_data.yaml"/>
+    <!-- needed by EE (end-effector) marker -->
+    <!--rosparam command="load" file="$(find pr2_moveit_config)/config/kinematics.yaml"/--> 
+ </node>
+ 
+ </launch>
