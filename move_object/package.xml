@@ -40,6 +40,10 @@
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>moveit_visual_tools</build_depend>
+  <build_depend>moveit_simple_grasps</build_depend>
+  <run_depend>moveit_visual_tools</run_depend>
+  <run_depend>moveit_simple_grasps</run_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

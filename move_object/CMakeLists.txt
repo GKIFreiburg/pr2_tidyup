@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   moveit_ros_planning_interface
   moveit_core
   moveit_visual_tools
+  moveit_simple_grasps
   tf
   tf_conversions
   trajectory_msgs
@@ -105,7 +106,11 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
+
+# include directory of current package
 include_directories(include)
+# include directories of all packages listed in find_package(catkin ...
+include_directories(${catkin_INCLUDE_DIRS})
 include_directories(/usr/local/include)
 
 link_directories(/usr/local/lib)
