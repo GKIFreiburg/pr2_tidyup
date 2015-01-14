@@ -1,0 +1,36 @@
+# To install ORK follow these steps
+# mkdir ws && cd ws
+# export DISTRO=hydro
+# sudo apt-get install libopenni-dev ros-${DISTRO}-catkin ros-${DISTRO}-ecto* ros-${DISTRO}-opencv-candidate ros-${DISTRO}-moveit-msgs
+# source /opt/ros/${DISTRO}/setup.sh
+# wstool init src ork.rosinstall
+# cd src && wstool update -j8
+# cd .. && rosdep install --from-paths src -i -y
+# catkin_make
+# source devel/setup.bash
+
+- git: {local-name: ecto/ecto, uri: "https://github.com/plasmodic/ecto"}
+- git: {local-name: ecto/image_pipeline, uri: "https://github.com/plasmodic/ecto_image_pipeline"}
+- git: {local-name: ecto/openni, uri: "https://github.com/plasmodic/ecto_openni"}
+- git: {local-name: ecto/opencv, uri: "https://github.com/plasmodic/ecto_opencv"}
+- git: {local-name: ecto/pcl, uri: "https://github.com/plasmodic/ecto_pcl"}
+- git: {local-name: ecto/ros, uri: "https://github.com/plasmodic/ecto_ros"}
+
+
+- git: {local-name: ork/object_recognition_core, uri: "https://github.com/wg-perception/object_recognition_core"}
+- git: {local-name: ork/capture, uri: "https://github.com/wg-perception/capture"}
+- git: {local-name: ork/reconstruction, uri: "https://github.com/wg-perception/reconstruction"}
+- git: {local-name: ork/linemod, uri: "https://github.com/wg-perception/linemod"}
+- git: {local-name: ork/renderer, uri: "https://github.com/wg-perception/ork_renderer"}
+- git: {local-name: ork/tabletop, uri: "https://github.com/wg-perception/tabletop"}
+- git: {local-name: ork/tod, uri: "https://github.com/wg-perception/tod"}
+- git: {local-name: ork/transparent_objects, uri: "https://github.com/wg-perception/transparent_objects"}
+- git: {local-name: ork/object_recognition_ros, uri: "https://github.com/wg-perception/object_recognition_ros"}
+# - git: {local-name: ork/object_recognition_msgs, uri: "https://github.com/wg-perception/object_recognition_msgs"}
+- git: {local-name: ork/object_recognition_household, uri: "https://github.com/wg-perception/object_recognition_household"}
+
+- git: {local-name: household_objects_database, uri: "https://github.com/ros-interactive-manipulation/household_objects_database"}
+
+- git: {local-name: pr2_tidyup, uri: "https://github.com/GKIFreiburg/pr2_tidyup"}
+
+
