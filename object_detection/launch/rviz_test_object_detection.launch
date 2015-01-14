@@ -1,0 +1,9 @@
+<launch>
+ # The visualization in rviz and load plugins
+  <arg name="config" default="-d $(find object_detection)/conf/filtered_kinect.rviz" />
+
+  <node name="$(anon rviz)" pkg="rviz" type="rviz" respawn="false"
+	args="$(arg config)" output="screen">
+  </node>
+ 
+</launch>
