@@ -15,10 +15,10 @@ rosrun object_recognition_core object_add.py -n coke -d "A universal can of coke
 
 
 # Add a mesh for the object / also possible to import .obj files
-export OBJECT_ID=fba1f0fcaac81601c714332d34007a44	
+export OBJECT_ID=
 rosrun object_recognition_core mesh_add.py $OBJECT_ID `rospack find object_detection`/objects/coke/coke.stl --commit
 
 # Deleting an object
-export OBJECT_ID=fba1f0fcaac81601c714332d34005f52
+export OBJECT_ID=
 rosrun object_recognition_core object_delete.py $OBJECT_ID --commit
 
