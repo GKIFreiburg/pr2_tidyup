@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(object_detection)
+project(export_mesh)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED COMPONENTS roscpp)
+find_package(catkin REQUIRED household_objects_database)
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -77,7 +77,7 @@ find_package(catkin REQUIRED COMPONENTS roscpp)
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES simulation
+#  LIBRARIES export_mesh
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -91,20 +91,19 @@ catkin_package(
 # include_directories(include)
 
 ## Declare a cpp library
-# add_library(simulation
-#   src/${PROJECT_NAME}/simulation.cpp
+# add_library(export_mesh
+#   src/${PROJECT_NAME}/export_mesh.cpp
 # )
 
 ## Declare a cpp executable
-# add_executable(simulation_node src/simulation_node.cpp)
-add_executable(filter_kinect filter_kinect.cpp)
+add_executable(export_mesh export_mesh.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(simulation_node simulation_generate_messages_cpp)
+# add_dependencies(export_mesh_node export_mesh_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
- target_link_libraries(filter_kinect
+target_link_libraries(export_mesh
    ${catkin_LIBRARIES}
 )
 
@@ -123,7 +122,7 @@ add_executable(filter_kinect filter_kinect.cpp)
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS simulation simulation_node
+# install(TARGETS export_mesh export_mesh_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -148,7 +147,7 @@ add_executable(filter_kinect filter_kinect.cpp)
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_simulation.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_export_mesh.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

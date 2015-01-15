@@ -1,0 +1,24 @@
+# Link to CouchDB to view Meshes and Objects
+http://localhost:5984/or_web_ui/_design/viewer/index.html
+
+# Create an Object in the DB
+rosrun object_recognition_core object_add.py -n coke -d "A universal can of coke" --commit
+
+###############################################################################
+#
+#			IMPORTANT
+#
+#	Meshes must have their origin projected on the table.
+#   f.ex. coke can has the origin at the bottom in the center of the can
+#
+###############################################################################
+
+
+# Add a mesh for the object / also possible to import .obj files
+export OBJECT_ID=fba1f0fcaac81601c714332d34007a44	
+rosrun object_recognition_core mesh_add.py $OBJECT_ID `rospack find object_detection`/objects/coke/coke.stl --commit
+
+# Deleting an object
+export OBJECT_ID=fba1f0fcaac81601c714332d34005f52
+rosrun object_recognition_core object_delete.py $OBJECT_ID --commit
+
