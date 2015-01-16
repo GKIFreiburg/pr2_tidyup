@@ -26,6 +26,7 @@
 - git: {local-name: ork/tod, uri: "https://github.com/wg-perception/tod"}
 - git: {local-name: ork/transparent_objects, uri: "https://github.com/wg-perception/transparent_objects"}
 - git: {local-name: ork/object_recognition_ros, uri: "https://github.com/wg-perception/object_recognition_ros"}
+- git: {local-name: ork/object_recognition_ros_visualization, uri: "https://github.com/wg-perception/object_recognition_ros_visualization"}
 # - git: {local-name: ork/object_recognition_msgs, uri: "https://github.com/wg-perception/object_recognition_msgs"}
 - git: {local-name: ork/object_recognition_household, uri: "https://github.com/wg-perception/object_recognition_household"}
 
