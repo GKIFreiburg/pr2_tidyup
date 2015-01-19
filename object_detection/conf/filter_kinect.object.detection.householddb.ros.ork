@@ -57,7 +57,7 @@ pipeline2:
       port: 5432
       user: 'willow'
       password: 'willow'
-      name: 'household_objects-0.7'
+      name: 'household_objects'
       module: 'object_recognition_tabletop'
 #      type: CouchDB
 #      root: http://localhost:5984

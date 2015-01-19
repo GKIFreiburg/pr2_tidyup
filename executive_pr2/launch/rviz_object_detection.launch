@@ -1,0 +1,10 @@
+<launch>
+  # Start rviz, loading the planning_scene
+  <include file="$(find executive_pr2)/launch/rviz_pr2_planning_scene_move_body.launch">
+  </include>
+
+  # Start object detection - table and object detection (and filter kinect node)
+  <include file="$(find object_detection)/launch/filtered_kinect_detection.launch">
+  </include>
+
+</launch>

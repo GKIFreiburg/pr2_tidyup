@@ -1,0 +1,11 @@
+<launch>
+  <!-- node which filters bad kinect images an publishes all good images
+       to topic /filtered_kinect/depth/* -->
+  <node name="filter_kinect" pkg="object_detection" type="filter_kinect" output="screen" />
+
+  # Executes table detection with the right config
+  <node name="table_detection" pkg="object_recognition_core" type="detection" args="-c $(find object_detection)/conf/filter_kinect.table.detection.ros.ork" output="screen" respawn="false">
+  
+  </node>
+
+</launch>

@@ -1,26 +1,19 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(planning)
+project(pick)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED roscpp
-#moveit_commander
 moveit_core
 moveit_msgs
 moveit_planners_ompl
-#moveit_ros_benchmarks
-#moveit_ros_benchmarks_gui
-#moveit_ros_manipulation
+moveit_ros_manipulation
 moveit_ros_move_group
-#moveit_ros_perception
 moveit_ros_planning
 moveit_ros_planning_interface
-#moveit_ros_robot_interaction
 moveit_ros_visualization
 moveit_ros_warehouse
-#moveit_setup_assistant
-#moveit_simple_controller_manager
 )
 
 ## System dependencies are found with CMake's conventions
@@ -94,7 +87,7 @@ moveit_ros_warehouse
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES planning
+#  LIBRARIES pick
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -102,100 +95,27 @@ catkin_package(
 ###########
 ## Build ##
 ###########
+
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 # include_directories(include)
 
 ## Declare a cpp library
-# add_library(planning
-#   src/${PROJECT_NAME}/planning.cpp
+# add_library(pick
+#   src/${PROJECT_NAME}/pick.cpp
 # )
 
 ## Declare a cpp executable
-# move group tutorial
-add_executable(move_group_tutorial move_group_tutorial.cpp)
-add_executable(pose_goal pose_goal.cpp)
-add_executable(joint_space joint_space.cpp)
-add_executable(path_constraints path_constraints.cpp)
-add_executable(cartesian_paths cartesian_paths.cpp)
-add_executable(objects objects.cpp)
-add_executable(dual_arms dual_arms.cpp)
-add_executable(get_position get_position.cpp)
-add_executable(cube cube.cpp)
-
-# planning scene
-add_executable(planning_scene_tutorial planning_scene_tutorial.cpp)
-
-# planning scene ros api
-add_executable(planning_scene_ros_api_tutorial planning_scene_ros_api_tutorial.cpp)
-
-add_executable(move_body_parts_for_detection move_body_parts_for_detection.cpp)
-
-add_executable(move_to_initial_position move_to_initial_position.cpp)
-
+add_executable(pick src/pick.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(planning_node planning_generate_messages_cpp)
+# add_dependencies(pick_node pick_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# move group tutorial
-target_link_libraries(move_group_tutorial
+target_link_libraries(pick
   ${catkin_LIBRARIES}
 )
-
-target_link_libraries(pose_goal
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(joint_space
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(path_constraints
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(cartesian_paths
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(objects
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(dual_arms
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(get_position
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(cube
-  ${catkin_LIBRARIES}
-)
-
-# planning scene
-target_link_libraries(planning_scene_tutorial
-  ${catkin_LIBRARIES}
-)
-
-# planning scene ros api
-target_link_libraries(planning_scene_ros_api_tutorial
-  ${catkin_LIBRARIES}
-)
-
-# needed by detection
-target_link_libraries(move_body_parts_for_detection
-  ${catkin_LIBRARIES}
-)
-
-# move to initial position
-target_link_libraries(move_to_initial_position
-  ${catkin_LIBRARIES}
-)
-
 
 #############
 ## Install ##
@@ -212,7 +132,7 @@ target_link_libraries(move_to_initial_position
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS planning planning_node
+# install(TARGETS pick pick_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -237,7 +157,7 @@ target_link_libraries(move_to_initial_position
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_planning.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_pick.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
