@@ -1,9 +1,0 @@
-<launch>
-
-  <node name="filter_kinect" pkg="object_detection" type="filter_kinect" output="screen" />
-
-  <node name="object_detection" pkg="object_recognition_core" type="detection" args="-c $(find object_detection)/conf/filter_kinect.object.detection.householddb.ros.ork" output="screen" respawn="false">
-  
-  </node>
-
-</launch>
