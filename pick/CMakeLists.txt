@@ -14,6 +14,7 @@ moveit_ros_planning
 moveit_ros_planning_interface
 moveit_ros_visualization
 moveit_ros_warehouse
+rosbag
 )
 
 ## System dependencies are found with CMake's conventions

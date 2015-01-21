@@ -91,7 +91,7 @@ int main(int argc, char **argv)
 	// Now, let's modify one of the joints, plan to the new joint
 	// space goal and visualize the plan.
 	// group_variable_Values[1] corresponds to head_tilt_joint
-	group_variable_values[1] = 0.6;
+	group_variable_values[1] = 0.80;
 	head_group.setJointValueTarget(group_variable_values);
 
 
