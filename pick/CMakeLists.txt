@@ -109,12 +109,18 @@ catkin_package(
 ## Declare a cpp executable
 add_executable(pick src/pick.cpp)
 
+add_executable(pick_place src/pick_place.cpp)
+
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(pick_node pick_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(pick
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(pick_place
   ${catkin_LIBRARIES}
 )
 
