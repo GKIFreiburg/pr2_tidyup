@@ -96,23 +96,23 @@ void pick(moveit::planning_interface::MoveGroup &group)
 
 	g.post_grasp_retreat.direction.header.frame_id = "base_footprint";
 	g.post_grasp_retreat.direction.vector.z = 1.0;
-	g.post_grasp_retreat.min_distance = 0.1;
+	g.post_grasp_retreat.min_distance = 0.12;
 	g.post_grasp_retreat.desired_distance = 0.2;
 
-	//g.pre_grasp_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
+	g.pre_grasp_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
 	//g.pre_grasp_posture.joint_names.resize(1, "r_gripper_joint");
-	g.pre_grasp_posture.joint_names.resize(1, "r_gripper_l_finger_joint");
+//	g.pre_grasp_posture.joint_names.resize(1, "r_gripper_l_finger_joint");
 	g.pre_grasp_posture.points.resize(1);
 	g.pre_grasp_posture.points[0].positions.resize(1);
 	g.pre_grasp_posture.points[0].positions[0] = 1.0;
-	g.pre_grasp_posture.points[0].time_from_start = ros::Duration(4.0);
+	g.pre_grasp_posture.points[0].time_from_start = ros::Duration(15.0);
 
 	g.grasp_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
 	//g.grasp_posture.joint_names.resize(1, "r_gripper_joint");
 	g.grasp_posture.points.resize(1);
 	g.grasp_posture.points[0].positions.resize(1);
 	g.grasp_posture.points[0].positions[0] = 0;
-	g.grasp_posture.points[0].time_from_start = ros::Duration(4.0);
+	g.grasp_posture.points[0].time_from_start = ros::Duration(15.0);
 
 
 	/*
