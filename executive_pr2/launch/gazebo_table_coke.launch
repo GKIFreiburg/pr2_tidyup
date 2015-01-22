@@ -27,7 +27,7 @@
    
   <!-- spawn a coke can (.stl object) -->
   <node name="spawn_coke" pkg="gazebo_ros" type="spawn_model" 
-   args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 0.5 -y -0.45 -z 0.55" 
+   args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 0.5 -y -0.75 -z 0.55" 
    respawn="false" output="screen" /> 
 
   <!-- parameters that give you reasonable physics as well as good speed -->
