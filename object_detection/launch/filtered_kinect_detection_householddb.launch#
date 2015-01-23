@@ -12,4 +12,9 @@
   <node name="object_detection" pkg="object_recognition_core" type="detection" args="-c $(find object_detection)/conf/filter_kinect.object.detection.householddb.ros.ork" output="screen" respawn="false">
   </node>
 
+  <!-- Node publishing object information of the detected objects such as
+    name, mesh, ground thruth point cloud -->
+  <node pkg="object_recognition_ros" type="object_information_server" name="object_information_server" respawn="true" output="screen">
+  </node>
+
 </launch>
