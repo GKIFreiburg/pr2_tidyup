@@ -69,16 +69,16 @@ void pick(moveit::planning_interface::MoveGroup &group)
 	std::vector<moveit_msgs::Grasp> grasps;
 
 	moveit_msgs::Grasp g;
-	for (int i = 20; i < 40; i++) {
-		for (int j = 0; j < 20; j++) {
-			for (int k = 0; k < 20; k++) {
+//	for (int i = 20; i < 40; i++) {
+//		for (int j = 0; j < 20; j++) {
+//			for (int k = 0; k < 20; k++) {
 
 	geometry_msgs::PoseStamped p;
 	p.header.frame_id = "base_link";
 	p.header.stamp = ros::Time::now();
 	//p.pose.position.x = 0.25;
-	p.pose.position.x = 0.01 * i;
-	p.pose.position.y = -0.45;
+	p.pose.position.x = 0.32;
+	p.pose.position.y = -0.75;
 	p.pose.position.z = 0.58;
 	p.pose.orientation.x = 0;
 	p.pose.orientation.y = 0;
@@ -91,29 +91,28 @@ void pick(moveit::planning_interface::MoveGroup &group)
 
 	g.pre_grasp_approach.direction.vector.x = 1.0;
 	g.pre_grasp_approach.direction.header.frame_id = "r_wrist_roll_link";
-	g.pre_grasp_approach.min_distance = 0.2;
-	g.pre_grasp_approach.min_distance = 0.01 * j;
-	g.pre_grasp_approach.desired_distance = 0.4;
-	g.pre_grasp_approach.desired_distance = 0.01 * k;
+	g.pre_grasp_approach.min_distance = 0.12;
+	g.pre_grasp_approach.desired_distance = 0.2;
 
 	g.post_grasp_retreat.direction.header.frame_id = "base_footprint";
 	g.post_grasp_retreat.direction.vector.z = 1.0;
-	g.post_grasp_retreat.min_distance = 0.1;
+	g.post_grasp_retreat.min_distance = 0.12;
 	g.post_grasp_retreat.desired_distance = 0.2;
 
-	//g.pre_grasp_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
-	g.pre_grasp_posture.joint_names.resize(1, "r_gripper_joint");
+	g.pre_grasp_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
+	//g.pre_grasp_posture.joint_names.resize(1, "r_gripper_joint");
+//	g.pre_grasp_posture.joint_names.resize(1, "r_gripper_l_finger_joint");
 	g.pre_grasp_posture.points.resize(1);
 	g.pre_grasp_posture.points[0].positions.resize(1);
 	g.pre_grasp_posture.points[0].positions[0] = 1.0;
-	g.pre_grasp_posture.points[0].time_from_start = ros::Duration(4.0);
+	g.pre_grasp_posture.points[0].time_from_start = ros::Duration(15.0);
 
-	//g.grasp_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
-	g.grasp_posture.joint_names.resize(1, "r_gripper_joint");
+	g.grasp_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
+	//g.grasp_posture.joint_names.resize(1, "r_gripper_joint");
 	g.grasp_posture.points.resize(1);
 	g.grasp_posture.points[0].positions.resize(1);
 	g.grasp_posture.points[0].positions[0] = 0;
-	g.grasp_posture.points[0].time_from_start = ros::Duration(4.0);
+	g.grasp_posture.points[0].time_from_start = ros::Duration(15.0);
 
 
 	/*
@@ -148,9 +147,9 @@ void pick(moveit::planning_interface::MoveGroup &group)
 	g.grasp_posture.points[0].time_from_start = ros::Duration(4);
 */
 	grasps.push_back(g);
-			}
-		}
-	}
+//			}
+//		}
+//	}
 	//group.setSupportSurfaceName("table");
 
 	rosbag::Bag bag;
@@ -307,17 +306,17 @@ int main(int argc, char **argv)
 	//co.header.frame_id = "base_link";
 
 	// Look for specific object
-	for (std::size_t i = 0; i < recognizedObjects->objects.size(); i++)
+//	for (std::size_t i = 0; i < recognizedObjects->objects.size(); i++)
 	{
 	  // This line create each time a new element with a new address
 	  // const object_recognition_msgs::RecognizedObject object = recognizedObjects->objects[i];
 
 	  // Creating an object an rewrite for each object the address, so get the current object.
-	  const object_recognition_msgs::RecognizedObject &object = recognizedObjects->objects[i];
-	  std::string dbkey = object.type.key;
-	  std::string db = object.type.db;
-
-	  ROS_INFO("Object: # %lu - key: %s and db: %s", i, dbkey.c_str(), db.c_str());
+//	  const object_recognition_msgs::RecognizedObject &object = recognizedObjects->objects[i];
+//	  std::string dbkey = object.type.key;
+//	  std::string db = object.type.db;
+//
+//	  ROS_INFO("Object: # %lu - key: %s and db: %s", i, dbkey.c_str(), db.c_str());
 
 	  // remove coke
 	  co.id = "coke_household";
@@ -327,7 +326,7 @@ int main(int argc, char **argv)
 	  //co.header = object.header;
 	  co.header.frame_id = "base_link";
 	  co.header.stamp = ros::Time::now();
-	  co.type = object.type;
+	  //co.type = object.type;
 	  co.id = "coke_household";
 
 
@@ -339,7 +338,7 @@ int main(int argc, char **argv)
 	  co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Z] = 0.12;
 	  co.primitive_poses.resize(1);
 	  co.primitive_poses[0].position.x = 0.5;
-	  co.primitive_poses[0].position.y = -0.45;
+	  co.primitive_poses[0].position.y = -0.75;
 	  co.primitive_poses[0].position.z = 0.56;
 	  co.primitive_poses[0].orientation.w = 1;
 

@@ -4,13 +4,16 @@
   # and the current state of the world as seen by the planner
   <include file="$(find pr2_moveit_config)/launch/move_group.launch">
     <arg name="publish_monitored_planning_scene" value="true" />
+    <arg name="info" value="true" />
   </include>
 
   # The visualization in rviz
+  <!--
   <include file="$(find executive_pr2)/launch/moveit_rviz.launch">
     <arg name="config" value="true"/>
     <arg name="debug" value="false"/>
   </include>
+  -->
 
   # Move arms out of the field of view and lower head to look at table
   <node name="move_body_parts_for_detection" pkg="planning" type="move_body_parts_for_detection">
