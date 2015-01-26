@@ -334,7 +334,7 @@ bool publishCokeBlockToPlanningScene(const ros::Publisher &pub_co, const geometr
 	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_X] = 0.067;
 	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Y] = 0.067;
 	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Z] = 0.12;
-	co.primitive_poses.resize(1);
+	//co.primitive_poses.resize(1);
 	co.primitive_poses.push_back(poseCokeBlock);
 //	co.primitive_poses[0].position.x = 0.5;
 //	co.primitive_poses[0].position.y = -0.75;
@@ -434,11 +434,22 @@ int main(int argc, char **argv)
 	// wait a bit for ros things to initialize
 	ros::WallDuration(1.0).sleep();
 
-	if (!publishDetectedObjectsToPlanningScene(client, pub_co))
-		ROS_WARN("Could not add detected objects to planning scene");
+//	if (!publishDetectedObjectsToPlanningScene(client, pub_co))
+//		ROS_WARN("Could not add detected objects to planning scene");
+    geometry_msgs::PoseStamped p;
+    p.header.frame_id = "base_link";
+    p.header.stamp = ros::Time::now();
+    //p.pose.position.x = 0.25;
+    p.pose.position.x = 0.32;
+    p.pose.position.y = -0.75;
+    p.pose.position.z = 0.58;
+    p.pose.orientation.x = 0;
+    p.pose.orientation.y = 0;
+    p.pose.orientation.z = 0;
+    p.pose.orientation.w = 1;
+	publishCokeBlockToPlanningScene(pub_co, p.pose);
 
-
-	//pick(group);
+	pick(group);
 
 	ros::WallDuration(1.0).sleep();
 
