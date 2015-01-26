@@ -35,21 +35,22 @@
 /* Author: Ioan Sucan */
 
 #include <ros/ros.h>
+#include <cstdlib>
 
 // MoveIt!
 #include <moveit/planning_scene_monitor/planning_scene_monitor.h>
 #include <moveit/move_group_interface/move_group.h>
 #include <moveit_msgs/CollisionObject.h>
-#include <object_recognition_msgs/RecognizedObjectArray.h>
 #include <shape_tools/solid_primitive_dims.h>
 
 #include <shape_msgs/Mesh.h>
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/PoseWithCovarianceStamped.h>
 
-
+#include <object_recognition_msgs/GetObjectInformation.h>
 #include <object_recognition_msgs/ObjectInformation.h>
 #include <object_recognition_msgs/ObjectType.h>
+#include <object_recognition_msgs/RecognizedObjectArray.h>
 
 #include <tf/transform_listener.h>
 
@@ -273,15 +274,81 @@ void recognizedObjectsReceived(
 	recognizedObjects = msgIn;
 }
 
+bool publishDetectedObjectsToPlanningScene(ros::ServiceClient &client, const ros::Publisher &pub_co){
+
+	if (recognizedObjects->objects.empty()) {
+		ROS_WARN("RecognizedObjectArray is empty! No objects are added to the planning scene");
+		return false;
+	}
+
+	for (std::size_t i = 0; i < recognizedObjects->objects.size(); i++)
+	{
+		// Creating an object an rewrite for each object the address, so get the current object.
+		const object_recognition_msgs::RecognizedObject &object = recognizedObjects->objects[i];
+
+		object_recognition_msgs::GetObjectInformation srv;
+		srv.request.type = object.type;
+
+		object_recognition_msgs::ObjectInformation information;
+		if (client.call(srv))
+		{
+			information = srv.response.information;
+			ROS_INFO("Receiving information of object #: %lu", i);
+		} else {
+			ROS_WARN("Failed to call service get_object_info");
+			return false;
+		}
+
+		// Creating collision object
+		moveit_msgs::CollisionObject co;
+		co.header = object.header;
+
+		co.id = information.name;
+
+		co.meshes.resize(1);
+		co.meshes.push_back(information.ground_truth_mesh);
+		co.mesh_poses.resize(1);
+		co.mesh_poses.push_back(object.pose.pose.pose);
+		co.type = object.type;
+		co.operation = co.ADD;
+
+		// publish object to planning scene
+		pub_co.publish(co);
+	}
+
+	return true;
+}
+
+// Publishing a coke, estimated by a block to the planning scene.
+// Pose w.r.t. base_link
+bool publishCokeBlockToPlanningScene(const ros::Publisher &pub_co, const geometry_msgs::Pose poseCokeBlock)
+{
+	moveit_msgs::CollisionObject co;
+	co.header.stamp = ros::Time::now();
+	co.header.frame_id = "base_link";
+
+	co.id = "cokeBox";
+	co.primitives.resize(1);
+	co.primitives[0].type = shape_msgs::SolidPrimitive::BOX;
+	co.primitives[0].dimensions.resize(shape_tools::SolidPrimitiveDimCount<shape_msgs::SolidPrimitive::BOX>::value);
+	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_X] = 0.067;
+	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Y] = 0.067;
+	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Z] = 0.12;
+	co.primitive_poses.resize(1);
+	co.primitive_poses.push_back(poseCokeBlock);
+//	co.primitive_poses[0].position.x = 0.5;
+//	co.primitive_poses[0].position.y = -0.75;
+//	co.primitive_poses[0].position.z = 0.56;
+//	co.primitive_poses[0].orientation.w = 1;
+
+	co.operation = co.ADD;
+	pub_co.publish(co);
+
+	return true;
+}
 
 int main(int argc, char **argv)
 {
-	if (argc != 1 && argc != 2)
-	{
-		ROS_ERROR("Usage: rosrun pick pick <file containing moveit_msgs/Grasp");
-		exit(EXIT_FAILURE);
-	}
-
 	ros::init (argc, argv, "right_arm_pick_place");
 	ros::AsyncSpinner spinner(1);
 	spinner.start();
@@ -290,9 +357,9 @@ int main(int argc, char **argv)
 	ros::Publisher pub_co = nh.advertise<moveit_msgs::CollisionObject>("collision_object", 10);
 	ros::Publisher pub_aco = nh.advertise<moveit_msgs::AttachedCollisionObject>("attached_collision_object", 10);
 
-	ros::Subscriber sub = nh.subscribe(
-	"/recognized_object_array", 10,
-	&recognizedObjectsReceived);
+	ros::Subscriber sub = nh.subscribe("/recognized_object_array", 10,	&recognizedObjectsReceived);
+
+	ros::ServiceClient client = nh.serviceClient<object_recognition_msgs::GetObjectInformation>("get_object_info");
 
 	ros::WallDuration(1.0).sleep();
 	ros::spinOnce();
@@ -300,80 +367,13 @@ int main(int argc, char **argv)
 	moveit::planning_interface::MoveGroup group("right_arm");
 	group.setPlanningTime(45.0);
 
-
-	moveit_msgs::CollisionObject co;
-	//co.header.stamp = ros::Time::now();
-	//co.header.frame_id = "base_link";
-
-	// Look for specific object
-//	for (std::size_t i = 0; i < recognizedObjects->objects.size(); i++)
-	{
-	  // This line create each time a new element with a new address
-	  // const object_recognition_msgs::RecognizedObject object = recognizedObjects->objects[i];
-
-	  // Creating an object an rewrite for each object the address, so get the current object.
-//	  const object_recognition_msgs::RecognizedObject &object = recognizedObjects->objects[i];
-//	  std::string dbkey = object.type.key;
-//	  std::string db = object.type.db;
-//
-//	  ROS_INFO("Object: # %lu - key: %s and db: %s", i, dbkey.c_str(), db.c_str());
-
-	  // remove coke
-	  co.id = "coke_household";
-	  co.operation = moveit_msgs::CollisionObject::REMOVE;
-	  pub_co.publish(co);
-
-	  //co.header = object.header;
-	  co.header.frame_id = "base_link";
-	  co.header.stamp = ros::Time::now();
-	  //co.type = object.type;
-	  co.id = "coke_household";
-
-
-	  co.primitives.resize(1);
-	  co.primitives[0].type = shape_msgs::SolidPrimitive::BOX;
-	  co.primitives[0].dimensions.resize(shape_tools::SolidPrimitiveDimCount<shape_msgs::SolidPrimitive::BOX>::value);
-	  co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_X] = 0.067;
-	  co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Y] = 0.067;
-	  co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Z] = 0.12;
-	  co.primitive_poses.resize(1);
-	  co.primitive_poses[0].position.x = 0.5;
-	  co.primitive_poses[0].position.y = -0.75;
-	  co.primitive_poses[0].position.z = 0.56;
-	  co.primitive_poses[0].orientation.w = 1;
-
-
-	/*
-	  ROS_INFO("CONFIDENCE %f", object.confidence);
-	  shape_msgs::Mesh mesh = object.bounding_mesh;
-	  ROS_INFO_STREAM("MESH: \n" << mesh);
-
-	  co.meshes.push_back(object.bounding_mesh);
-	  co.mesh_poses.push_back(object.pose.pose.pose);
-	*/
-	  co.operation = co.ADD;
-	  pub_co.publish(co);
-
-	  //if (object.type.db == ""
-
-	}
-	/*
-	co.id =
-
-
+/*
 	moveit_msgs::CollisionObject remove_object;
 	remove_object.id = "box";
 	remove_object.header.frame_id = "odom_combined";
 	remove_object.operation = remove_object.REMOVE;
 	collision_object_publisher.publish(remove_object);
 
-	*/
-
-
-
-
-
-	/*
 	// remove pole
 	co.id = "pole";
 	co.operation = moveit_msgs::CollisionObject::REMOVE;
@@ -434,13 +434,11 @@ int main(int argc, char **argv)
 	// wait a bit for ros things to initialize
 	ros::WallDuration(1.0).sleep();
 
-	if (argc == 1)
-	{
-		pick(group);
-	} else // argc == 2
-	{
-		loadGraspFromFileAndPick(group);
-	}
+	if (!publishDetectedObjectsToPlanningScene(client, pub_co))
+		ROS_WARN("Could not add detected objects to planning scene");
+
+
+	//pick(group);
 
 	ros::WallDuration(1.0).sleep();
 

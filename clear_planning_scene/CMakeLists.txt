@@ -1,24 +1,14 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(pick)
+project(clear_planning_scene)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED roscpp
-moveit_core
-moveit_msgs
-moveit_planners_ompl
-moveit_ros_manipulation
-moveit_ros_move_group
-moveit_ros_planning
-moveit_ros_planning_interface
-moveit_ros_visualization
-moveit_ros_warehouse
-rosbag
-object_recognition_msgs
-shape_tools
-shape_msgs
-geometry_msgs
+find_package(catkin REQUIRED COMPONENTS
+    roscpp
+    rospy
+    std_msgs
+    message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -62,11 +52,14 @@ geometry_msgs
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+   FILES
+    ClearAllObjects.srv
+    ClearAttachedCollisionObjects.srv
+    ClearCollisionObjects.srv
+    DeleteAttachedCollisionObject.srv
+    DeleteCollisionObject.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -76,10 +69,10 @@ geometry_msgs
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+   DEPENDENCIES
+   std_msgs  # Or other packages containing msgs
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -92,7 +85,7 @@ geometry_msgs
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES pick
+#  LIBRARIES clearPlanningScene
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -106,25 +99,19 @@ catkin_package(
 # include_directories(include)
 
 ## Declare a cpp library
-# add_library(pick
-#   src/${PROJECT_NAME}/pick.cpp
+# add_library(clearPlanningScene
+#   src/${PROJECT_NAME}/clearPlanningScene.cpp
 # )
 
 ## Declare a cpp executable
-add_executable(pick src/pick.cpp)
-
-add_executable(pick_place src/pick_place.cpp)
+add_executable(clear_planning_scene_server src/clear_planning_scene_server.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(pick_node pick_generate_messages_cpp)
+add_dependencies(clear_planning_scene_server clear_planning_scene_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(pick
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(pick_place
+target_link_libraries(clear_planning_scene_server
   ${catkin_LIBRARIES}
 )
 
@@ -143,7 +130,7 @@ target_link_libraries(pick_place
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS pick pick_node
+# install(TARGETS clearPlanningScene clearPlanningScene_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -168,7 +155,7 @@ target_link_libraries(pick_place
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_pick.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_clearPlanningScene.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

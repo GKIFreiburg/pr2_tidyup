@@ -18,26 +18,26 @@ int main(int argc, char **argv)
 	ros::AsyncSpinner spinner(1);
 	spinner.start();
 
-	// Delaying execution when using roslaunch file so that rviz has enough time
-	// before the move action is carried out.
-	int seconds = 0;
-	std::string paramName = ros::this_node::getName() + "/rviz_bootup_time";
-	if (ros::param::get(paramName , seconds))
-	{
-		ROS_WARN("The execution of node '%s' is delayed %d seconds.",
-				ros::this_node::getName().c_str(), seconds);
-	}
-
-	// This sleep is ONLY to allow Rviz to come up
-	sleep(seconds);
-
-	// Check if parameter is available, if so delete it because it is not needed anymore.
-	// Next time this node is executed, it will execute immediately.
-	if (ros::param::has(paramName))
-	{
-		ros::param::del(paramName);
-		ROS_INFO("'$s' has been deleted", paramName.c_str());
-	}
+//	// Delaying execution when using roslaunch file so that rviz has enough time
+//	// before the move action is carried out.
+//	int seconds = 0;
+//	std::string paramName = ros::this_node::getName() + "/rviz_bootup_time";
+//	if (ros::param::get(paramName , seconds))
+//	{
+//		ROS_WARN("The execution of node '%s' is delayed %d seconds.",
+//				ros::this_node::getName().c_str(), seconds);
+//	}
+//
+//	// This sleep is ONLY to allow Rviz to come up
+//	sleep(seconds);
+//
+//	// Check if parameter is available, if so delete it because it is not needed anymore.
+//	// Next time this node is executed, it will execute immediately.
+//	if (ros::param::has(paramName))
+//	{
+//		ros::param::del(paramName);
+//		ROS_INFO("'$s' has been deleted", paramName.c_str());
+//	}
 
 	// Setup
 	// ^^^^^
@@ -60,6 +60,8 @@ int main(int argc, char **argv)
 
 	// We can also print the name of the end-effector link for this group.
 	ROS_INFO("Reference frame: %s", two_arms_group.getEndEffectorLink().c_str());
+
+	// TODO: Check if limbs are already in position, if so skip movement!
 
 	// We can plan a motion for this group to a desired pose for the
 	// end-effector.
@@ -119,12 +121,12 @@ int main(int argc, char **argv)
 	// a blocking function and requires a controller to be active
 	// and report success on execution of a trajectory.
 
-	/* Uncomment below line when working with a real robot*/
+	// Uncomment below line when working with a real robot
 	two_arms_group.move();
-	sleep(5.0);
+	//sleep(5.0);
 
 	head_group.move();
-	sleep(5.0);
+	//sleep(5.0);
 
 	ros::shutdown();
 	return 0;
