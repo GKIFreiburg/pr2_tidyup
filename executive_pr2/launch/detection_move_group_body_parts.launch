@@ -11,9 +11,11 @@
   <include file="$(find object_detection)/launch/filtered_kinect_detection.launch">
   </include>
 
+    <!--
   # Start clear_planning_scene_server to access rosservice to clean the planning scene
   <node name="clear_planning_scene_server" pkg="clear_planning_scene" type="clear_planning_scene_server">
   </node>
+    -->
 
   # Move arms out of the field of view and lower head to look at table
   <node name="move_body_parts_for_detection" pkg="planning" type="move_body_parts_for_detection">

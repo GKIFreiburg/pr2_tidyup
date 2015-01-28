@@ -1,67 +1,81 @@
-/*
- * planning_scene_interface.h
- *
- *  Created on: 26 Jul 2012
- *      Author: andreas
- */
-
 #ifndef PLANNING_SCENE_INTERFACE_H_
 #define PLANNING_SCENE_INTERFACE_H_
 
 #include <ros/ros.h>
+#include <ros/service.h>
+#include <ros/publisher.h>
 #include <sensor_msgs/JointState.h>
-#include <arm_navigation_msgs/SetPlanningSceneDiff.h>
-#include "tidyup_utils/hand_description.h"
+#include <moveit_msgs/RobotState.h>
+#include <moveit_msgs/PlanningScene.h>
+#include <moveit_msgs/GetPlanningScene.h>
+#include <moveit_msgs/CollisionObject.h>
+#include <moveit_msgs/AllowedCollisionEntry.h>
+#include "tidyup_utils/hand_description.h"     // TODO: not used in cpp
 #include <map>
 
 class PlanningSceneInterface
 {
 public:
     static PlanningSceneInterface* instance();
-//    bool setPlanningSceneDiff(const arm_navigation_msgs::PlanningScene& scene);
+    //bool setPlanningSceneDiff(const arm_navigation_msgs::PlanningScene& scene);
 
     bool sendDiff();
     bool resetPlanningScene();
 
-//    const arm_navigation_msgs::PlanningScene& getPlanningScene() const {return spsdService.response.planning_scene;}
-    const arm_navigation_msgs::PlanningScene& getCurrentScene() const {return spsdService.request.planning_scene_diff;}
-    const arm_navigation_msgs::RobotState& getRobotState(){return spsdService.request.planning_scene_diff.robot_state;}
-    const std::vector <arm_navigation_msgs::CollisionObject>& getCollisionObjects(){return spsdService.request.planning_scene_diff.collision_objects;}
-    const std::vector <arm_navigation_msgs::AttachedCollisionObject>& getAttachedCollisionObjects() const {return spsdService.request.planning_scene_diff.attached_collision_objects;}
-    const arm_navigation_msgs::CollisionObject* getCollisionObject(const std::string& id);
-    const arm_navigation_msgs::AttachedCollisionObject* getAttachedCollisionObject(const std::string& id);
+    //const arm_navigation_msgs::PlanningScene& getPlanningScene() const {return spsdService.response.planning_scene;}
+    const moveit_msgs::PlanningScene& getCurrentScene() const {return planning_scene_diff_;}
+    const moveit_msgs::RobotState& getRobotState(){return planning_scene_diff_.robot_state;}
+    const std::vector<moveit_msgs::CollisionObject>& getCollisionObjects(){return planning_scene_diff_.world.collision_objects;}
+    const std::vector<moveit_msgs::AttachedCollisionObject>& getAttachedCollisionObjects() const {return planning_scene_diff_.robot_state.attached_collision_objects;}
+    const moveit_msgs::CollisionObject* getCollisionObject(const std::string& id);
+    const moveit_msgs::AttachedCollisionObject* getAttachedCollisionObject(const std::string& id);
 
-    void setRobotState(const arm_navigation_msgs::RobotState& state);
-    void addObject(const arm_navigation_msgs::CollisionObject& object);
+    void setRobotState(const moveit_msgs::RobotState& state);
+    void addObject(const moveit_msgs::CollisionObject& object);
     void removeObject(const std::string& id);
     void updateObject(const std::string& id, const geometry_msgs::Pose& pose);
+    // TODO: Still useful? c.f. pick and place
     void attachObjectToGripper(const std::string& id, const std::string& arm);
     void detachObjectAndAdd(const std::string& id);
 
-    const std::string& getGlobalFrame() const {return globalFrame;}
+    const std::string& getGlobalFrame() const {return globalFrame_;}
 
-    void printDiffToCurrent(const arm_navigation_msgs::PlanningScene& other) const;
-    static void printDiff(const arm_navigation_msgs::PlanningScene& scene, const arm_navigation_msgs::PlanningScene& other);
-    static void printDiff(const arm_navigation_msgs::RobotState& state, const arm_navigation_msgs::RobotState& other);
-    static void printDiff(const std::vector<arm_navigation_msgs::CollisionObject>& objectList,
-            const std::vector<arm_navigation_msgs::CollisionObject>& other);
-    static void printDiff(const std::vector<arm_navigation_msgs::AttachedCollisionObject>& objectList,
-            const std::vector<arm_navigation_msgs::AttachedCollisionObject>& other);
+    void printDiffToCurrent(const moveit_msgs::PlanningScene& other) const;
+    static void printDiff(const moveit_msgs::PlanningScene& scene, const moveit_msgs::PlanningScene& other);
+    static void printDiff(const moveit_msgs::RobotState& state, const moveit_msgs::RobotState& other);
+    static void printDiff(const std::vector<moveit_msgs::CollisionObject>& objectList,
+            const std::vector<moveit_msgs::CollisionObject>& other);
+    static void printDiff(const std::vector<moveit_msgs::AttachedCollisionObject>& objectList,
+            const std::vector<moveit_msgs::AttachedCollisionObject>& other);
+    // TODO: only comparing Transforms
+    static bool isDifferent(const geometry_msgs::Transform& transform, const geometry_msgs::Transform& other);
     static bool isDifferent(const geometry_msgs::Pose& pose, const geometry_msgs::Pose& other);
-    static void printAttachedObject(const arm_navigation_msgs::AttachedCollisionObject& object);
-    static void printObjects(const arm_navigation_msgs::PlanningScene& scene);
+    static void printAttachedObject(const moveit_msgs::AttachedCollisionObject& object);
+    static void printObjects(const moveit_msgs::PlanningScene& scene);
     void test();
 
 
 private:
     PlanningSceneInterface();
 
-    arm_navigation_msgs::RobotState& getRobotState_() {return spsdService.request.planning_scene_diff.robot_state;}
-    std::vector <arm_navigation_msgs::CollisionObject>& getCollisionObjects_() {return spsdService.request.planning_scene_diff.collision_objects;}
-    std::vector <arm_navigation_msgs::AttachedCollisionObject>& getAttachedCollisionObjects_() {return spsdService.request.planning_scene_diff.attached_collision_objects;}
-    arm_navigation_msgs::CollisionObject* getCollisionObject_(const std::string& id);
-    arm_navigation_msgs::AttachedCollisionObject* getAttachedCollisionObject_(const std::string& id);
+    moveit_msgs::RobotState& getRobotState_() {return planning_scene_diff_.robot_state;}
+    std::vector<moveit_msgs::CollisionObject>& getCollisionObjects_() {return planning_scene_diff_.world.collision_objects;}
+    std::vector<moveit_msgs::AttachedCollisionObject>& getAttachedCollisionObjects_() {return planning_scene_diff_.robot_state.attached_collision_objects;}
+    moveit_msgs::CollisionObject* getCollisionObject_(const std::string& id);
+    moveit_msgs::AttachedCollisionObject* getAttachedCollisionObject_(const std::string& id);
 
+    static PlanningSceneInterface* singleton_instance_;
+    ros::ServiceClient getPlanningSceneClient_;
+	moveit_msgs::GetPlanningScene getPlanningSceneService_;
+    moveit_msgs::PlanningScene planning_scene_diff_;
+    ros::Publisher planning_scene_diff_publisher_;
+
+    // TODO: not used in cpp
+    std::map<std::string, HandDescription> handDescriptions_;
+    std::string globalFrame_;
+
+    std::string logName_;
+ /*
     static PlanningSceneInterface* singleton_instance;
     arm_navigation_msgs::SetPlanningSceneDiff spsdService;
     ros::ServiceClient setPlanningSceneService;
@@ -70,6 +84,7 @@ private:
     std::string globalFrame;
 
     std::string logName;
+  */
 };
 
 
