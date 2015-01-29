@@ -1,0 +1,26 @@
+#The table definitions are not needed if you are reading
+#from the database
+sushi_groups:
+    clean_table:
+        x: -0.223609
+        y: 3.813174
+        z: 0.821224
+    eating_table:
+        x: 0.669369
+        y: 1.710028
+        z: 0.759857
+    dirty_table:
+        x: -0.615216
+        y: -1.683636
+        z: 0.758218
+    setting:
+        places:
+            cup:
+                x: 0.05
+                y: -0.2
+            bowl:
+                x: 0.1
+                y: 0.2
+        dimensions:
+            x: 0.3
+            y: 0.5

@@ -1,0 +1,47 @@
+<launch>
+    <!-- run on m1 -->
+    <node pkg="screenrun" type="screenrun" name="screenrun_m1" args="b" required="true">
+        <rosparam param="programs">
+            -
+                name: roscore
+                commands:
+                    - roscore
+            -
+                name: robot
+                commands:
+                    - roslaunch --wait /etc/ros/robot.launch
+            -
+                name: kinect 
+                commands:
+                    - killall XnSensorServer ; roslaunch /etc/ros/openni_head.launch
+            -
+                name: perception
+                commands:
+                    - roslaunch narfROS tidyup_perception.launch
+            -
+                name: logoDetection
+                commands:
+                    - roscd object_recognition; roslaunch object_recognition detect_cereal.launch
+            -
+                name: prerequisites
+                commands:
+                    - roslaunch tidyup_executive prerequisites.launch config_pkg:=$(rospack find tidyup_demo_launch)
+            -
+                name: laser_lines
+                commands:
+                    - roslaunch tidyup_demo_launch landmarks-kbsg.launch
+            -
+                name: arm_services
+                commands:
+                    - roslaunch tidyup_executive arm_services.launch config_pkg:=$(rospack find tidyup_demo_launch)
+            -
+                name: planner
+                commands:
+                    - roslaunch continual_planning_server continual-planning-tidyup-actionlib.launch config_pkg:=$(rospack find tidyup_demo_launch)
+            -
+                name: rosfawkes
+                commands:
+                    - roscd rosfawkes; bin/rosfawkes -d -p webview,skiller,readylogagent
+        </rosparam>
+    </node>
+</launch>

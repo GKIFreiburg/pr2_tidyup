@@ -1,0 +1,24 @@
+<launch>
+    <!-- run on m1 -->
+    <node pkg="screenrun" type="screenrun" name="screenrun_m1" args="b" required="true">
+        <rosparam param="programs">
+            -
+                name: core
+                commands:
+                    - roscore\015
+            -
+                name: robot-sim
+                commands:
+                    - roslaunch --wait tidyup_executive gazebo_robot.launch config_pkg:=$(rospack find tidyup_demo_launch)\015
+            -
+                name: prerequisites
+                commands:
+                    - export ROBOT=sim\015
+                    - roslaunch tidyup_executive prerequisites.launch config_pkg:=$(rospack find tidyup_demo_launch)
+            -
+                name: planner
+                commands:
+                    - roslaunch tidyup_demo_launch continual_planning.launch config_pkg:=$(rospack find tidyup_demo_launch)
+        </rosparam>
+    </node>
+</launch>

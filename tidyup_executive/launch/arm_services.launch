@@ -1,0 +1,11 @@
+<!-- -->
+<launch>
+  <arg name="config_pkg"/>
+  <arg name="kinect_frame_prefix" default="/head_mount_kinect" />
+
+  <node pkg="tidyup_arm_services" type="point_cloud_converter_node" respawn="true" name="cloud_converter" />
+  <node pkg="tidyup_arm_services" type="start_tidyup_arm_services.py" respawn="true" name="tidyup_arm_services" output="screen" >
+    <param name="head_pointing_frame" value="$(arg kinect_frame_prefix)_rgb_optical_frame" />
+    <param name="tables" value="$(arg config_pkg)/config/planning/tables.dat" />
+  </node>
+</launch>

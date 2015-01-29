@@ -1,0 +1,32 @@
+<launch>
+    <!-- run on m1 -->
+    <node pkg="screenrun" type="screenrun" name="screenrun_m1" args="b" required="true">
+        <rosparam param="programs">
+            -
+                name: robot
+                commands:
+                    - roslaunch /etc/ros/robot.launch\015
+            -
+                name: kinect 
+                commands:
+                    - roslaunch /etc/ros/openni_head.launch
+            -
+                name: sushi
+                commands:
+                    - roslaunch tidyup_executive reality.launch kinect_frame_prefix:=/head_mount_kinect config_pkg:=$(rospack find tidyup_launch_geb78)
+            -
+                name: door_manipulation
+                commands:
+                    - roslaunch door_executive door_manipulation_kinect.launch
+            -
+                name: wiping 
+                commands:
+                    - roslaunch coverage_3d_executive tidyup_coverage.launch
+            -
+                name: planner
+                commands:
+                    - roscd tidyup_actions\015
+                    - roslaunch tidyup_actions continual-planning-tidyup.launch config_pkg:=$(rospack find tidyup_launch_geb78) paused:=true
+        </rosparam>
+    </node>
+</launch>
