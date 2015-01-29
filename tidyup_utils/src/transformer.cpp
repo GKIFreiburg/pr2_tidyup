@@ -1,16 +1,12 @@
-/*
- * transformer.cpp
- *
- *  Created on: 1 Aug 2012
- *      Author: andreas
- */
-
 #include "tidyup_utils/transformer.h"
 
 Transformer* Transformer::instance = NULL;
 
 Transformer::Transformer() :
-    robot_model("/robot_description")
+    //robot_model("/robot_description")
+    // We will start by instantiating a RobotModelLoader object, which will look up the
+    // robot description on the ROS parameter server and construct a RobotModel
+    robot_model_loader_("/robot_description")
 {
 }
 
@@ -27,17 +23,25 @@ std::string Transformer::relative_frame(const std::string& frame_id) const
     return frame_id.substr(1, frame_id.size());
 }
 
-bool Transformer::getTransform(const std::string& to_frame,
+bool Transformer::getTransform_(const std::string& to_frame,
         const std::string& from_frame,
-        const arm_navigation_msgs::RobotState& robotState,
+        const moveit_msgs::RobotState& robotState,
         tf::Transform& transform)
 {
-    planning_models::KinematicState kstate(robot_model.getKinematicModel());
-    if (!planning_environment::setRobotStateAndComputeTransforms(robotState, kstate))
-    {
-        ROS_ERROR("Unable to transform robot state to kinematic state");
-        return false;
-    }
+//	planning_models::KinematicState kstate(robot_model.getKinematicModel());
+//    if (!planning_environment::setRobotStateAndComputeTransforms(robotState, kstate))
+//    {
+//        ROS_ERROR("Unable to transform robot state to kinematic state");
+//        return false;
+//    }
+
+	// Convert a robot state (with accompanying extra transforms) to a kinematic state.
+	robot_state::RobotState kstate(robot_model_loader_.getModel());
+	if (!moveit::core::robotStateMsgToRobotState(robotState, kstate, true))
+	{
+		ROS_ERROR("Unable to create a kinematic robot state");
+		return false;
+	}
 
     ROS_INFO("transforming from %s to %s", from_frame.c_str(), to_frame.c_str());
 
@@ -67,10 +71,12 @@ bool Transformer::getTransform(const std::string& to_frame,
     return true;
 }
 
-bool Transformer::getWorldTransform(const std::string& frame_id,
+bool Transformer::getWorldTransform_(const std::string& frame_id,
         const planning_models::KinematicState& state,
         tf::Transform &transform)
 {
+	// TODO: ???? World? Globallink?
+	// TODO: compare returns an int
     if (!frame_id.compare(state.getKinematicModel()->getRoot()->getParentFrameId()))
     {
         //identity transform
@@ -90,6 +96,11 @@ bool Transformer::getWorldTransform(const std::string& frame_id,
         ROS_ERROR("Unable to find link %s in kinematic state", frame_id.c_str());
         return false;
     }
+
+    // const Eigen::Affine3d & 	getGlobalLinkTransform (const std::string &link_name)
+
+    //void 	tf::transformEigenToTF (const Eigen::Affine3d &e, tf::Transform &t)
+ 	//Converts an Eigen Affine3d into a tf Transform.
 
     transform = link->getGlobalLinkTransform();
     return true;

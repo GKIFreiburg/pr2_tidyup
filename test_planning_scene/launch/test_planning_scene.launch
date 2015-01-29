@@ -1,8 +1,10 @@
 <launch>
 
-  <include file="$(find pr2_moveit_config)/launch/demo.launch"/>
+  <include file="$(find test_planning_scene)/launch/demo.launch"/>
 
+    <!--
   <node name="test_planning_scene" pkg="test_planning_scene" type="test_planning_scene" respawn="false" output="screen">
   </node>
+    -->
 
 </launch>

@@ -1,10 +1,3 @@
-/*
- * transformer.h
- *
- *  Created on: 1 Aug 2012
- *      Author: andreas
- */
-
 #ifndef TRANSFORMER_H_
 #define TRANSFORMER_H_
 
@@ -19,6 +12,9 @@
 #include <arm_navigation_msgs/Constraints.h>
 
 #include <planning_environment/models/model_utils.h>
+
+#include <moveit/robot_model_loader/robot_model_loader.h>
+#include <moveit/robot_model/robot_model.h>
 
 class Transformer
 {
@@ -58,15 +54,16 @@ public:
 
 private:
     static Transformer* instance;
-    bool getTransform(const std::string& to_frame,
+    bool getTransform_(const std::string& to_frame,
             const std::string& from_frame,
-            const arm_navigation_msgs::RobotState& robotState,
+            const moveit_msgs::RobotState& robotState,
             tf::Transform& transform);
     bool getWorldTransform(const std::string& frame_id,
             const planning_models::KinematicState &state,
             tf::Transform &transform);
     std::string relative_frame(const std::string& frame_id) const;
-    planning_environment::RobotModels robot_model;
+    //planning_environment::RobotModels robot_model;
+    robot_model_loader::RobotModelLoader robot_model_loader_;
 };
 
 #endif /* TRANSFORMER_H_ */

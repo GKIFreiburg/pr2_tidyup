@@ -58,7 +58,11 @@ PlanningSceneInterface::PlanningSceneInterface() : logName_("[psi]")
 		ROS_FATAL_NAMED(logName_, "Could not initialize a nodehandle.");
 		return;
 	}
-	planning_scene_diff_publisher_ = nh.advertise<moveit_msgs::PlanningScene>("planning_scene" ,1);
+	// Publisher advertise(const std::string& topic, uint32_t queue_size, bool latch = false)
+    // \param latch (optional) If true, the last message published on
+    // this topic will be saved and sent to new subscribers when they
+    // connect
+	planning_scene_diff_publisher_ = nh.advertise<moveit_msgs::PlanningScene>("planning_scene" ,1, true);
 
     // TODO: check globalFrame
     globalFrame_ = getRobotState_().multi_dof_joint_state.header.frame_id;
@@ -308,7 +312,7 @@ void PlanningSceneInterface::printDiff(const moveit_msgs::RobotState& state, con
         ROS_INFO_STREAM("robot transform: " << state.multi_dof_joint_state.transforms[0] << " vs " << other.multi_dof_joint_state.transforms[0]);
     }
     double epsilon = 0.01; // rad
-    for (size_t i = 0; i < state.joint_state.position.size(); i++)
+    for (std::size_t i = 0; i < state.joint_state.position.size(); i++)
     {
         if (fabs((float)state.joint_state.position[i] - (float)other.joint_state.position[i]) > epsilon)
         {
