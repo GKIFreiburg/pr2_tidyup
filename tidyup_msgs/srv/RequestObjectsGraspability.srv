@@ -1,0 +1,5 @@
+# request to detect graspability of objects in the current view
+# the reachable attribute of the passed objects should be filled
+tidyup_msgs/GraspableObject[] objects
+---
+tidyup_msgs/GraspableObject[] objects

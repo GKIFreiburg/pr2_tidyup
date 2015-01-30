@@ -1,0 +1,5 @@
+# request to detect graspable objects in the current view
+string static_object
+---
+tidyup_msgs/GraspableObject[] objects
+tidyup_msgs/WipeGoal[] wipe_goals

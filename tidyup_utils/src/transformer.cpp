@@ -72,19 +72,28 @@ bool Transformer::getTransform_(const std::string& to_frame,
 }
 
 bool Transformer::getWorldTransform_(const std::string& frame_id,
-        const planning_models::KinematicState& state,
+        const robot_state::RobotState& state,
         tf::Transform &transform)
 {
-	// TODO: ???? World? Globallink?
-	// TODO: compare returns an int
-    if (!frame_id.compare(state.getKinematicModel()->getRoot()->getParentFrameId()))
+	// For a mobile robot this could be "odom", "odom_combined", "map", or similar.
+	// The name of some reference frame which is external to the robot. The name of this frame
+	// can be found by calling RobotModel::getModelFrame() f.ex. odom_combined.
+	if (frame_id.compare(state.getRobotModel()->getModelFrame()) == 0)
     {
         //identity transform
         transform.setIdentity();
         return true;
     }
 
-    if (!frame_id.compare(state.getKinematicModel()->getRoot()->getChildFrameId()))
+//    if (frame_id.compare(state.
+//    		getKinematicModel()->getRoot()->getParentFrameId()) == 0)
+//    {
+//        //identity transform
+//        transform.setIdentity();
+//        return true;
+//    }
+
+    if (frame_id.compare(state.getKinematicModel()->getRoot()->getChildFrameId()) == 0)
     {
         transform = state.getRootTransform();
         return true;

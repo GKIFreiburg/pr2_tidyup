@@ -1,0 +1,6 @@
+# either use left or right arm to open door in cuurent view
+bool left_arm
+bool right_arm
+---
+string result
+---

@@ -1,0 +1,6 @@
+# either move the left or right arm
+bool left_arm
+bool right_arm
+---
+string result
+---

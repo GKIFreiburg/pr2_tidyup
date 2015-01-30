@@ -6,8 +6,8 @@ project(tidyup_demo_launch)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED roscpp
 navigation_actions
-object_manipulation_actions
-tidyup_state_creators
+#object_manipulation_actions
+#tidyup_state_creators
 )
 
 ###################################

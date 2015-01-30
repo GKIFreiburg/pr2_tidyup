@@ -1,0 +1,5 @@
+# request to detect table at the current pose
+---
+geometry_msgs/PoseStamped pose
+geometry_msgs/Point bounding_box_size
+

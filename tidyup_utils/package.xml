@@ -3,7 +3,6 @@
   <version>0.0.0</version>
   <description>
      Utility classes for the Tidyup project.
-
   </description>
   <maintainer email="dornhege@informatik.uni-freiburg.de">Andreas Hertle, Christian Dornhege</maintainer>
   <license>BSD</license>

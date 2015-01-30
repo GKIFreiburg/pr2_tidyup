@@ -1,0 +1,16 @@
+<package>
+  <description brief="tidyup_msgs">
+    Messages used in the TidyUp project.
+  </description>
+  <author>Maintained by Christian Dornhege</author>
+  <license>BSD</license>
+  <review status="unreviewed" notes=""/>
+  <url>http://ros.org/wiki/tidyup_msgs</url>
+
+  <depend package="actionlib_msgs" />
+  <depend package="geometry_msgs" />
+  <depend package="arm_navigation_msgs" />
+
+</package>
+
+

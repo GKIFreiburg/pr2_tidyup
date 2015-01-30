@@ -132,6 +132,8 @@ int main(int argc, char **argv)
 		ROS_WARN_STREAM("\nTransform: " << *Iter);
 	}
 
+	ROS_WARN_STREAM("Get Model Frame: " << robot_state.getRobotModel()->getModelFrame());
+
 
 
 

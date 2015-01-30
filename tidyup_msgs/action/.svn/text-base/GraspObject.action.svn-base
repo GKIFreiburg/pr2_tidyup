@@ -1,0 +1,11 @@
+# name of the table or shelf 
+string static_object
+# name of the object to pickup
+string pickup_object
+# name of the arm, which holds the object
+string arm
+---
+# the new pose of the object
+geometry_msgs/PoseStamped grasp
+arm_navigation_msgs/ArmNavigationErrorCodes error_code
+---

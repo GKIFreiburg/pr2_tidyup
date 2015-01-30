@@ -1,0 +1,12 @@
+# name of the table or shelf 
+string static_object
+# name of the object to place
+string putdown_object
+# name of the arm, which holds the object
+string arm
+# the current planning scene
+arm_navigation_msgs/PlanningScene planning_scene
+---
+# the new pose of the object
+geometry_msgs/PoseStamped putdown_pose
+arm_navigation_msgs/ArmNavigationErrorCodes error_code

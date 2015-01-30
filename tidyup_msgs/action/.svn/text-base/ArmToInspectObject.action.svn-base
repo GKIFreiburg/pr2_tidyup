@@ -1,0 +1,7 @@
+# name of the object to inspect
+string object_id
+# name of the arm, which holds the object
+string arm
+---
+arm_navigation_msgs/ArmNavigationErrorCodes error_code
+---

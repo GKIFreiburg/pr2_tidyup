@@ -2,11 +2,9 @@
   <name>tidyup_demo_launch</name>
   <version>0.0.0</version>
   <description>
-
      tidyup_demo_launch
-
   </description>
-  <maintainer email="luc@todo.todo">luc</maintainer>
+  <maintainer email="lannersluc@gmail.com">Luc Lanners</maintainer>
   <license>BSD</license>
   <url>http://ros.org/wiki/tidyup_demo_launch</url>
   <buildtool_depend>catkin</buildtool_depend>

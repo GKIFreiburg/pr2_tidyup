@@ -59,7 +59,7 @@ private:
             const moveit_msgs::RobotState& robotState,
             tf::Transform& transform);
     bool getWorldTransform(const std::string& frame_id,
-            const planning_models::KinematicState &state,
+            const robot_state::RobotState &state,
             tf::Transform &transform);
     std::string relative_frame(const std::string& frame_id) const;
     //planning_environment::RobotModels robot_model;

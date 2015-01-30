@@ -32,6 +32,10 @@
 
 - git: {local-name: household_objects_database, uri: "https://github.com/ros-interactive-manipulation/household_objects_database"}
 
+# GKI Freiburg
 - git: {local-name: pr2_tidyup, uri: "https://github.com/GKIFreiburg/pr2_tidyup"}
+- git: {local-name: gki_pr2_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_pr2_symbolic_planning.git"}
+- git: {local-name: gki_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_symbolic_planning.git"}
+
 
 

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 project(tidyup_utils)
-
+ 
 find_package(catkin REQUIRED moveit_msgs geometry_msgs tf roscpp rospy)
 catkin_package(INCLUDE_DIRS include)
 
@@ -31,8 +31,8 @@ QT4_WRAP_CPP(qt_moc_srcs ${qt_hdrs})
 
 add_library(tidyup_utils 
     src/stringutil.cpp
-    src/planning_scene_interface.cpp
-    src/transformer.cpp
+#    src/planning_scene_interface.cpp
+#    src/transformer.cpp
     src/hand_description.cpp
     src/arm_state.cpp
     src/geometryPoses.cpp

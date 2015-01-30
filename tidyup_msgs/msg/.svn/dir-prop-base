@@ -1,0 +1,24 @@
+K 10
+svn:ignore
+V 397
+GraspObject*
+PostGraspPosition*
+PlaceObject*
+OpenDoorAction.msg
+OpenDoorActionFeedback.msg
+OpenDoorActionGoal.msg
+OpenDoorActionResult.msg
+OpenDoorFeedback.msg
+OpenDoorGoal.msg
+OpenDoorResult.msg
+ArmToSideAction.msg
+ArmToSideActionFeedback.msg
+ArmToSideActionGoal.msg
+ArmToSideActionResult.msg
+ArmToSideFeedback.msg
+ArmToSideGoal.msg
+ArmToSideResult.msg
+InspectObject*.msg
+ArmToInspectObject*.msg
+
+END

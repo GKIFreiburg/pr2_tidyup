@@ -1,0 +1,59 @@
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/!svn/ver/4553/branches/tidyup_robot-experimental/tidyup_msgs/srv
+END
+RequestObjectsGraspability.srv
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/3484/branches/tidyup_robot-experimental/tidyup_msgs/srv/RequestObjectsGraspability.srv
+END
+DetectDoorState.srv
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/!svn/ver/3484/branches/tidyup_robot-experimental/tidyup_msgs/srv/DetectDoorState.srv
+END
+DetectTable.srv
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/3577/branches/tidyup_robot-experimental/tidyup_msgs/srv/DetectTable.srv
+END
+DetectGraspableObjects.srv
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/!svn/ver/3484/branches/tidyup_robot-experimental/tidyup_msgs/srv/DetectGraspableObjects.srv
+END
+DoorState.srv
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/3484/branches/tidyup_robot-experimental/tidyup_msgs/srv/DoorState.srv
+END
+DetectExpectedGraspableObjects.srv
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/!svn/ver/4433/branches/tidyup_robot-experimental/tidyup_msgs/srv/DetectExpectedGraspableObjects.srv
+END
+GetPutdownPose.srv
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/3484/branches/tidyup_robot-experimental/tidyup_msgs/srv/GetPutdownPose.srv
+END
+GetInspectPose.srv
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/4553/branches/tidyup_robot-experimental/tidyup_msgs/srv/GetInspectPose.srv
+END
+ArmsAtSide.srv
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/4525/branches/tidyup_robot-experimental/tidyup_msgs/srv/ArmsAtSide.srv
+END

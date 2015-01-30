@@ -1,0 +1,5 @@
+bool left_arm
+bool right_arm
+---
+string result
+---
