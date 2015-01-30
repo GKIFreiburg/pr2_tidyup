@@ -5,6 +5,9 @@ find_package(catkin REQUIRED COMPONENTS
 roscpp
 )
 
+catkin_package(
+)
+
 add_executable(${PROJECT_NAME} src/screenrun.cpp)
 target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
 
