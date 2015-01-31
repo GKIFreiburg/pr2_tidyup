@@ -27,12 +27,19 @@ class ProgramEntry
 
         void pushToScreen() {
             ROS_INFO("Creating screen window for \"%s\"", name.c_str());
+
             if(!executeCmd(g_screen_cmd + " -S ros -X screen -t '" + name + "'"))
+            {
+                ROS_ERROR_STREAM("Creating command: " << g_screen_cmd << " -S ros screen -t '" << name << "'");
                 return;
+            }
             for(vector<string>::iterator it = commands.begin(); it != commands.end(); it++) {
                 ROS_INFO("Pushing command: \"%s\"", it->c_str());
                 if(!executeCmd(g_screen_cmd + " -p '" + name + "' -S ros -X eval 'stuff \"" + *it + "\"'"))
+                    {
+                        ROS_ERROR_STREAM("Pushing command: " << g_screen_cmd + " -p '" << name << "' -S ros -X eval 'stuff \"" << *it + "\"'");
                     return;
+                    }
             }
         }
 };
@@ -115,7 +122,7 @@ int main(int argc, char** argv)
     if(argc > 1) {
         if(strcmp(argv[1], "b") == 0) {
             ROS_INFO("Using byobu for screen.");
-            g_screen_cmd = "byobu";
+            g_screen_cmd = "byobu-screen";
         }
     }
 
@@ -128,6 +135,7 @@ int main(int argc, char** argv)
         ROS_WARN("Screen \"ros\" already running, reusing this session");
     } else {
         ROS_INFO("Creating screen \"ros\"");
+
         if(!executeCmd(g_screen_cmd + " -S ros -d -m")) {
             ROS_FATAL("failed");
             return 1;

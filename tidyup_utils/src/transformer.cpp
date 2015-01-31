@@ -45,15 +45,15 @@ bool Transformer::getTransform_(const std::string& to_frame,
 
     ROS_INFO("transforming from %s to %s", from_frame.c_str(), to_frame.c_str());
 
-    std::vector<geometry_msgs::TransformStamped> transforms;
+    //std::vector<geometry_msgs::TransformStamped> transforms;
     tf::Transform global_to_from;
-    if (!getWorldTransform(from_frame, kstate, global_to_from))
+    if (!getWorldTransform_(from_frame, kstate, global_to_from))
     {
         ROS_ERROR("Unable to find frame_id %s in kinematic state", from_frame.c_str());
         return false;
     }
     tf::Transform global_to_to;
-    if (!getWorldTransform(to_frame, kstate, global_to_to))
+    if (!getWorldTransform_(to_frame, kstate, global_to_to))
     {
         ROS_ERROR("Unable to find frame_id %s in kinematic state", to_frame.c_str());
         return false;
@@ -93,38 +93,44 @@ bool Transformer::getWorldTransform_(const std::string& frame_id,
 //        return true;
 //    }
 
-    if (frame_id.compare(state.getKinematicModel()->getRoot()->getChildFrameId()) == 0)
-    {
-        transform = state.getRootTransform();
-        return true;
-    }
+//	// TODO:
+//    if (frame_id.compare(state.getKinematicModel()->getRoot()->getChildFrameId()) == 0)
+//    {
+//        transform = state.getRootTransform();
+//        return true;
+//    }
 
-    const planning_models::KinematicState::LinkState *link = state.getLinkState(frame_id);
+	const moveit::core::LinkModel *link = state.getLinkModel(frame_id);
+    //const planning_models::KinematicState::LinkState *link = state.getLinkState(frame_id);
     if (!link)
     {
         ROS_ERROR("Unable to find link %s in kinematic state", frame_id.c_str());
         return false;
     }
 
+    // TODO: Check if this is correct!
+    const Eigen::Affine3d &link_state = state.getGlobalLinkTransform(link->getName());
+
     // const Eigen::Affine3d & 	getGlobalLinkTransform (const std::string &link_name)
 
     //void 	tf::transformEigenToTF (const Eigen::Affine3d &e, tf::Transform &t)
  	//Converts an Eigen Affine3d into a tf Transform.
 
-    transform = link->getGlobalLinkTransform();
+    tf::transformEigenToTF(link_state, transform);
+    //transform = link->getGlobalLinkTransform();
     return true;
 }
 
 bool Transformer::transform(const std::string& new_frame,
         const std::string& old_frame,
-        const arm_navigation_msgs::RobotState& robotState,
+        const moveit_msgs::RobotState& robotState,
         geometry_msgs::Point& point)
 {
     tf::Vector3 btPoint(point.x, point.y, point.z);
     tf::Transform trans;
     if (instance == NULL)
         instance = new Transformer();
-    if (instance->getTransform(new_frame, old_frame, robotState, trans))
+    if (instance->getTransform_(new_frame, old_frame, robotState, trans))
     {
         btPoint = trans * btPoint;
         point.x = btPoint.x();
@@ -137,14 +143,14 @@ bool Transformer::transform(const std::string& new_frame,
 
 bool Transformer::transform(const std::string& new_frame,
                 const std::string& old_frame,
-                const arm_navigation_msgs::RobotState& robotState,
+                const moveit_msgs::RobotState& robotState,
                 geometry_msgs::Quaternion& quaternion)
 {
     tf::Quaternion bt_Quaternion(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
     tf::Transform trans;
     if (instance == NULL)
         instance = new Transformer();
-    if (instance->getTransform(new_frame, old_frame, robotState, trans))
+    if (instance->getTransform_(new_frame, old_frame, robotState, trans))
     {
         bt_Quaternion = trans * bt_Quaternion;
         quaternion.x = bt_Quaternion.x();
@@ -158,7 +164,7 @@ bool Transformer::transform(const std::string& new_frame,
 
 bool Transformer::transform(const std::string& new_frame,
             const std::string& old_frame,
-            const arm_navigation_msgs::RobotState& robotState,
+            const moveit_msgs::RobotState& robotState,
             geometry_msgs::Pose& pose)
 {
     geometry_msgs::Point& point = pose.position;
@@ -168,7 +174,7 @@ bool Transformer::transform(const std::string& new_frame,
     tf::Transform trans;
     if (instance == NULL)
         instance = new Transformer();
-    if (instance->getTransform(new_frame, old_frame, robotState, trans))
+    if (instance->getTransform_(new_frame, old_frame, robotState, trans))
     {
         btPoint = trans * btPoint;
         point.x = btPoint.x();
@@ -186,7 +192,7 @@ bool Transformer::transform(const std::string& new_frame,
 
 bool Transformer::transform(const std::string& new_frame,
         const std::string& old_frame,
-        const arm_navigation_msgs::RobotState& robotState,
+        const moveit_msgs::RobotState& robotState,
         geometry_msgs::PointStamped& point)
 {
     if (transform(new_frame, old_frame, robotState, point.point))
@@ -199,7 +205,7 @@ bool Transformer::transform(const std::string& new_frame,
 
 bool Transformer::transform(const std::string& new_frame,
         const std::string& old_frame,
-        const arm_navigation_msgs::RobotState& robotState,
+        const moveit_msgs::RobotState& robotState,
         geometry_msgs::QuaternionStamped& quaternion)
 {
     if (transform(new_frame, old_frame, robotState, quaternion.quaternion))
@@ -212,7 +218,7 @@ bool Transformer::transform(const std::string& new_frame,
 
 bool Transformer::transform(const std::string& new_frame,
         const std::string& old_frame,
-        const arm_navigation_msgs::RobotState& robotState,
+        const moveit_msgs::RobotState& robotState,
         geometry_msgs::PoseStamped& pose)
 {
     if (transform(new_frame, old_frame, robotState, pose.pose))
@@ -224,9 +230,13 @@ bool Transformer::transform(const std::string& new_frame,
 }
 
 bool Transformer::transform(const std::string& new_frame,
-            const arm_navigation_msgs::RobotState& robotState,
-            arm_navigation_msgs::Constraints& constraint)
+            const moveit_msgs::RobotState& robotState,
+            moveit_msgs::Constraints& constraint)
 {
+	ROS_WARN("Transformer::transform(new_frame, robotState, constraint) not yet implemented!");
+	return false;
+
+	/*
     bool ok = true;
     for(std::vector <arm_navigation_msgs::PositionConstraint>::iterator it = constraint.position_constraints.begin();
             it != constraint.position_constraints.end(); it++)
@@ -247,4 +257,5 @@ bool Transformer::transform(const std::string& new_frame,
         ok &= transform(new_frame, it->header.frame_id, robotState, it->target);
     }
     return ok;
+    */
 }
