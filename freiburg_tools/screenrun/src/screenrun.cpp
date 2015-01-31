@@ -29,17 +29,12 @@ class ProgramEntry
             ROS_INFO("Creating screen window for \"%s\"", name.c_str());
 
             if(!executeCmd(g_screen_cmd + " -S ros -X screen -t '" + name + "'"))
-            {
-                ROS_ERROR_STREAM("Creating command: " << g_screen_cmd << " -S ros screen -t '" << name << "'");
                 return;
-            }
             for(vector<string>::iterator it = commands.begin(); it != commands.end(); it++) {
                 ROS_INFO("Pushing command: \"%s\"", it->c_str());
-                if(!executeCmd(g_screen_cmd + " -p '" + name + "' -S ros -X eval 'stuff \"" + *it + "\"'"))
-                    {
-                        ROS_ERROR_STREAM("Pushing command: " << g_screen_cmd + " -p '" << name << "' -S ros -X eval 'stuff \"" << *it + "\"'");
+                if(!executeCmd(g_screen_cmd + " -S ros -X eval 'select " + name + "' 'stuff \"" + *it + "\"'"))
+                //if(!executeCmd(g_screen_cmd + " -p '" + name + "' -S ros -X eval 'stuff \"" + *it + "\"'"))
                     return;
-                    }
             }
         }
 };
@@ -127,7 +122,7 @@ int main(int argc, char** argv)
     }
 
     ros::NodeHandle nh;
-    
+
     if(!load())
         return 1;
 
@@ -136,7 +131,7 @@ int main(int argc, char** argv)
     } else {
         ROS_INFO("Creating screen \"ros\"");
 
-        if(!executeCmd(g_screen_cmd + " -S ros -d -m")) {
+        if(!executeCmd(g_screen_cmd + " -dmS ros")) {
             ROS_FATAL("failed");
             return 1;
         }
@@ -147,4 +142,5 @@ int main(int argc, char** argv)
     }
 
     return 0;
+
 }
