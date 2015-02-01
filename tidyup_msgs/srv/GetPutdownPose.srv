@@ -5,8 +5,10 @@ string putdown_object
 # name of the arm, which holds the object
 string arm
 # the current planning scene
-arm_navigation_msgs/PlanningScene planning_scene
+#arm_navigation_msgs/PlanningScene planning_scene
+moveit_msgs/PlanningScene planning_scene
 ---
 # the new pose of the object
 geometry_msgs/PoseStamped putdown_pose
-arm_navigation_msgs/ArmNavigationErrorCodes error_code
+#arm_navigation_msgs/ArmNavigationErrorCodes error_code
+moveit_msgs/MoveItErrorCodes error_code

@@ -7,7 +7,7 @@
     <rosparam command="load" ns="tfd_modules" file="$(arg config_pkg)/config/planning/planner_params.yaml" />
 
     <!-- start executive -->
-    <node pkg="continual_planning_executive" type="continual_planning_executive" args="" respawn="true" name="continual_planning_executive" output="screen" >
+    <node pkg="continual_planning_executive" type="continual_planning_executive" args="" respawn="false" name="continual_planning_executive" output="screen" >
         <param name="locations" value="$(arg config_pkg)/config/planning/locations.dat" />
         <!-- tolerance to use when determining if navigation has reached a target (i.e. we are AT a target)
             if nav_target_tolerance_relative_to_move_base is true, nav_base_local_planner_ns should give

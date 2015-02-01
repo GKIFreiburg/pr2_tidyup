@@ -37,5 +37,8 @@
 - git: {local-name: gki_pr2_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_pr2_symbolic_planning.git"}
 - git: {local-name: gki_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_symbolic_planning.git"}
 
+# screenrun
+-git: {local-name: screenrun: "https://github.com/dornhege/screenrun.git"}
+
 
 

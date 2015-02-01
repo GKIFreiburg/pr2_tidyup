@@ -7,5 +7,6 @@ string arm
 ---
 # the new pose of the object
 geometry_msgs/PoseStamped putdown_pose
-arm_navigation_msgs/ArmNavigationErrorCodes error_code
+#arm_navigation_msgs/ArmNavigationErrorCodes error_code
+moveit_msgs/MoveItErrorCodes error_code
 ---

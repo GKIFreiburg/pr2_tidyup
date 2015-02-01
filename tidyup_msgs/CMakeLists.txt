@@ -26,26 +26,27 @@ add_service_files(
     DetectGraspableObjects.srv
     DetectTable.srv
     DoorState.srv
-#    GetInspectPose.srv
-#    GetPutdownPose.srv
+    GetInspectPose.srv
+    GetPutdownPose.srv
     RequestObjectsGraspability.srv
 )
 
 add_action_files(
    FILES
-#   ArmToInspectObject.action
+   ArmToInspectObject.action
    ArmToSide.action
-#   GraspObject.action
-#   OpenDoor.action
-#   PlaceObject.action
-#   PostGraspPosition.action
+   GraspObject.action
+   OpenDoor.action
+   PlaceObject.action
+   PostGraspPosition.action
 )
 
 generate_messages(
    DEPENDENCIES
+   std_msgs  # Or other packages containing msgs
    actionlib_msgs
    geometry_msgs
-   std_msgs  # Or other packages containing msgs
+   moveit_msgs
 )
 
 catkin_package(
