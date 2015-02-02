@@ -70,15 +70,12 @@ void pick(moveit::planning_interface::MoveGroup &group)
 	std::vector<moveit_msgs::Grasp> grasps;
 
 	moveit_msgs::Grasp g;
-//	for (int i = 20; i < 40; i++) {
-//		for (int j = 0; j < 20; j++) {
-//			for (int k = 0; k < 20; k++) {
 
 	geometry_msgs::PoseStamped p;
 	p.header.frame_id = "base_link";
 	p.header.stamp = ros::Time::now();
 	//p.pose.position.x = 0.25;
-	p.pose.position.x = 0.32;
+	p.pose.position.x = 0.32; // 0.5-0.18
 	p.pose.position.y = -0.75;
 	p.pose.position.z = 0.58;
 	p.pose.orientation.x = 0;
@@ -102,69 +99,36 @@ void pick(moveit::planning_interface::MoveGroup &group)
 
 	g.pre_grasp_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
 	//g.pre_grasp_posture.joint_names.resize(1, "r_gripper_joint");
-//	g.pre_grasp_posture.joint_names.resize(1, "r_gripper_l_finger_joint");
+	//g.pre_grasp_posture.joint_names.resize(1, "r_gripper_l_finger_joint");
 	g.pre_grasp_posture.points.resize(1);
 	g.pre_grasp_posture.points[0].positions.resize(1);
 	g.pre_grasp_posture.points[0].positions[0] = 1.0;
-	g.pre_grasp_posture.points[0].time_from_start = ros::Duration(15.0);
+	g.pre_grasp_posture.points[0].time_from_start = ros::Duration(45.0);
 
 	g.grasp_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
 	//g.grasp_posture.joint_names.resize(1, "r_gripper_joint");
 	g.grasp_posture.points.resize(1);
 	g.grasp_posture.points[0].positions.resize(1);
 	g.grasp_posture.points[0].positions[0] = 0;
-	g.grasp_posture.points[0].time_from_start = ros::Duration(15.0);
+	g.grasp_posture.points[0].time_from_start = ros::Duration(45.0);
 
 
-	/*
-	g.pre_grasp_approach.direction.vector.x = 1.0;
-	g.pre_grasp_approach.direction.header.frame_id = "r_wrist_roll_link";
-	//g.pre_grasp_approach.min_distance = 0.05;
-	//g.pre_grasp_approach.desired_distance = 0.1;
-	g.pre_grasp_approach.min_distance = 0.2;
-	g.pre_grasp_approach.desired_distance = 0.4;
-
-	g.post_grasp_retreat.direction.header.frame_id = "base_link";
-	g.post_grasp_retreat.direction.vector.z = 1.0;
-	g.post_grasp_retreat.min_distance = 0.1;
-	g.post_grasp_retreat.desired_distance = 0.25;
-
-	g.pre_grasp_posture.header.frame_id = "base_link";
-	g.pre_grasp_posture.header.stamp = ros::Time::now();
-	//g.pre_grasp_posture.joint_names.resize(1, "r_gripper_l_finger_joint");
-	g.pre_grasp_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
-	g.pre_grasp_posture.points.resize(1);
-	g.pre_grasp_posture.points[0].positions.resize(1);
-	g.pre_grasp_posture.points[0].positions[0] = 0.55;
-	g.pre_grasp_posture.points[0].time_from_start = ros::Duration(4);
-
-	g.grasp_posture.header.frame_id = "base_link";
-	g.grasp_posture.header.stamp = ros::Time::now();
-	//g.grasp_posture.joint_names.resize(1, "r_gripper_l_finger_joint");
-	g.grasp_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
-	g.grasp_posture.points.resize(1);
-	g.grasp_posture.points[0].positions.resize(1);
-	g.grasp_posture.points[0].positions[0] = 0;
-	g.grasp_posture.points[0].time_from_start = ros::Duration(4);
-*/
 	grasps.push_back(g);
-//			}
-//		}
-//	}
+
 	//group.setSupportSurfaceName("table");
 
-	rosbag::Bag bag;
-	bag.open(bagFile, rosbag::bagmode::Write);
+	// Using rosbag to record msg.
+//	rosbag::Bag bag;
+//	bag.open(bagFile, rosbag::bagmode::Write);
+//	bag.write(bagTopic, ros::Time::now(), g);
+//	bag.close();
 
-	bag.write(bagTopic, ros::Time::now(), g);
-
-	bag.close();
-
-	std::ofstream outputFile;
-	std::string fileName = "loaded_pick_grasp.txt";
-	outputFile.open(fileName.c_str());
-	outputFile << g;
-	outputFile.close();
+	// Dump a MSG into a file.
+//	std::ofstream outputFile;
+//	std::string fileName = "loaded_pick_grasp.txt";
+//	outputFile.open(fileName.c_str());
+//	outputFile << g;
+//	outputFile.close();
 
 	group.pick("coke_household", grasps);
 }
@@ -189,16 +153,14 @@ void loadGraspFromFileAndPick(moveit::planning_interface::MoveGroup &group)
 
 			grasps.push_back(*g);
 
-
 			//ASSERT_EQ(s->data, std::string("foo"));
 			//std::cout << g << std::endl;
 
-
-			std::ofstream outputFile;
-			std::string fileName = "loaded_pick_grasp1.txt";
-			outputFile.open(fileName.c_str());
-			outputFile << *g;
-			outputFile.close();
+//			std::ofstream outputFile;
+//			std::string fileName = "loaded_pick_grasp1.txt";
+//			outputFile.open(fileName.c_str());
+//			outputFile << *g;
+//			outputFile.close();
 
 		}
 	}
@@ -327,15 +289,15 @@ bool publishCokeBlockToPlanningScene(const ros::Publisher &pub_co, const geometr
 	co.header.stamp = ros::Time::now();
 	co.header.frame_id = "base_link";
 
-	co.id = "cokeBox";
+	co.id = "coke_household";
 	co.primitives.resize(1);
 	co.primitives[0].type = shape_msgs::SolidPrimitive::BOX;
 	co.primitives[0].dimensions.resize(shape_tools::SolidPrimitiveDimCount<shape_msgs::SolidPrimitive::BOX>::value);
 	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_X] = 0.067;
 	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Y] = 0.067;
 	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Z] = 0.12;
-	//co.primitive_poses.resize(1);
 	co.primitive_poses.push_back(poseCokeBlock);
+//	co.primitive_poses.resize(1);
 //	co.primitive_poses[0].position.x = 0.5;
 //	co.primitive_poses[0].position.y = -0.75;
 //	co.primitive_poses[0].position.z = 0.56;
@@ -354,7 +316,6 @@ int main(int argc, char **argv)
 	spinner.start();
 
 	ros::NodeHandle nh;
-	//ros::Publisher pub_co = nh.advertise<moveit_msgs::CollisionObject>("collision_object", 10);
 	ros::Publisher pub_co = nh.advertise<moveit_msgs::CollisionObject>("collision_object", 10);
 	ros::Publisher pub_aco = nh.advertise<moveit_msgs::AttachedCollisionObject>("attached_collision_object", 10);
 
@@ -440,8 +401,7 @@ int main(int argc, char **argv)
     geometry_msgs::PoseStamped p;
     p.header.frame_id = "base_link";
     p.header.stamp = ros::Time::now();
-    //p.pose.position.x = 0.25;
-    p.pose.position.x = 0.32;
+    p.pose.position.x = 0.50;
     p.pose.position.y = -0.75;
     p.pose.position.z = 0.58;
     p.pose.orientation.x = 0;
@@ -458,4 +418,4 @@ int main(int argc, char **argv)
 
 	ros::waitForShutdown();
 	return 0;
-	}
+}

@@ -2,7 +2,7 @@
 <launch>
 
     <arg name="gui" default="0" />
-    <arg name="config_pkg" />
+    <arg name="config_pkg" default="$(find tidyup_demo_launch)"/>
 
     <rosparam command="load" ns="tfd_modules" file="$(arg config_pkg)/config/planning/planner_params.yaml" />
 
