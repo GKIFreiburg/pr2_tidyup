@@ -1,16 +1,15 @@
 state_creators:
     - tidyup_state_creators/state_creator_robot_pose robot_location location at-base location
-    - tidyup_state_creators/state_creator_robot_location_in_room robot_location location
+#    - tidyup_state_creators/state_creator_robot_location_in_room robot_location location
     - tidyup_state_creators/state_creator_arms_at_side /tidyup/arms_at_side arm-state arm_at_side
 goal_creators:
     - tidyup_state_creators/goal_creator_tidyup_initialize
     - tidyup_state_creators/goal_creator_from_planning_scene
     - tidyup_state_creators/goal_creator_move_objects_to_table
 action_executors:
-    - object_manipulation_actions/action_executor_pickup_object pickup-object /tidyup/grasping_action
-    - object_manipulation_actions/action_executor_putdown_object putdown-object /tidyup/placing_action
-    - object_manipulation_actions/action_executor_detect_objects detect-objects /tidyup/detect_narf_objects /tidyup/request_graspability table2
+#    - object_manipulation_actions/action_executor_pickup_object pickup-object /tidyup/grasping_action
+#    - object_manipulation_actions/action_executor_putdown_object putdown-object /tidyup/placing_action
+#    - object_manipulation_actions/action_executor_detect_objects detect-objects /tidyup/detect_narf_objects /tidyup/request_graspability table2
     - object_manipulation_actions/action_executor_arm_to_side arm-to-side /tidyup/side_position_action arm-state arm_at_side
 #    - object_manipulation_actions/action_executor_arm_to_inspect_object arm-to-inspect-object /tidyup/inspect_action arm-state arm_unknown
-    - planner_navigation_actions/action_executor_ros_navigation drive-base move_base start recent-detected-objects false
-
+#    - planner_navigation_actions/action_executor_ros_navigation drive-base move_base start recent-detected-objects false

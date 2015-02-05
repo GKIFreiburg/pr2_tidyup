@@ -22,7 +22,7 @@ int main(int argc, char **argv)
 	spinner.start();
 
 	ros::NodeHandle node_handle;
-	ros::Duration sleep_time(3.0);
+	ros::Duration sleep_time(15.0);
 	sleep_time.sleep();
 
 	ros::ServiceClient getPlanningSceneClient;
@@ -32,12 +32,13 @@ int main(int argc, char **argv)
 	moveit_msgs::PlanningSceneComponents components;
 	components.SCENE_SETTINGS;
 	components.ROBOT_STATE;
-    std::ofstream outputFile;
-    std::string fileName = "moveit_msgs::PlanningSceneComponents.msg";
-	outputFile.open(fileName.c_str());
-	outputFile << components;
-	outputFile.close();
-	srv.request.components = components;
+	//srv.request.components = components;
+	srv.request.components.ROBOT_STATE;
+//    std::ofstream outputFile;
+//    std::string fileName = "moveit_msgs::PlanningSceneComponents.msg";
+//	outputFile.open(fileName.c_str());
+//	outputFile << components;
+//	outputFile.close();
 
 
 	if (getPlanningSceneClient.call(srv))
@@ -51,6 +52,32 @@ int main(int argc, char **argv)
 	std::string robotModelName = srv.response.scene.robot_model_name;
 	ROS_WARN("RobotModelName = %s\n"
 			 "Name = %s", robotModelName.c_str(), srv.response.scene.name.c_str());
+
+//  // Test to visualize the robot using markers.
+//	visualization_msgs::MarkerArray robotMarker;
+//	std::vector<std::string> link_names = robot_state.getRobotModel()->getLinkModelNames();
+//	for (int i = 0; i < link_names.size(); i++)
+//		ROS_INFO("link_name[%d] = %s", i, link_names[i].c_str());
+//
+//	robot_state.getRobotMarkers(robotMarker, link_names, false);
+//	std::ofstream outputFile;
+//	std::string fileName = "robotMarker";
+//	outputFile.open(fileName.c_str());
+//	outputFile << robotMarker;
+//	outputFile.close();
+//	ros::NodeHandle nh("~");
+//	ros::Publisher robotMarkerPub = nh.advertise<visualization_msgs::MarkerArray>("markers", 5, 1);
+//	robotMarkerPub.publish(robotMarker);
+//	ROS_INFO("Robot Marker Array published to 'robot_Marker' topic");
+
+
+
+
+
+
+
+
+
 
 
 	// BEGIN_TUTORIAL

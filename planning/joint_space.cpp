@@ -76,15 +76,28 @@ int main(int argc, char **argv)
   std::vector<double> group_variable_values;
   //group.getCurrentState()->copyJointGroupPositions(group.getCurrentState()->getRobotModel()->getJointModelGroup(group.getName()), group_variable_values);
   group.getCurrentState()->copyJointGroupPositions(group.getName(), group_variable_values);
+  // gives the same values as group_variable_values
+  std::vector<double> jointValues = group.getCurrentJointValues();
+
+  // Verify that getCurrentJointValues gives the same values as copyJointGroupPositions.
+  if (jointValues == group_variable_values)
+	  ROS_INFO("Both vectors have the same values for the joint positions.");
+  else
+	  ROS_WARN("Both vectors have different values for the joint positions.");
 
   std::vector<std::string> jointNames = group.getJoints();
   for (int i = 0; i < jointNames.size(); i++)
-    ROS_INFO("jointNames[%d]: %s, jointvalue before change: %f", i, jointNames[i].c_str(), group_variable_values[i]);
+    ROS_INFO("jointNames[%d]: %s, jointvalue before change: %f - %f", i, jointNames[i].c_str(), group_variable_values[i], jointValues[i]);
 
   // Now, let's modify one of the joints, plan to the new joint
   // space goal and visualize the plan.
-  group_variable_values[jointNr] = jointValue;
-  group.setJointValueTarget(group_variable_values);
+  // group_variable_values[jointNr] = jointValue;
+  //group.setJointValueTarget(group_variable_values);
+
+  // Set the joint position for the entire right arm. Arm tucked
+  double values[] = {-2.110, 1.230, -2.06, -1.69, 0.3, -1.32, 1.57};
+  std::vector<double> right_arm_at_side(values, values + sizeof(values) / sizeof(double));
+  group.setJointValueTarget(right_arm_at_side);
 
   // Now, we call the planner to compute the plan
   // and visualize it.
@@ -96,6 +109,9 @@ int main(int argc, char **argv)
   ROS_INFO("Visualizing plan (joint space goal) %s",success?"":"FAILED");
   if (!success)
     ROS_WARN("Probably the joint value is out of limits!");
+
+  // Uncomment below line when working with a real robot
+  group.move();
 
   /* Sleep to give Rviz time to visualize the plan. */
   sleep(5.0);

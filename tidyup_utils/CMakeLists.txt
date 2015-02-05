@@ -2,15 +2,15 @@ cmake_minimum_required(VERSION 2.8)
 project(tidyup_utils)
  
 find_package(catkin REQUIRED
-roscpp
-rospy
-moveit_core
-moveit_msgs
-moveit_ros_planning
-moveit_ros_planning_interface
-geometry_msgs
-tf
-tf_conversions
+  roscpp
+  rospy
+  moveit_core
+  moveit_msgs
+  moveit_ros_planning
+  moveit_ros_planning_interface
+  geometry_msgs
+  tf
+  tf_conversions
 )
 
 catkin_package(
