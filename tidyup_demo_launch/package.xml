@@ -16,7 +16,7 @@
   <run_depend>navigation_actions</run_depend>
   <run_depend>object_manipulation_actions</run_depend>
   <run_depend>tidyup_state_creators</run_depend>
-  <!--<depend package="tidyup_executive"/>-->
+  <run_depend>tidyup_executive</run_depend>
 </package>
 
 

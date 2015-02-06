@@ -6,14 +6,14 @@ project(tidyup_demo_launch)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED roscpp
 navigation_actions
-#object_manipulation_actions
-#tidyup_state_creators
+object_manipulation_actions
+tidyup_state_creators
 )
 
 ###################################
 ## catkin specific configuration ##
 ###################################
-## The catkin_package macro generates cmake config files for your package
+## The catkin_package macro generates cmWake config files for your package
 ## Declare things to be passed to dependent projects
 ## INCLUDE_DIRS: uncomment this if you package contains header files
 ## LIBRARIES: libraries you create in this project that dependent projects also need

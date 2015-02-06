@@ -1,0 +1,19 @@
+<launch>
+    <!-- run on base -->
+    <node pkg="screenrun" type="screenrun" name="screenrun_base" args="b" required="true">
+        <rosparam param="programs">
+            -
+                name: rviz 
+                commands:
+                    - rosrun rviz rviz
+            -
+                name: dashboard
+                commands:
+                    - rosrun pr2_dashboard pr2_dashboard\015
+            -
+                name: continual_planning_monitor 
+                commands:
+                    - rosrun continual_planning_monitor continual_planning_monitor
+        </rosparam>
+    </node>
+</launch>

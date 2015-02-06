@@ -1,21 +1,14 @@
 Startup:
 
-- on marvin: roslaunch sushi_tidyup_executive screen_m1.launch
-- on base:   roslaunch sushi_tidyup_executive screen_base.launch
+- roslauch tidyup_demo_launch screen_simulation
 
 The launch files exit normally and "screen -r" opens the started screen sessions.
 Robot starts automatically, the rest can be started as normally in a terminal.
 
 Screen windows:
-On marvin:
-- robot
-- kinect
-- sushi -> starts the sushi "reality" executive containing many basic robot tasks, e.g. SBPL navigation, perception pipeline, manipulation pipeline, arm services for tidyup
-- door manipulation -> open/detect doors
-- coverage -> wipe spots
-- planner -> starts the planning executive that manages the high-level action execution and calls the planner in a continual planning loop.
-
-On base:
-- dashboard
-- continual_planning_monitor -> connects to executive on marvin and allows to monitor/control the planning run. Also allows to manully execute actions for testing.
+- roscore
+- gazebo (robot-sim)
+- rviz with a loaded config
+- prerequisites (starts all the relevant nodes needed)
+- continual_planning (as well as the monitor)
 
