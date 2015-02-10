@@ -11,6 +11,7 @@
     <node pkg="continual_planning_executive" type="continual_planning_executive" args="" respawn="false" name="continual_planning_executive" output="screen" >
         <param name="start_paused" value="true" />
         <param name="locations" value="$(arg config_pkg)/config/planning/locations.dat" />
+        <param name="tables" value="$(arg config_pkg)/config/planning/tables.dat" />
         <!-- tolerance to use when determining if navigation has reached a target (i.e. we are AT a target)
             if nav_target_tolerance_relative_to_move_base is true, nav_base_local_planner_ns should give
             the namespace that holds the xy_goal_tolerance parameter the base_local_planner uses.
@@ -20,7 +21,7 @@
         <param name="nav_target_tolerance_relative_to_move_base" value="false" />
         <param name="nav_base_local_planner_ns" value="/move_base/TrajectoryPlannerROS" />
 
-        <!-- <param name="door_location_file" value="$(arg config_pkg)/config/doors.dat" /> -->
+        <!--<param name="door_location_file" value="$(arg config_pkg)/config/doors.dat" /> -->
         <rosparam command="load" file="$(arg config_pkg)/config/planning/actions.yaml" />
         <rosparam command="load" file="$(find tfd_modules)/config/tfdm_interface.yaml" />
         <rosparam command="load" file="$(arg config_pkg)/config/planning/domain.yaml" />

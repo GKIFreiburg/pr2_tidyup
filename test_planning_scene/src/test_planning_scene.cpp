@@ -32,8 +32,9 @@ int main(int argc, char **argv)
 	moveit_msgs::PlanningSceneComponents components;
 	components.SCENE_SETTINGS;
 	components.ROBOT_STATE;
-	//srv.request.components = components;
-	srv.request.components.ROBOT_STATE;
+	components.WORLD_OBJECT_NAMES;
+	srv.request.components = components;
+	//srv.request.components.ROBOT_STATE;
 //    std::ofstream outputFile;
 //    std::string fileName = "moveit_msgs::PlanningSceneComponents.msg";
 //	outputFile.open(fileName.c_str());
@@ -44,6 +45,12 @@ int main(int argc, char **argv)
 	if (getPlanningSceneClient.call(srv))
 	{
 		ROS_INFO("Service calling planning scene was successful.");
+	}
+
+	std::vector<moveit_msgs::CollisionObject> cos = srv.response.scene.world.collision_objects;
+	for (int i = 0; i < cos.size(); i++)
+	{
+		ROS_WARN("CO Name: %s", cos[i].id.c_str());
 	}
 
 	robot_model_loader::RobotModelLoader robot_model_loader("robot_description");

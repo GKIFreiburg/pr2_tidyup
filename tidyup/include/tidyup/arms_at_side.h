@@ -18,8 +18,8 @@ namespace tidyup
 		bool checkIfArmsAtSide(tidyup_msgs::ArmsAtSide::Request &req,
 								tidyup_msgs::ArmsAtSide::Response &res);
 
-		// Load the joint values for the arm at the side into the given vector.
-		bool loadJointValues(const std::string &group_name, std::vector<double> &arm_joints) const;
+		// Load the joint values for the arm-at-side position into the given vector.
+		bool loadJointValues(const std::string &arm_group_name, std::vector<double> &arm_joints) const;
 		private:
 
 		moveit::planning_interface::MoveGroup* right_arm_group_;

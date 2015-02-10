@@ -1,3 +1,4 @@
+<!-- -->
 <launch>
     <!-- run on m1 -->
     <node pkg="screenrun" type="screenrun" name="screenrun_m1" args="b" required="true">
@@ -11,14 +12,25 @@
                 commands:
                     - roslaunch --wait tidyup_executive gazebo_robot.launch config_pkg:=$(rospack find tidyup_demo_launch)\015
             -
+                <!-- pe2_move_group needs to be started before prerequisites, since it publishes
+                     the robot describtion -->
+                name: pr2_move_group
+                commands:
+                    - roslaunch tidyup_executive pr2_move_group.launch
+            -
                 name: prerequisites
                 commands:
                     - export ROBOT=sim\015
                     - roslaunch tidyup_executive prerequisites.launch config_pkg:=$(rospack find tidyup_demo_launch)
             -
+                name: rviz
+                commands:
+                    - roslaunch tidyup_demo_launch rviz.launch
+            -
                 name: planner
                 commands:
                     - roslaunch tidyup_demo_launch continual_planning.launch config_pkg:=$(rospack find tidyup_demo_launch)
+
         </rosparam>
     </node>
 </launch>

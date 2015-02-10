@@ -12,6 +12,6 @@
      <arg name="disable_move_base" value="$(arg disable_move_base)"/>
   </include>
 
-  <include file="$(find tidyup_executive)/launch/household_objects_database.launch"/>
+  <!--include file="$(find tidyup_executive)/launch/household_objects_database.launch"/-->
 
 </launch>

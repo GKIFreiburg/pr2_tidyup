@@ -14,15 +14,15 @@ namespace tidyup
 	{
 	}
 
-	bool armsAtSide::loadJointValues(const std::string &group_name, std::vector<double> &arm_joints) const
+	bool armsAtSide::loadJointValues(const std::string &arm_group_name, std::vector<double> &arm_joints) const
 	{
 		ros::NodeHandle nhPriv("~");
-		if (!nhPriv.hasParam(group_name))
+		if (!nhPriv.hasParam(arm_group_name))
 			return false;
 		//ROS_ASSERT(nhPriv.hasParam(group_name));
 
 		XmlRpc::XmlRpcValue joint_list;
-		nhPriv.getParam(group_name, joint_list);
+		nhPriv.getParam(arm_group_name, joint_list);
 		if (joint_list.getType() != XmlRpc::XmlRpcValue::TypeArray)
 			return false;
 		//ROS_ASSERT(joint_list.getType() == XmlRpc::XmlRpcValue::TypeArray);
@@ -52,7 +52,7 @@ namespace tidyup
 		if (!loadJointValues(left_arm_group_->getName(), left_arm_at_side) &
 				!loadJointValues(right_arm_group_->getName(), right_arm_at_side))
 		{
-			ROS_WARN("Failed to load joint values from param server, take hard coded values.");
+			ROS_WARN("armsAtSide::%s: Failed to load joint values from param server, take hard coded values.", __func__);
 			double values[] = {-2.110, 1.230, -2.06, -1.69, 0.3, -1.32, 1.57};
 			std::vector<double> tmp(values, values + sizeof(values) / sizeof(double));
 			right_arm_at_side = tmp;
@@ -72,14 +72,14 @@ namespace tidyup
 		double error = 0.01;
 		for (int i = 0; i < right_arm_at_side.size(); i++)
 		{
-			ROS_INFO("right arm value: %f - %f", right_arm_values[i], right_arm_at_side[i]);
+			// ROS_INFO("armsAtSide::%s: right arm value: %f - %f", __func__ ,right_arm_values[i], right_arm_at_side[i]);
 			if (std::abs((double)right_arm_values[i] - (double)right_arm_at_side[i]) > error)
 				right_arm = false;
 		}
 
 		for (int i = 0; i < left_arm_at_side.size(); i++)
 		{
-			ROS_INFO("left arm value: %f - %f", left_arm_values[i], left_arm_at_side[i]);
+			// ROS_INFO("armsAtSide::%s: left arm value: %f - %f", __func__, left_arm_values[i], left_arm_at_side[i]);
 			if (std::abs((double)left_arm_values[i] - (double)left_arm_at_side[i]) > error)
 				left_arm = false;
 		}

@@ -21,6 +21,9 @@ This file is for tidyup stuff needed in reality and simulation.
      <arg name="disable_move_base" value="$(arg disable_move_base)"/>
   </include>
 
+  <!-- starting services and action servers -->
+  <include file="$(find tidyup)/launch/tidyup.launch" />
+
   <node pkg="map_server" name="tidyup_map" type="map_server" args="$(arg config_pkg)/maps/map.yaml" respawn="true" >
       <!-- <remap from="map" to="map_server_map"/> -->
   </node>
@@ -50,8 +53,8 @@ This file is for tidyup stuff needed in reality and simulation.
     <remap from="map" to="octomap_map"/>
   </node>
 
-  <node if="$(arg run_db)" pkg="mongodb" type="wrapper.py" name="sushi_db" output="screen">
+  <!--node if="$(arg run_db)" pkg="mongodb" type="wrapper.py" name="sushi_db" output="screen">
       <param name="database_path" value="$(arg db_path)"/>
       <param name="overwrite" value="false"/>
-  </node>
+  </node-->
 </launch>
