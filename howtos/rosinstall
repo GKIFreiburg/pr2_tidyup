@@ -16,7 +16,6 @@
 - git: {local-name: ecto/pcl, uri: "https://github.com/plasmodic/ecto_pcl"}
 - git: {local-name: ecto/ros, uri: "https://github.com/plasmodic/ecto_ros"}
 
-
 - git: {local-name: ork/object_recognition_core, uri: "https://github.com/wg-perception/object_recognition_core"}
 - git: {local-name: ork/capture, uri: "https://github.com/wg-perception/capture"}
 - git: {local-name: ork/reconstruction, uri: "https://github.com/wg-perception/reconstruction"}
@@ -34,11 +33,8 @@
 
 # GKI Freiburg
 - git: {local-name: pr2_tidyup, uri: "https://github.com/GKIFreiburg/pr2_tidyup"}
-- git: {local-name: gki_pr2_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_pr2_symbolic_planning.git"}
-- git: {local-name: gki_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_symbolic_planning.git"}
+- git: {local-name: gki_pr2_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_pr2_symbolic_planning"}
+- git: {local-name: gki_pr2_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_pr2_symbolic_planning"}
 
 # screenrun
--git: {local-name: screenrun: "https://github.com/dornhege/screenrun.git"}
-
-
-
+- git: {local-name: screenrun, uri: "https://github.com/dornhege/screenrun"}
