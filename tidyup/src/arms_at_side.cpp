@@ -14,7 +14,7 @@ namespace tidyup
 	{
 	}
 
-	bool armsAtSide::loadJointValues(const std::string &arm_group_name, std::vector<double> &arm_joints) const
+	bool armsAtSide::loadJointValues(const std::string &arm_group_name, std::vector<double> &arm_joints)
 	{
 		ros::NodeHandle nhPriv("~");
 		if (!nhPriv.hasParam(arm_group_name))

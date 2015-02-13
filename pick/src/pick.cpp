@@ -75,7 +75,7 @@ void pick(moveit::planning_interface::MoveGroup &group)
 	p.header.frame_id = "base_link";
 	p.header.stamp = ros::Time::now();
 	//p.pose.position.x = 0.25;
-	p.pose.position.x = 0.32; // 0.5-0.18
+	p.pose.position.x = 0.32; // 0.5-0.18 very important!
 	p.pose.position.y = -0.75;
 	p.pose.position.z = 0.58;
 	p.pose.orientation.x = 0;
