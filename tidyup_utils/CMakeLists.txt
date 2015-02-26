@@ -49,6 +49,7 @@ add_library(tidyup_utils
     src/hand_description.cpp
     src/arm_state.cpp
     src/geometryPoses.cpp
+    src/arms_at_side.cpp
 )
 
 target_link_libraries(tidyup_utils
