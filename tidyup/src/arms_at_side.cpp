@@ -3,18 +3,18 @@
 
 namespace tidyup
 {
-	armsAtSide::armsAtSide(moveit::planning_interface::MoveGroup* right_arm_group,
+	ArmsAtSide::ArmsAtSide(moveit::planning_interface::MoveGroup* right_arm_group,
 					moveit::planning_interface::MoveGroup* left_arm_group) :
 		right_arm_group_(right_arm_group),
 		left_arm_group_(left_arm_group)
 	{
 	}
 
-	armsAtSide::~armsAtSide()
+	ArmsAtSide::~ArmsAtSide()
 	{
 	}
 
-	bool armsAtSide::loadJointValues(const std::string &arm_group_name, std::vector<double> &arm_joints)
+	bool ArmsAtSide::loadJointValues(const std::string &arm_group_name, std::vector<double> &arm_joints)
 	{
 		ros::NodeHandle nhPriv("~");
 		if (!nhPriv.hasParam(arm_group_name))
@@ -38,7 +38,7 @@ namespace tidyup
 		return true;
 	}
 
-	bool armsAtSide::checkIfArmsAtSide(tidyup_msgs::ArmsAtSide::Request &req,
+	bool ArmsAtSide::checkIfArmsAtSide(tidyup_msgs::ArmsAtSide::Request &req,
 									tidyup_msgs::ArmsAtSide::Response &res)
 	{
 		// First get the current set of joint values for the groups.
@@ -52,7 +52,7 @@ namespace tidyup
 		if (!loadJointValues(left_arm_group_->getName(), left_arm_at_side) &
 				!loadJointValues(right_arm_group_->getName(), right_arm_at_side))
 		{
-			ROS_WARN("armsAtSide::%s: Failed to load joint values from param server, take hard coded values.", __func__);
+			ROS_WARN("ArmsAtSide::%s: Failed to load joint values from param server, take hard coded values.", __func__);
 			double values[] = {-2.110, 1.230, -2.06, -1.69, 0.3, -1.32, 1.57};
 			std::vector<double> tmp(values, values + sizeof(values) / sizeof(double));
 			right_arm_at_side = tmp;
@@ -72,14 +72,14 @@ namespace tidyup
 		double error = 0.01;
 		for (int i = 0; i < right_arm_at_side.size(); i++)
 		{
-			// ROS_INFO("armsAtSide::%s: right arm value: %f - %f", __func__ ,right_arm_values[i], right_arm_at_side[i]);
+			// ROS_INFO("ArmsAtSide::%s: right arm value: %f - %f", __func__ ,right_arm_values[i], right_arm_at_side[i]);
 			if (std::abs((double)right_arm_values[i] - (double)right_arm_at_side[i]) > error)
 				right_arm = false;
 		}
 
 		for (int i = 0; i < left_arm_at_side.size(); i++)
 		{
-			// ROS_INFO("armsAtSide::%s: left arm value: %f - %f", __func__, left_arm_values[i], left_arm_at_side[i]);
+			// ROS_INFO("ArmsAtSide::%s: left arm value: %f - %f", __func__, left_arm_values[i], left_arm_at_side[i]);
 			if (std::abs((double)left_arm_values[i] - (double)left_arm_at_side[i]) > error)
 				left_arm = false;
 		}

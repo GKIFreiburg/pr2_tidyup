@@ -1,6 +1,6 @@
 <launch>
   <arg name="config_pkg" />
-  <arg name="gui" default="false"/>
+  <arg name="gui" default="true"/>
   <arg name="kinect_frame_prefix" default="/openni"/>
   <env name="GAZEBO_RESOURCE_PATH" value="$(arg config_pkg)/simulation/"/>  
   <param name="/use_sim_time" value="true" />

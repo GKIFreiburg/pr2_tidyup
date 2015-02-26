@@ -12,7 +12,7 @@
                 commands:
                     - roslaunch --wait tidyup_executive gazebo_robot.launch config_pkg:=$(rospack find tidyup_demo_launch)\015
             -
-                <!-- pe2_move_group needs to be started before prerequisites, since it publishes
+                <!-- pr2_move_group needs to be started before prerequisites, since it publishes
                      the robot describtion -->
                 name: pr2_move_group
                 commands:

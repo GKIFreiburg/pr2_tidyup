@@ -8,12 +8,12 @@
 namespace tidyup
 {
 
-	class armsAtSide
+	class ArmsAtSide
 	{
 		public:
-		armsAtSide(moveit::planning_interface::MoveGroup* right_arm_group,
+		ArmsAtSide(moveit::planning_interface::MoveGroup* right_arm_group,
 				moveit::planning_interface::MoveGroup* left_arm_group);
-		~armsAtSide();
+		~ArmsAtSide();
 
 		bool checkIfArmsAtSide(tidyup_msgs::ArmsAtSide::Request &req,
 								tidyup_msgs::ArmsAtSide::Response &res);

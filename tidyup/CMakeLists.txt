@@ -107,7 +107,7 @@ include_directories(include)
 #)
 
 ## Declare a cpp executable
-add_executable(tidyup src/tidyup.cpp src/arms_at_side.cpp)
+add_executable(tidyup src/tidyup.cpp src/arms_at_side.cpp src/arm_to_side_server.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
