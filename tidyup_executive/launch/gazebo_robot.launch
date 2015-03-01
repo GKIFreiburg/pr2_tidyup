@@ -1,12 +1,16 @@
+<!-- -->
 <launch>
   <arg name="config_pkg" />
   <arg name="gui" default="true"/>
   <arg name="kinect_frame_prefix" default="/openni"/>
   <env name="GAZEBO_RESOURCE_PATH" value="$(arg config_pkg)/simulation/"/>  
   <param name="/use_sim_time" value="true" />
-  <env name="ROBOT" value="sim"/>  
+  <env name="ROBOT" value="sim"/>
+  <!-- Does not work when using screen, define ROBOT_INITIAL_POSE in bashrc 
+  export ROBOT_INITIAL_POSE="-x 4.25 -y 8.5 -z 0 -R 0 -P 0 -Y -1.57" -->
+  <env name="ROBOT_INITIAL_POSE" value="-x 4.25 -y 8.5 -z 0 -R 0 -P 0 -Y -1.57"/>
 
-  <include file="$(find pr2_gazebo)/launch/pr2_empty_world.launch" />
+  <include file="$(find pr2_gazebo)/launch/pr2_empty_world.launch"/>
 
   <!--<include file="$(find gazebo_ros)/launch/empty_world.launch" />-->
   <!-- <node name="gazebo" pkg="gazebo_ros" type="gazebo" args="$(arg config_pkg)/simulation/map.sdf" respawn="false" output="screen"/>  -->
