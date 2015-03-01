@@ -5,16 +5,16 @@ project(tidyup)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED
-roscpp
-tidyup_msgs
-moveit_core
-moveit_msgs
-moveit_planners_ompl
-moveit_ros_manipulation
-moveit_ros_move_group
-moveit_ros_planning
-moveit_ros_planning_interface
-moveit_ros_visualization
+	roscpp
+	tidyup_msgs
+	moveit_core
+	moveit_msgs
+	moveit_planners_ompl
+	moveit_ros_manipulation
+	moveit_ros_move_group
+	moveit_ros_planning
+	moveit_ros_planning_interface
+	moveit_ros_visualization
 )
 
 ## System dependencies are found with CMake's conventions
@@ -107,7 +107,11 @@ include_directories(include)
 #)
 
 ## Declare a cpp executable
-add_executable(tidyup src/tidyup.cpp src/arms_at_side.cpp src/arm_to_side_server.cpp)
+add_executable(tidyup
+	src/tidyup.cpp
+	src/arms_at_side_service_server.cpp
+	src/arm_to_side_action_server.cpp
+)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
