@@ -12,6 +12,41 @@
 
   <include file="$(find pr2_gazebo)/launch/pr2_empty_world.launch"/>
 
+  <!-- spawn tables -->
+  <param name="table1" command="$(find xacro)/xacro.py '$(find gazebo_worlds)/objects/table1.urdf.xacro'" />
+  <node name="spawn_table1" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table1 -model table1 -x 4.81 -y 5.28"
+  respawn="false" output="screen" />
+
+  <param name="table2" 
+   command="$(find xacro)/xacro.py '$(find gazebo_worlds)/objects/table2.urdf.xacro'" />
+  <node name="spawn_table2" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table2 -model table2 -x 0.50 -y 6.44" 
+   respawn="false" output="screen" />
+
+  <param name="table_sink" 
+   command="$(find xacro)/xacro.py '$(find gazebo_worlds)/objects/table_sink.urdf.xacro'" />
+  <node name="spawn_table_sink" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table_sink -model table_sink -x 5.80 -y 6.40" 
+   respawn="false" output="screen" />
+
+  <!-- spawn a coke can (.stl object) -->
+  <!--
+  <node name="spawn_coke" pkg="gazebo_ros" type="spawn_model" 
+   args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 0.7 -y -0.25 -z 0.55" 
+   respawn="false" output="screen" /> 
+  -->
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- OLD STUFF -->
+
   <!--<include file="$(find gazebo_ros)/launch/empty_world.launch" />-->
   <!-- <node name="gazebo" pkg="gazebo_ros" type="gazebo" args="$(arg config_pkg)/simulation/map.sdf" respawn="false" output="screen"/>  -->
   <!--<group if="$(arg gui)">
