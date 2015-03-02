@@ -30,6 +30,8 @@ namespace tidyup
 
 		moveit::planning_interface::MoveGroup* right_arm_group_;
 		moveit::planning_interface::MoveGroup* left_arm_group_;
+
+		moveit::planning_interface::MoveItErrorCode armToSide(moveit::planning_interface::MoveGroup* group);
 	};
 };
 

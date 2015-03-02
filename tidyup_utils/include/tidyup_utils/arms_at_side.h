@@ -1,5 +1,5 @@
-#ifndef ARMS_AT_SIDE_H_
-#define ARMS_AT_SIDE_H_
+#ifndef ARMS_AT_SIDE_SERVICE_SERVER_H_
+#define ARMS_AT_SIDE_SERVICE_SERVER_H_
 
 #include <ros/ros.h>
 #include <tidyup_msgs/ArmsAtSide.h>
@@ -8,12 +8,12 @@
 namespace tidyup
 {
 
-	class ArmsAtSide
+	class ArmsAtSideServiceServer
 	{
 		public:
-		ArmsAtSide(moveit::planning_interface::MoveGroup* right_arm_group,
+		ArmsAtSideServiceServer(moveit::planning_interface::MoveGroup* right_arm_group,
 				moveit::planning_interface::MoveGroup* left_arm_group);
-		~ArmsAtSide();
+		~ArmsAtSideServiceServer();
 
 		bool checkIfArmsAtSide(tidyup_msgs::ArmsAtSide::Request &req,
 								tidyup_msgs::ArmsAtSide::Response &res);
@@ -26,8 +26,6 @@ namespace tidyup
 		moveit::planning_interface::MoveGroup* left_arm_group_;
 
 	};
-
-
 };
 
-#endif /* ARMS_AT_SIDE_H_ */
+#endif /* ARMS_AT_SIDE_SERVICE_SERVER_H_ */
