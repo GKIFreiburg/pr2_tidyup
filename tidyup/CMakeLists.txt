@@ -122,7 +122,6 @@ add_dependencies(tidyup tidyup_msgs_generate_messages_cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(tidyup
   ${catkin_LIBRARIES}
-  tidyup_utils
 )
 
 #############
