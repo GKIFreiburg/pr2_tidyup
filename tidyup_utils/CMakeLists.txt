@@ -14,7 +14,8 @@ find_package(catkin REQUIRED
 )
 
 catkin_package(
-INCLUDE_DIRS include
+	INCLUDE_DIRS include
+	LIBRARIES tidyup_utils
 )
 
 find_package(Qt4 REQUIRED)
@@ -55,7 +56,6 @@ add_library(tidyup_utils
 target_link_libraries(tidyup_utils
   ${catkin_LIBRARIES}
 )
-
 
 add_executable(geometryPoses_test src/geometryPoses_test.cpp)
 target_link_libraries(geometryPoses_test ${PROJECT_NAME} ${catkin_LIBRARIES})

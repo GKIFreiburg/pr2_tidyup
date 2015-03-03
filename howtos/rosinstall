@@ -36,3 +36,7 @@
 - git: {local-name: gki_pr2_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_pr2_symbolic_planning"}
 - git: {local-name: gki_pr2_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_pr2_symbolic_planning"}
 
+
+- git: {local-name: ork_to_planning_scene, uri: "https://github.com/dornhege/ork_to_planning_scene.git"}
+
+

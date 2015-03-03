@@ -1,8 +1,7 @@
 #include <ros/ros.h>
 #include <actionlib/server/simple_action_server.h>
 #include <moveit/move_group_interface/move_group.h>
-#include <tidyup/arms_at_side_service_server.h>
-#include <tidyup/arm_to_side_action_server.h>
+#include <tidyup_utils/arms_at_side.h>
 
 int main(int argc, char **argv)
 {
@@ -19,14 +18,11 @@ int main(int argc, char **argv)
 	arms_group.getCurrentState();
 
 	// Initialize objects.
-	tidyup::ArmsAtSideServiceServer ArmsAtSide(&right_arm_group, &left_arm_group);
+	tidyup::ArmsAtSide ArmsAtSide(&right_arm_group, &left_arm_group);
 
 	// Advertise the different services and action servers.
 	ros::ServiceServer service = nhPriv.advertiseService(
-			"arms_at_side", &tidyup::ArmsAtSideServiceServer::checkIfArmsAtSide, &ArmsAtSide);
-
-	tidyup::ArmToSideActionServer armToSideActionServer(nhPriv,
-			"side_position_action", &right_arm_group, &left_arm_group);
+			"arms_at_side", &tidyup::ArmsAtSide::checkIfArmsAtSide, &ArmsAtSide);
 
 	ros::spin();
 

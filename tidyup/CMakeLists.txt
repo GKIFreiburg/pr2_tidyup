@@ -7,6 +7,7 @@ project(tidyup)
 find_package(catkin REQUIRED
 	roscpp
 	tidyup_msgs
+	tidyup_utils
 	moveit_core
 	moveit_msgs
 	moveit_planners_ompl
@@ -99,7 +100,10 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(include)
+include_directories(
+	include
+	${catkin_INCLUDE_DIRS}	
+)
 
 ## Declare a cpp library
 #add_library(tidyup_arm_services
@@ -109,8 +113,6 @@ include_directories(include)
 ## Declare a cpp executable
 add_executable(tidyup
 	src/tidyup.cpp
-	src/arms_at_side_service_server.cpp
-	src/arm_to_side_action_server.cpp
 )
 
 ## Add cmake target dependencies of the executable/library
@@ -120,6 +122,7 @@ add_dependencies(tidyup tidyup_msgs_generate_messages_cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(tidyup
   ${catkin_LIBRARIES}
+  tidyup_utils
 )
 
 #############
