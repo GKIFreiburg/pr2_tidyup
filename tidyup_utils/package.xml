@@ -4,7 +4,7 @@
   <description>
      Utility classes for the Tidyup project.
   </description>
-  <maintainer email="dornhege@informatik.uni-freiburg.de">Andreas Hertle, Christian Dornhege</maintainer>
+  <maintainer email="dornhege@informatik.uni-freiburg.de">Andreas Hertle, Christian Dornhege, Luc Lanners</maintainer>
   <license>BSD</license>
   <url>http://ros.org/wiki/tidyup_utils</url>
 
@@ -20,6 +20,7 @@
   <build_depend>moveit_ros_planning</build_depend>
   <build_depend>moveit_ros_planning_interface</build_depend>
   <build_depend>geometry_msgs</build_depend>
+  <build_depend>tidyup_msgs</build_depend>
 
   <run_depend>roscpp</run_depend>
   <run_depend>rospy</run_depend>
@@ -30,6 +31,7 @@
   <run_depend>moveit_ros_planning</run_depend>
   <run_depend>moveit_ros_planning_interface</run_depend>
   <run_depend>geometry_msgs</run_depend>
+  <run_depend>tidyup_msgs</run_depend>
   
 
   <!--<rosdep name="libqt4-dev"/>-->

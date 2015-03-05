@@ -23,13 +23,26 @@ Removed collision free IK
   <arg name="model_set" default="SUSHI_MODEL_SET"/>
   <arg name="kinect_frame_prefix" default="/head_mount_kinect"/>
   <arg name="disable_move_base" default="0"/>
+  <arg name="sim" default="1"/> 
 
   <param if="$(arg stereo)" name="head_pointing_frame" value="/narrow_stereo_optical_frame"/>
   <group unless="$(arg stereo)">
     <param name="head_pointing_frame" value="$(arg kinect_frame_prefix)_rgb_optical_frame"/>
   </group>
 
+  <group if="$(arg sim)">
+    <!-- node which filters bad kinect images an publishes all good images
+    to topic /filtered_kinect/depth/* -->
+    <node name="filter_kinect" pkg="object_detection" type="filter_kinect" />
+  </group>
+  
+  <include file="$(find ork_to_planning_scene)/launch/ork_tabletop.launch">
+    <arg if="$(arg sim)" name="configFile" value="$(find object_detection)/conf/filter_kinect.object.detection.ros.ork"/>
+  </include>
+
+  <!--
   <include file="$(find object_detection)/launch/filtered_kinect_detection.launch"/>
+  -->
   <!--
   <include file="$(find tidyup_executive)/launch/pr2_tabletop_manipulation.launch">
      <arg name="stereo" value="$(arg stereo)"/>

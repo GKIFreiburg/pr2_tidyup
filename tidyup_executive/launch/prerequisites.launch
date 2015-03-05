@@ -2,6 +2,7 @@
 <launch>
   <arg name="config_pkg" />
   <arg name="disable_move_base" default="0"/>
+  <arg name="sim" default="1"/>
 
   <include file="$(find pr2_machine)/$(env ROBOT).machine" />
 
@@ -10,6 +11,7 @@
   <include file="$(find tidyup_executive)/launch/common.launch">
      <arg name="config_pkg" value="$(arg config_pkg)" />
      <arg name="disable_move_base" value="$(arg disable_move_base)"/>
+     <arg name="sim" value="$(arg sim)"/>
   </include>
 
   <!--include file="$(find tidyup_executive)/launch/household_objects_database.launch"/-->
