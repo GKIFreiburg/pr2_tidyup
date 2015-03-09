@@ -28,11 +28,9 @@
    respawn="false" output="screen" />
 
   <!-- spawn a coke can (.stl object) -->
-  <!--
   <node name="spawn_coke" pkg="gazebo_ros" type="spawn_model" 
-   args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 0.7 -y -0.25 -z 0.55" 
-   respawn="false" output="screen" /> 
-  -->
+   args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 4.81 -y 5.28 -z 0.90" 
+   respawn="false"/>
 
 
 

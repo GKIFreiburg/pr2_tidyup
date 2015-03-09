@@ -1,26 +1,20 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(kinematics)
+project(control_robot)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED roscpp
-#moveit_commander
-moveit_core
-moveit_msgs
-moveit_planners_ompl
-#moveit_ros_benchmarks
-#moveit_ros_benchmarks_gui
-#moveit_ros_manipulation
-moveit_ros_move_group
-#moveit_ros_perception
-moveit_ros_planning
-moveit_ros_planning_interface
-#moveit_ros_robot_interaction
-moveit_ros_visualization
-moveit_ros_warehouse
-#moveit_setup_assistant
-#moveit_simple_controller_manager
+find_package(catkin REQUIRED COMPONENTS
+	roscpp
+	control_robot_msgs
+	moveit_core
+	moveit_msgs
+	moveit_planners_ompl
+	moveit_ros_manipulation
+	moveit_ros_move_group
+	moveit_ros_planning
+	moveit_ros_planning_interface
+	moveit_ros_visualization
 )
 
 ## System dependencies are found with CMake's conventions
@@ -94,7 +88,7 @@ moveit_ros_warehouse
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES kinematics
+#  LIBRARIES control_robot
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -105,25 +99,30 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
+include_directories(
+   include
+   ${catkin_INCLUDE_DIRS}
+)
 
 ## Declare a cpp library
-# add_library(kinematics
-#   src/${PROJECT_NAME}/kinematics.cpp
+# add_library(control_robot
+#   src/${PROJECT_NAME}/control_robot.cpp
 # )
 
 ## Declare a cpp executable
-# kinematic model tutorial
-add_executable(kinematic_model_tutorial kinematic_model_tutorial.cpp)
+add_executable(control_robot
+	src/main.cpp
+	src/control_head.cpp
+	src/control_arms.cpp
+)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(kinematics_node kinematics_generate_messages_cpp)
+add_dependencies(control_robot control_robot_msgs_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# kinematic model tutorial
-target_link_libraries(kinematic_model_tutorial
-  ${catkin_LIBRARIES}
+target_link_libraries(control_robot
+	${catkin_LIBRARIES}
 )
 
 #############
@@ -141,7 +140,7 @@ target_link_libraries(kinematic_model_tutorial
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS kinematics kinematics_node
+# install(TARGETS control_robot control_robot_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -166,7 +165,7 @@ target_link_libraries(kinematic_model_tutorial
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_kinematics.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_control_robot.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

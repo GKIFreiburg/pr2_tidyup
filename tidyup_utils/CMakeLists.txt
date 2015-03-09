@@ -1,9 +1,10 @@
 cmake_minimum_required(VERSION 2.8)
 project(tidyup_utils)
  
-find_package(catkin REQUIRED
+find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
+  tidyup_msgs
   moveit_core
   moveit_msgs
   moveit_ros_planning
@@ -52,6 +53,8 @@ add_library(tidyup_utils
     src/geometryPoses.cpp
     src/arms_at_side.cpp
 )
+
+add_dependencies(tidyup_utils tidyup_msgs_generate_messages_cpp)
 
 target_link_libraries(tidyup_utils
   ${catkin_LIBRARIES}
