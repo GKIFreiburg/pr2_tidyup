@@ -3,10 +3,17 @@
   <arg name="config_pkg" />
   <arg name="disable_move_base" default="0"/>
   <arg name="sim" default="1"/>
+  <arg name="control_robot" default="1"/>
 
   <include file="$(find pr2_machine)/$(env ROBOT).machine" />
 
   <include file="$(find pr2_navigation_teleop)/teleop.xml" />
+
+  <group if="$(arg control_robot)">
+  <!-- Control head and arms of robot using service calls -->
+  <node pkg="control_robot" type="control_robot" name="control_robot" output="screen"/>
+  </group>
+
 
   <include file="$(find tidyup_executive)/launch/common.launch">
      <arg name="config_pkg" value="$(arg config_pkg)" />

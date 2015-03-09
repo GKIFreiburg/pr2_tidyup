@@ -67,7 +67,7 @@ int main(int argc, char **argv)
 
 	//std::string ns = ros::this_node::getNamespace();
 
-    ROS_INFO("Waiting for head services.");
+    ROS_INFO("Waiting for %s services.", ros::this_node::getName().c_str());
     ros::Duration timeout = ros::Duration(0.5);
     ros::service::waitForService("control_robot/head_pitch_down", timeout);
     ros::service::waitForService("control_robot/head_pitch_up", timeout);

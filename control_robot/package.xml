@@ -2,7 +2,7 @@
 <package>
   <name>control_robot</name>
   <version>0.0.0</version>
-  <description>The control_robot package</description>
+  <description>The control_robot package published service servers to control the head and arms of the robot by simple service calls.</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
