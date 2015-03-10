@@ -9,6 +9,43 @@ namespace control_robot
 		head_yaw_("head_pan_joint"),
 		head_step_(0.15)
 	{
+		ros::NodeHandle nhPriv("~");
+		srvHeadPitchDown_ = nhPriv.advertiseService(
+				"head_pitch_down", &ControlHead::headPitchDown, this);
+		srvHeadPitchUp_ = nhPriv.advertiseService(
+				"head_pitch_up", &ControlHead::headPitchUp, this);
+		srvHeadPitchStraight_ = nhPriv.advertiseService(
+				"head_pitch_straight", &ControlHead::headPitchStraight, this);
+		srvHeadPitchDegrees_ = nhPriv.advertiseService(
+				"head_pitch_degrees", &ControlHead::headPitchDegrees, this);
+
+		srvHeadYawLeft_ = nhPriv.advertiseService(
+				"head_yaw_left", &ControlHead::headYawLeft, this);
+		srvHeadYawRight_ = nhPriv.advertiseService(
+				"head_yaw_right", &ControlHead::headYawRight, this);
+		srvHeadYawStraight_ = nhPriv.advertiseService(
+				"head_yaw_straight", &ControlHead::headYawStraight, this);
+		srvHeadYawDegrees_ = nhPriv.advertiseService(
+				"head_yaw_degrees", &ControlHead::headYawDegrees, this);
+
+		srvHeadInitialPosition_ = nhPriv.advertiseService(
+				"head_initial_position", &ControlHead::headInitialPosition, this);
+
+	    ROS_INFO("Waiting for %s services.", ros::this_node::getName().c_str());
+	    ros::Duration timeout = ros::Duration(0.5);
+	    // If one service is not online, we get an info message
+	    ros::service::waitForService("control_robot/head_pitch_down", timeout);
+	    ros::service::waitForService("control_robot/head_pitch_up", timeout);
+	    ros::service::waitForService("control_robot/head_pitch_straight", timeout);
+	    ros::service::waitForService("control_robot/head_pitch_degrees", timeout);
+
+	    ros::service::waitForService("control_robot/head_yaw_left", timeout);
+	    ros::service::waitForService("control_robot/head_yaw_right", timeout);
+	    ros::service::waitForService("control_robot/head_yaw_straight", timeout);
+	    ros::service::waitForService("control_robot/head_yaw_degrees", timeout);
+
+	    ros::service::waitForService("control_robot/head_initial_position", timeout);
+	    ROS_INFO("Head control services are Ready!");
 	}
 
 	ControlHead::~ControlHead()

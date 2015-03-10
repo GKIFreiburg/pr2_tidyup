@@ -28,6 +28,45 @@ namespace control_robot
 		arms_at_front_values_.insert(arms_at_front_values_.end(), right_arm_at_front_values_.begin(), right_arm_at_front_values_.end());
 		arms_at_front_bent_values_.insert(arms_at_front_bent_values_.begin(), left_arm_at_front_bent_values_.begin(), left_arm_at_front_bent_values_.end());
 		arms_at_front_bent_values_.insert(arms_at_front_bent_values_.end(), right_arm_at_front_bent_values_.begin(), right_arm_at_front_bent_values_.end());
+
+		ros::NodeHandle nhPriv("~");
+		srvRightArmToSide_ = nhPriv.advertiseService(
+				"right_arm_to_side", &ControlArms::rightArmToSide, this);
+		srvRightArmToFront_ = nhPriv.advertiseService(
+				"right_arm_to_front", &ControlArms::rightArmToFront, this);
+		srvRightArmToFrontBent_ = nhPriv.advertiseService(
+				"right_arm_to_front_bent", &ControlArms::rightArmToFrontBent, this);
+
+		srvLeftArmToSide_ = nhPriv.advertiseService(
+				"left_arm_to_side", &ControlArms::leftArmToSide, this);
+		srvLeftArmToFront_ = nhPriv.advertiseService(
+				"left_arm_to_front", &ControlArms::leftArmToFront, this);
+		srvLeftArmToFrontBent = nhPriv.advertiseService(
+				"left_arm_to_front_bent", &ControlArms::leftArmToFrontBent, this);
+
+		srvArmsToSide_ = nhPriv.advertiseService(
+				"arms_to_side", &ControlArms::armsToSide, this);
+		srvArmsToFront_ = nhPriv.advertiseService(
+				"arms_to_front", &ControlArms::armsToFront, this);
+		srvArmsToFrontBent_ = nhPriv.advertiseService(
+				"arms_to_front_bent", &ControlArms::armsToFrontBent, this);
+
+	    ROS_INFO("Waiting for %s services.", ros::this_node::getName().c_str());
+		ros::Duration timeout = ros::Duration(0.5);
+		// If one service is not online, we get an info message
+	    ros::service::waitForService("control_robot/right_arm_to_side", timeout);
+	    ros::service::waitForService("control_robot/right_arm_to_front", timeout);
+	    ros::service::waitForService("control_robot/right_arm_to_front_bent", timeout);
+
+	    ros::service::waitForService("control_robot/left_arm_to_side", timeout);
+	    ros::service::waitForService("control_robot/left_arm_to_front", timeout);
+	    ros::service::waitForService("control_robot/left_arm_to_front_bent", timeout);
+
+	    ros::service::waitForService("control_robot/arms_to_side", timeout);
+	    ros::service::waitForService("control_robot/arms_to_front", timeout);
+	    ros::service::waitForService("control_robot/arms_to_front_bent", timeout);
+
+	    ROS_INFO("Arm control services are ready!");
 	}
 
 	ControlArms::~ControlArms()

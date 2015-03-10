@@ -53,6 +53,15 @@ namespace control_robot
 		std::string head_pitch_;
 		std::string head_yaw_;
 		double head_step_;
+		ros::ServiceServer srvHeadPitchDown_;
+		ros::ServiceServer srvHeadPitchUp_;
+		ros::ServiceServer srvHeadPitchStraight_;
+		ros::ServiceServer srvHeadPitchDegrees_;
+		ros::ServiceServer srvHeadYawLeft_;
+		ros::ServiceServer srvHeadYawRight_;
+		ros::ServiceServer srvHeadYawStraight_;
+		ros::ServiceServer srvHeadYawDegrees_;
+		ros::ServiceServer srvHeadInitialPosition_;
 
 		// Receive the current joint value of the entered joint
 		bool getCurrentJointValueOfJoint(const std::string jointName, double &value);

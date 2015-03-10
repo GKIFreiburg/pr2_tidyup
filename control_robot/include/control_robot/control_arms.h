@@ -54,6 +54,18 @@ namespace control_robot
 		moveit::planning_interface::MoveGroup* left_arm_group_;
 		moveit::planning_interface::MoveGroup* arms_group_;
 
+		ros::ServiceServer srvRightArmToSide_;
+		ros::ServiceServer srvRightArmToFront_;
+		ros::ServiceServer srvRightArmToFrontBent_;
+
+		ros::ServiceServer srvLeftArmToSide_;
+		ros::ServiceServer srvLeftArmToFront_;
+		ros::ServiceServer srvLeftArmToFrontBent;
+
+		ros::ServiceServer srvArmsToSide_;
+		ros::ServiceServer srvArmsToFront_;
+		ros::ServiceServer srvArmsToFrontBent_;
+
 		std::vector<double> right_arm_at_side_values_;
 		std::vector<double> right_arm_at_front_values_;
 		std::vector<double> right_arm_at_front_bent_values_;
