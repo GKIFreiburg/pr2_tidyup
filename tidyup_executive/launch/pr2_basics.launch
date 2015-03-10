@@ -53,7 +53,6 @@ Removed collision free IK
 
   <node pkg="amcl" type="amcl" name="amcl" output="screen">
 	  <remap from="scan" to="base_scan" />
-	  <!-- Publish scans from best pose at a max of 10 Hz -->
 	  <param name="base_frame_id" value="base_footprint"/>
 	  <param name="odom_model_type" value="omni"/>
 	  <param name="odom_alpha5" value="0.1"/>
@@ -66,7 +65,6 @@ Removed collision free IK
 	  <param name="kld_z" value="0.99"/>
 	  <param name="odom_alpha1" value="0.2"/>
 	  <param name="odom_alpha2" value="0.2"/>
-	  <!-- translation std dev, m -->
 	  <param name="odom_alpha3" value="0.8"/>
 	  <param name="odom_alpha4" value="0.2"/>
 	  <param name="laser_z_hit" value="0.5"/>
@@ -77,7 +75,6 @@ Removed collision free IK
 	  <param name="laser_lambda_short" value="0.1"/>
 	  <param name="laser_lambda_short" value="0.1"/>
 	  <param name="laser_model_type" value="likelihood_field"/>
-	  <!-- <param name="laser_model_type" value="beam"/> -->
 	  <param name="laser_likelihood_max_dist" value="2.0"/>
 	  <param name="update_min_d" value="0.1"/>
 	  <param name="update_min_a" value="0.15"/>
@@ -101,6 +98,7 @@ Removed collision free IK
   <node pkg="topic_tools" type="throttle" name="throttle_joint_states" args="messages joint_states 4.0"/>
 
 <!--
+  <include file="$(find sbpl_lattice_planner)/launch/move_base/move_base_sbpl.xml"/>
   <include file="$(find tidyup_executive)/launch/move_base_sbpl_planning_scene.launch" unless="$(arg disable_move_base)">
      <arg name="config_pkg" value="$(arg config_pkg)" />
   </include>
