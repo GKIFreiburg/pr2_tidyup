@@ -1,0 +1,19 @@
+To remove actions from the continual_planning_monitor because of typos or other reasons:
+
+gedit ~/.config/gki/ContinualPlanningMonitor.conf
+
+
+
+Source:
+
+http://doc.qt.io/qt-5/qsettings.html#details
+
+On Unix systems, if the file format is NativeFormat, the following files are used by default:
+
+    $HOME/.config/MySoft/Star Runner.conf (Qt for Embedded Linux: $HOME/Settings/MySoft/Star Runner.conf)
+    $HOME/.config/MySoft.conf (Qt for Embedded Linux: $HOME/Settings/MySoft.conf)
+    /etc/xdg/MySoft/Star Runner.conf
+    /etc/xdg/MySoft.conf
+
+
+
