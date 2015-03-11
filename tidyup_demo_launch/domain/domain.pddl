@@ -13,15 +13,12 @@
 
         arm                             ; use left or right arm, see constants
         arm_state                       ; specific arm positions, see constants
-
-		;object_type                     ; type of movable objects, see domain constants
     )
 
     (:constants
         left_arm right_arm - arm
         arm_at_side arm_unknown arm_at_front - arm_state
         robot_location - location
-        ;cup plate mug teapot - object_type  ; various predefined object types
     )
 
     (:predicates
@@ -30,7 +27,6 @@
 
         (robot-at ?l - location)
         (location-near-table ?l - manipulation_location ?t - table)
-        (localized-at ?l - manipulation_location)
 
         (object-grasped ?o - movable_object ?a - arm)
         (object-on ?o - movable_object ?t - table)
@@ -50,7 +46,6 @@
         (timestamp ?p - pose) - number
         (inspection-timestamp ?l - manipulation_location) - number
         (frame-id ?p - pose) - frameid
-		;(object-is-type ?o - movable_object ?t - object_type) - number  ; do we believe obect is of a certain type? values between 0 and 1
     )
 
 	; aquire sensor data from this location
@@ -61,7 +56,6 @@
         (and
             (at start (robot-at ?l))
             (at start (location-near-table ?l ?t))
-            (at start (localized-at ?l))
             (at start (not (inspected ?l)))
             (at start (arms-drive-pose))
         )
@@ -84,23 +78,6 @@
         :effect
         (and
             (at end (object-inspected ?o))
-        )
-    )
-
-	; localize table landmark
-    (:durative-action localize
-        :parameters (?l - manipulation_location ?t - table)
-        :duration (= ?duration 5.0)
-        :condition
-        (and
-            (at start (robot-at ?l))
-            (at start (location-near-table ?l ?t))
-            (at start (not (localized-at ?l)))
-            (at start (arms-drive-pose))
-        )
-        :effect
-        (and
-            (at end (localized-at ?l))
         )
     )
 
