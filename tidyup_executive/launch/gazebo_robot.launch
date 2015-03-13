@@ -12,7 +12,11 @@
 
   <include file="$(find pr2_gazebo)/launch/pr2_empty_world.launch"/>
 
-  <!-- spawn tables -->
+  <node name="spawn_map" pkg="gazebo_ros" type="spawn_model" 
+   args="-urdf -file $(arg config_pkg)/simulation/map.urdf -model map" 
+   respawn="false"/>
+  
+  <!-- spawn tables 
   <param name="table1" command="$(find xacro)/xacro.py '$(find gazebo_worlds)/objects/table1.urdf.xacro'" />
   <node name="spawn_table1" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table1 -model table1 -x 4.81 -y 5.28"
   respawn="false" output="screen" />
@@ -26,6 +30,7 @@
    command="$(find xacro)/xacro.py '$(find gazebo_worlds)/objects/table_sink.urdf.xacro'" />
   <node name="spawn_table_sink" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table_sink -model table_sink -x 5.80 -y 6.40" 
    respawn="false" output="screen" />
+  -->
 
   <!-- spawn a coke can (.stl object) -->
   <node name="spawn_coke" pkg="gazebo_ros" type="spawn_model" 
