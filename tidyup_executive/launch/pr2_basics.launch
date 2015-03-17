@@ -37,7 +37,7 @@ Removed collision free IK
   </group>
   
   <include file="$(find ork_to_planning_scene)/launch/ork_tabletop.launch">
-    <arg if="$(arg sim)" name="configFile" value="$(find object_detection)/conf/filter_kinect.object.detection.ros.ork"/>
+    <arg name="sim" value="$(arg sim)"/>
   </include>
 
   <!--
