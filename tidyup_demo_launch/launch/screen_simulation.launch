@@ -27,6 +27,10 @@
                 commands:
                     - roslaunch tidyup_demo_launch rviz.launch
             -
+                name: monitor
+                commands:
+                    - rosrun continual_planning_monitor continual_planning_monitor
+            -
                 name: planner
                 commands:
                     - roslaunch tidyup_demo_launch continual_planning.launch config_pkg:=$(rospack find tidyup_demo_launch)
