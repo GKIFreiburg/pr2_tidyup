@@ -16,7 +16,7 @@ void cameraImageReceived(
 
   *counterPtr = *counterPtr + 1;
 
-  ROS_INFO("Pushing MSG Nr. %d to TOPIC", *counterPtr);
+  ROS_DEBUG("Pushing MSG Nr. %d to TOPIC", *counterPtr);
   pubImgPtr->publish(msgIn);
 }
 
