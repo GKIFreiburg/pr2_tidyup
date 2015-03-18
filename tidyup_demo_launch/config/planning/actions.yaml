@@ -1,5 +1,4 @@
 state_creators:
-#    - tidyup_state_creators/state_creator_robot_pose robot_location location at-base location
     - tidyup_state_creators/state_creator_robot_pose robot_location location robot-at location
 #    - tidyup_state_creators/state_creator_robot_location_in_room robot_location location
     - tidyup_state_creators/state_creator_arms_at_side /tidyup/arms_at_side arm-state arm_at_side

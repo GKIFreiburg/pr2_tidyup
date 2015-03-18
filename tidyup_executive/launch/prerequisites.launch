@@ -2,8 +2,9 @@
 <launch>
   <arg name="config_pkg" />
   <arg name="disable_move_base" default="0"/>
-  <arg name="sim" default="1"/>
-  <arg name="control_robot" default="1"/>
+  <arg name="sim" default="true"/>
+  <arg name="control_robot" default="true"/>
+  <arg name="clear_planning_scene" default="true"/>
 
   <include file="$(find pr2_machine)/$(env ROBOT).machine" />
 
@@ -12,6 +13,11 @@
   <group if="$(arg control_robot)">
   <!-- Control head and arms of robot using service calls -->
   <node pkg="control_robot" type="control_robot" name="control_robot" output="screen"/>
+  </group>
+
+  <group if="$(arg clear_planning_scene)">
+  <!-- Control head and arms of robot using service calls -->
+  <node pkg="clear_planning_scene" type="clear_planning_scene" name="clear_planning_scene" output="screen"/>
   </group>
 
 

@@ -104,14 +104,14 @@ catkin_package(
 # )
 
 ## Declare a cpp executable
-add_executable(clear_planning_scene_server src/clear_planning_scene_server.cpp)
+add_executable(clear_planning_scene src/clear_planning_scene.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-add_dependencies(clear_planning_scene_server clear_planning_scene_generate_messages_cpp)
+add_dependencies(clear_planning_scene clear_planning_scene_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(clear_planning_scene_server
+target_link_libraries(clear_planning_scene
   ${catkin_LIBRARIES}
 )
 
