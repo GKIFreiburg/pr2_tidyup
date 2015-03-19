@@ -18,11 +18,9 @@ int main(int argc, char **argv)
 	arms_group.getCurrentState();
 
 	// Initialize objects.
-	tidyup::ArmsAtSide ArmsAtSide(&right_arm_group, &left_arm_group);
 
-	// Advertise the different services and action servers.
-	ros::ServiceServer service = nhPriv.advertiseService(
-			"arms_at_side", &tidyup::ArmsAtSide::checkIfArmsAtSide, &ArmsAtSide);
+	// Advertise the "tidyup/arms_at_side" service server
+	tidyup::ArmsAtSide ArmsAtSide(&right_arm_group, &left_arm_group);
 
 	ros::spin();
 

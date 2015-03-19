@@ -8,6 +8,13 @@ namespace tidyup
 		right_arm_group_(right_arm_group),
 		left_arm_group_(left_arm_group)
 	{
+		ros::NodeHandle nhPriv("~");
+		srvArmsAtSide_ = nhPriv.advertiseService("arms_at_side", &ArmsAtSide::checkIfArmsAtSide, this);
+
+		ROS_INFO("ArmsAtSide::%s: Waiting for %s services.", __func__, ros::this_node::getName().c_str());
+		ros::Duration timeout = ros::Duration(0.5);
+		ros::service::waitForService("tidyup/arms_at_side", timeout);
+		ROS_INFO("ArmsAtSide::%s: Services are ready!", __func__);
 	}
 
 	ArmsAtSide::~ArmsAtSide()
