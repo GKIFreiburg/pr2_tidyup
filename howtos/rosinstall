@@ -40,3 +40,8 @@
 - git: {local-name: ork_to_planning_scene, uri: "https://github.com/dornhege/ork_to_planning_scene.git"}
 
 
+- git: {local-name: full_body_nav, uri: 'git@kaspar.informatik.uni-freiburg.de:/export/home/git/repositories/full-body-nav.git'}
+- git: {local-name: sbpl_lattice_planner, uri: 'https://github.com/trainman419/sbpl_lattice_planner.git'}
+- git: {local-name: sbpl, uri: 'https://github.com/sbpl/sbpl.git'}
+
+
