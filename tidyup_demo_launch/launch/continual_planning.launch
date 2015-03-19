@@ -2,7 +2,7 @@
 <launch>
 
     # "1" means show gui
-    <arg name="gui" default="1" />
+    <arg name="gui" default="false" />
     <arg name="config_pkg" default="$(find tidyup_demo_launch)"/>
 
     <rosparam command="load" ns="tfd_modules" file="$(arg config_pkg)/config/planning/planner_params.yaml" />

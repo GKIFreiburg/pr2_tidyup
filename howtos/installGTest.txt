@@ -1,0 +1,12 @@
+On ubuntu, it is easy to install gtest by command:
+
+sudo apt-get install libgtest-dev
+
+cd /usr/src/gtest
+
+sudo cmake CMakeLists.txt
+
+sudo make
+
+#copy or symlink libgtest.a and ligtest_main.a to /usr/lib folder
+sudo cp *.a /usr/lib

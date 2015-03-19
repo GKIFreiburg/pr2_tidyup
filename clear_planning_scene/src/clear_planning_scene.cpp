@@ -104,7 +104,7 @@ int main(int argc, char **argv)
 	planning_scene_diff_publisher = new ros::Publisher(
 			nh.advertise<moveit_msgs::PlanningScene>(
 			"planning_scene", 1));
-	ROS_INFO("Initialize clear_planning_scene_server");
+	ROS_INFO("Initialize %s", ros::this_node::getName().c_str());
 	while(planning_scene_diff_publisher->getNumSubscribers() < 1)
 	{
 		ros::WallDuration sleep_t(0.5);
