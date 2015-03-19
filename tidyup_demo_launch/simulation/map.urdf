@@ -20,6 +20,6 @@
   </link>
   <gazebo>
     <static>true</static>
-    <material>Gazebo/Grey</material>
+    <material>Gazebo/Wood</material>
   </gazebo>
 </robot>

@@ -37,7 +37,7 @@ Removed collision free IK
   </group>
   
   <include file="$(find ork_to_planning_scene)/launch/ork_tabletop.launch">
-    <arg if="$(arg sim)" name="configFile" value="$(find object_detection)/conf/filter_kinect.object.detection.ros.ork"/>
+    <!--<arg if="$(arg sim)" name="configFile" value="$(find object_detection)/conf/filter_kinect.object.detection.ros.ork"/>-->
   </include>
 
   <!--
@@ -97,8 +97,8 @@ Removed collision free IK
 
   <node pkg="topic_tools" type="throttle" name="throttle_joint_states" args="messages joint_states 4.0"/>
 
+  <include file="$(find tidyup_executive)/launch/move_base/move_base_sbpl.xml"/>
 <!--
-  <include file="$(find sbpl_lattice_planner)/launch/move_base/move_base_sbpl.xml"/>
   <include file="$(find tidyup_executive)/launch/move_base_sbpl_planning_scene.launch" unless="$(arg disable_move_base)">
      <arg name="config_pkg" value="$(arg config_pkg)" />
   </include>
