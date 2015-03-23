@@ -9,7 +9,6 @@ find_package(catkin REQUIRED COMPONENTS
 	tidyup_msgs
 	tidyup_utils
 	moveit_core
-#	moveit_ros_move_group
 	moveit_ros_planning
 	moveit_ros_planning_interface
 	symbolic_planning_utils
