@@ -20,12 +20,17 @@
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   
+  <build_depend>roscpp</build_depend>
   <build_depend>tidyup_msgs</build_depend>
   <build_depend>tidyup_utils</build_depend>
   <build_depend>moveit_core</build_depend>
+  <build_depend>moveit_ros_planning_interface</build_depend>
+  <build_depend>symbolic_planning_utils</build_depend>
 
+  <run_depend>roscpp</run_depend>
   <run_depend>tidyup_msgs</run_depend>
   <run_depend>tidyup_utils</run_depend>
   <run_depend>moveit_core</run_depend>
-
+  <run_depend>moveit_ros_planning_interface</run_depend>
+  <run_depend>symbolic_planning_utils</run_depend>
 </package>
