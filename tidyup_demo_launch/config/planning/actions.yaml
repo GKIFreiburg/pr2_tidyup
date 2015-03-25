@@ -4,7 +4,7 @@ state_creators:
     - tidyup_state_creators/state_creator_from_planning_scene
 goal_creators:
     - tidyup_state_creators/goal_creator_tidyup_initialize
-#    - tidyup_state_creators/goal_creator_load_tables_into_planning_scene
+    - tidyup_state_creators/goal_creator_load_tables_into_planning_scene
     - tidyup_state_creators/goal_creator_from_planning_scene
     - tidyup_state_creators/goal_creator_move_objects_to_table
 action_executors:

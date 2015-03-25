@@ -133,6 +133,8 @@ add_executable(move_body_parts_for_detection move_body_parts_for_detection.cpp)
 
 add_executable(move_to_initial_position move_to_initial_position.cpp)
 
+add_executable(kinematic_model_tutorial kinematic_model_tutorial.cpp)
+
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -193,6 +195,10 @@ target_link_libraries(move_body_parts_for_detection
 
 # move to initial position
 target_link_libraries(move_to_initial_position
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(kinematic_model_tutorial
   ${catkin_LIBRARIES}
 )
 
