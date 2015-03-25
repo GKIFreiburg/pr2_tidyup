@@ -1,7 +1,7 @@
 # To install ORK follow these steps
 # mkdir ws && cd ws
 # export DISTRO=hydro
-# sudo apt-get install libopenni-dev ros-${DISTRO}-catkin ros-${DISTRO}-ecto* ros-${DISTRO}-opencv-candidate ros-${DISTRO}-moveit-msgs
+# sudo apt-get install libopenni-dev ros-${DISTRO}-catkin ros-${DISTRO}-ecto* ros-${DISTRO}-opencv-candidate ros-${DISTRO}-moveit-msgs ros-${DISTRO}-octomap-server
 # source /opt/ros/${DISTRO}/setup.sh
 # wstool init src ork.rosinstall
 # cd src && wstool update -j8
