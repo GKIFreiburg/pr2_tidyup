@@ -12,14 +12,6 @@
                 commands:
                     - roslaunch --wait tidyup_executive gazebo_robot.launch config_pkg:=$(rospack find tidyup_demo_launch)\015
             -
-                name: rviz
-                commands:
-                    - roslaunch tidyup_demo_launch rviz.launch\015
-            -
-                name: monitor
-                commands:
-                    - rosrun continual_planning_monitor continual_planning_monitor\015
-            -
                 <!-- pr2_move_group needs to be started before prerequisites, since it publishes
                      the robot describtion -->
                 name: pr2_move_group
@@ -30,6 +22,14 @@
                 commands:
                     - export ROBOT=sim\015
                     - roslaunch tidyup_executive prerequisites.launch config_pkg:=$(rospack find tidyup_demo_launch)
+            -
+                name: rviz
+                commands:
+                    - roslaunch tidyup_demo_launch rviz.launch
+            -
+                name: monitor
+                commands:
+                    - rosrun continual_planning_monitor continual_planning_monitor
             -
                 name: planner
                 commands:

@@ -16,7 +16,7 @@
   </group>
 
   <group if="$(arg clear_planning_scene)">
-  <!-- Control head and arms of robot using service calls -->
+  <!-- Clearing planning_scene using service calls -->
   <node pkg="clear_planning_scene" type="clear_planning_scene" name="clear_planning_scene" output="screen"/>
   </group>
 

@@ -1,7 +1,7 @@
 # To install ORK follow these steps
 # mkdir ws && cd ws
 # export DISTRO=hydro
-# sudo apt-get install libopenni-dev ros-${DISTRO}-catkin ros-${DISTRO}-ecto* ros-${DISTRO}-opencv-candidate ros-${DISTRO}-moveit-msgs
+# sudo apt-get install libopenni-dev ros-${DISTRO}-catkin ros-${DISTRO}-ecto* ros-${DISTRO}-opencv-candidate ros-${DISTRO}-moveit-msgs ros-${DISTRO}-octomap-server ros-${DISTRO}-sbpl
 # source /opt/ros/${DISTRO}/setup.sh
 # wstool init src ork.rosinstall
 # cd src && wstool update -j8
@@ -34,13 +34,13 @@
 # GKI Freiburg
 - git: {local-name: pr2_tidyup, uri: "https://github.com/GKIFreiburg/pr2_tidyup"}
 - git: {local-name: gki_pr2_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_pr2_symbolic_planning"}
-- git: {local-name: gki_pr2_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_pr2_symbolic_planning"}
+- git: {local-name: gki_symbolic_planning, uri: "https://github.com/GKIFreiburg/gki_symbolic_planning"}
 
 
 - git: {local-name: ork_to_planning_scene, uri: "https://github.com/dornhege/ork_to_planning_scene.git"}
 
-
-- git: {local-name: full_body_nav, uri: 'git@kaspar.informatik.uni-freiburg.de:/export/home/git/repositories/full-body-nav.git'}
+# Move_base planner
+- git: {local-name: gki_3dnav, uri: 'https://github.com/GKIFreiburg/gki_3dnav.git'}
 - git: {local-name: sbpl_lattice_planner, uri: 'https://github.com/trainman419/sbpl_lattice_planner.git'}
 - git: {local-name: sbpl, uri: 'https://github.com/sbpl/sbpl.git'}
 
