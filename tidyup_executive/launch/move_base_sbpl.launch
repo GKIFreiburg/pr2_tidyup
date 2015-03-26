@@ -17,9 +17,10 @@
     <rosparam file="$(find sbpl_lattice_planner)/launch/move_base/base_local_planner_params_close.yaml" command="load" />
 
     <remap from="cmd_vel" to="base_controller/command"/>
-
+<!--
     <rosparam file="$(find sbpl_lattice_planner)/config/sbpl_global_params.yaml" command="load"/>
     <rosparam file="$(find sbpl_lattice_planner)/config/base_local_planner_trajectory.yaml" command="load" />
     <rosparam file="$(find sbpl_lattice_planner)/config/base_local_planner_poses.yaml" command="load" />
+    -->
   </node>
 </launch>
