@@ -38,25 +38,4 @@
    args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 4.81 -y 5.28 -z 0.90" 
    respawn="false"/>
 
-
-
-
-
-
-
-
-
-
-
-
-  <!-- OLD STUFF -->
-
-  <!--<include file="$(find gazebo_ros)/launch/empty_world.launch" />-->
-  <!-- <node name="gazebo" pkg="gazebo_ros" type="gazebo" args="$(arg config_pkg)/simulation/map.sdf" respawn="false" output="screen"/>  -->
-  <!--<group if="$(arg gui)">
-    <node name="gazebo_gui" pkg="gazebo" type="gui" respawn="false" output="screen" required="true"/>
-  </group>-->
-
-  <!--<include file="$(find simulation_object_tracker)/launch/object_manipulation_services.launch" />-->
-
 </launch>
