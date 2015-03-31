@@ -1,7 +1,7 @@
 # To install ORK follow these steps
 # mkdir ws && cd ws
 # export DISTRO=hydro
-# sudo apt-get install libopenni-dev ros-${DISTRO}-catkin ros-${DISTRO}-ecto* ros-${DISTRO}-opencv-candidate ros-${DISTRO}-moveit-msgs ros-${DISTRO}-octomap-server ros-${DISTRO}-sbpl
+# sudo apt-get install libopenni-dev ros-${DISTRO}-catkin ros-${DISTRO}-ecto* ros-${DISTRO}-opencv-candidate ros-${DISTRO}-moveit-msgs ros-${DISTRO}-octomap-server ros-${DISTRO}-sbpl screen byobu
 # source /opt/ros/${DISTRO}/setup.sh
 # wstool init src ork.rosinstall
 # cd src && wstool update -j8
@@ -9,7 +9,7 @@
 # catkin_make
 # source devel/setup.bash
 
-- git: {local-name: ecto/ecto, uri: "https://github.com/plasmodic/ecto"}
+- git: {local-name: ecto/ecto, uri: "https://github.com/plasmodic/ecto", version: "0.6.7"}
 - git: {local-name: ecto/image_pipeline, uri: "https://github.com/plasmodic/ecto_image_pipeline"}
 - git: {local-name: ecto/openni, uri: "https://github.com/plasmodic/ecto_openni"}
 - git: {local-name: ecto/opencv, uri: "https://github.com/plasmodic/ecto_opencv"}
