@@ -22,7 +22,10 @@
     )
 
     (:predicates
-        (inspected ?l - manipulation_location)              ; location is inspected
+        ; location was scanned at least once
+        (location-inspected ?l - manipulation_location)
+        ; location is updated with sensor data
+        (location-inspected-recently ?l - manipulation_location) 
         (object-inspected ?o - movable_object)              ; object is inspected
 
         (robot-at ?l - location)
@@ -56,12 +59,13 @@
         (and
             (at start (robot-at ?l))
             (at start (location-near-table ?l ?t))
-            (at start (not (inspected ?l)))
+            (at start (not (location-inspected-recently ?l)))
             (at start (arms-drive-pose))
         )
         :effect
         (and
-            (at end (inspected ?l))
+            (at end (location-inspected-recently ?l))
+            (at end (location-inspected ?l))
         )
     )
 
@@ -92,8 +96,8 @@
         )
         :effect
         (and
+            (at start (not (location-inspected-recently ?l)))
             (at start (not (robot-at ?s)))
-            (at start (not (localized-at ?s)))
             (at end (robot-at ?g))
         )
     )
@@ -105,15 +109,14 @@
         (and
             (at start (robot-at ?l))
             (at start (location-near-table ?l ?t))
-            (at start (localized-at ?l))
-            (at start (inspected ?l))
+            (at start (location-inspected-recently ?l))
             (at start (arms-drive-pose))
             (at start (object-on ?o ?t))
             (at start (hand-free ?a))
         )
         :effect
         (and
-            (at start (not (inspected ?l)))
+            (at start (not (location-inspected-recently ?l)))
             (at start (assign (arm-state ?a) arm_unknown))
             (at end (not (object-on ?o ?t)))
             (at end (object-grasped ?o ?a))
@@ -127,13 +130,13 @@
         (and
             (at start (robot-at ?l))
             (at start (location-near-table ?l ?t))
-            (at start (localized-at ?l))
-            (at start (inspected ?l))
+            (at start (location-inspected-recently ?l))
             (at start (arms-drive-pose))
             (at start (object-grasped ?o ?a))
         )
         :effect
         (and
+            (at start (not (location-inspected-recently ?l)))
             (at start (assign (arm-state ?a) arm_unknown))
             (at end (object-on ?o ?t))
             (at end (not (object-grasped ?o ?a)))

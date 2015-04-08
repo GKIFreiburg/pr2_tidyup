@@ -11,7 +11,7 @@ action_executors:
 #    - object_manipulation_actions/action_executor_pickup_object pickup-object /tidyup/grasping_action
 #    - object_manipulation_actions/action_executor_putdown_object putdown-object /tidyup/placing_action
 #    - object_manipulation_actions/action_executor_detect_objects detect-objects /tidyup/detect_narf_objects /tidyup/request_graspability table2
-    - object_manipulation_actions/action_executor_inspect_location inspect-location /ork_to_planning_scene inspected
+    - object_manipulation_actions/action_executor_inspect_location inspect-location /ork_to_planning_scene location-inspected location-inspected-recently
     - object_manipulation_actions/action_executor_arm_to_side arm-to-side /tidyup/side_position_action arm-state arm_at_side
 #    - object_manipulation_actions/action_executor_arm_to_inspect_object arm-to-inspect-object /tidyup/inspect_action arm-state arm_unknown
-#    - planner_navigation_actions/action_executor_ros_navigation drive-base move_base start recent-detected-objects false
+    - navigation_actions/action_executor_ros_navigation move-robot move_base start location-inspected-recently false

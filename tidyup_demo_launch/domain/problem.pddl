@@ -24,7 +24,7 @@
     ;(object-inspected cup1)
     ;(= (arm-state right_arm) arm_at_front)
     ;(object-grasped cup1 right_arm)
-    ;(inspected loc1)
+    ;(location-inspected loc1)
     ;(robot-at loc1)
     (arms-drive-pose)
   ))
