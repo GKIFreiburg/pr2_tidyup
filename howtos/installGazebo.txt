@@ -1,0 +1,108 @@
+Fixes for mobile manipulation with Gazebo
+=========================================
+
+- Currently for Hydro
+- Required for reproducible and stable pick and place
+- Basically parameter tunings and hacks
+- Made to work as good as possible, not for realism
+
+Gazebo Patch
+------------
+- Contact handling in physics is really bad
+- Gazebo has a "grasp hack" for this in the URDF's gripper tag
+- Doesn't work on Gazebo 1.9 ...
+-> Install gazebo from sources and apply patch
+
+Instructions:
+1. Build Gazebo from sources
+- Tutorial: http://gazebosim.org/tutorials?tut=install&ver=1.9
+- This will uninstall gazebo and dependencies from the system
+- This is a standard cmake build, just make sure the install prefix for
+  gazebo is a local dir, e.g., GAZEBO_LOCAL
+  		cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/home/luc/gazebo_local ../
+- compile should work
+
+2. Apply patch in gazebo_grasp_hack_fix to the matching files
+- Reference See: Pull Req
+https://bitbucket.org/awesomebytes/gazebo/src/74258505e58f9c432a9c68af8ad753e6f3e92b8b/gazebo/physics/Gripper.cc?at=gripper_fix_for_gazebo_1.9.3
+- I further modified that, Gripper.cc/Gripper.hh in gazebo_grasp_hack_fix should be merged to gazebo/physics manually (replace those two files in ~/gazebo_source/gazebo/gazebo/physics)
+- make && make install
+
+3. Use overlayed Gazebo
+- Modify gazebo_setup.sh to match GAZEBO_LOCAL path
+- include gazebo_setup.s in .bashrc to make sure the local install is used
+	write those exports in .bashrc
+
+/**************************************************************************************************
+ From here on these MUST be overlayed in a catkin workspace that is used to start Gazebo with ROS!
+/**************************************************************************************************
+
+gazebo_ros_pkgs
+---------------
+- Also need to rebuild gazebo plugins for custom gazebo (I think)
+- Tutorial: http://gazebosim.org/tutorials?tut=ros_installing
+- Go to "Install from Source"
+- Do NOT install the system gazebo!
+- Clone the hydro-devel branch
+- catkin_make should work, rosrun gazebo_ros gazebo also should work
+- After catkin_make, source this package: source /gazebo_ros/devel/setup.bash
+
+Parameters for grasping and arms
+--------------------------------
+To make grasping and the grasp hack work reliably in conjunction with pick and place
+a multitude of parameters were tuned and code adapted.
+
+Instructions:
+- Overlay the following repos with the branch: gazebo_grasp_tweaks
+!!! Important: packages must not be in folder gazebo_ros leads to eigen-errors !!!
+!!! These packages are already included in file rosinstall, with outchecking correct branch !!!
+https://github.com/dornhege/pr2_common.git
+https://github.com/dornhege/pr2_controllers.git
+https://github.com/dornhege/pr2_simulator.git
+- catkin_make and it might work
+!!! Verify that this folder overlays gazebo_ros package !!!
+- After catkin_make source this package: source ws/devel/setup.bash
+
+These should be a good starting point and work, but might be tuned for a system (performance vs. timeouts, etc.).
+If pick and place works in gazebo there is no need to do anything.
+
+Parameters tuning
+-----------------
+
+The following things are adapted:
+pr2_common -> URDF with new gripper hack parameters
+pr2_controllers -> pr2_gripper_action computes its own gripper velocity + debugs for adjusting
+                -> joint_trajectory_action_controller -> debugs for adjusting
+pr2_simulator -> pr2_arm_controllers.yaml new goal_time + stopped_velocity_tolerance
+              -> pr2_default_controllers.launch -> new param for gripper_action stall
+Optionally also overlay pr2_moveit_config -> /launch/move_group.launch
+            -> new param trajectory_execution/allowed_execution_duration_scaling 10.0 (absurdly high)
+
+Tuning instructions:
+
+If moveit reports "Controller handle r_arm_controller reports status ABORTED"
+- pr2_arm_controllers.yaml: goal_time gives extra time to reach a goal (if ABORTED, but still moving)
+    (For that also the pr2_moveit_config above)
+    stopped_velocity_tolerance: increase to assume stopped when Gazebo still reports velocity (if ABORTED, but at goal)
+- There are ROS_DEBUGs in JointTrajectoryActionController that output the actual values.
+
+If the grasping action reports wrong failure or timeouts although it is grasped/open/closed in gazebo:
+- pr2_default_controllers.launch: stall_velocity_threshold must be higher than reported vel when opened/closed/grasped object and lower than moving vel (ROS_DEBUG in pr2_gripper_action)
+
+If grasping fails in gazebo -> Gripper closed and object still moves/wobbles
+- First make sure the grasping action results are correct from the step before!
+- Debugs can be enabled in Gripper.cc in Gazebo
+- Hack idea: If N contacts for M steps and the transformation to these doesn't change for D steps
+    -> fix that transformation
+- Stuff to tune: attach steps, contacts (URDF), diffs (Gripper.cc), stall_timeout (later)
+- Contact are usually 0 or 100++ -> not critical
+- Once contacts are there it takes M + D steps until the transform is fixed -> adjust so it's as fast as possible, but only fixes an actual grasp (lower steps for faster, increase for safety)
+- Once this is done record the time until a grasp is fixed in ROS time, not gazebo time
+- adjust stall_timeout to be that time or larger for safety -> artificially delays a grasp being reported by the gripper_action, thus a pickup move doesn't engage moving the object while the transform is being fixed
+
+If detach doesnt work quickly -> retreat movement drags object along although not grasped any more
+- reduce detach_steps so it engages faster
+
+
+
+

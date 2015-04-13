@@ -6,7 +6,7 @@ project(planning)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED roscpp
 #moveit_commander
-moveit_core
+moveit_core 
 moveit_msgs
 moveit_planners_ompl
 #moveit_ros_benchmarks

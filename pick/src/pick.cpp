@@ -64,6 +64,7 @@
 
 const std::string bagTopic = "grasp";
 const std::string bagFile = "grasp.txt";
+const std::string objectName = "coke";
 
 void pick(moveit::planning_interface::MoveGroup &group)
 {
@@ -130,7 +131,7 @@ void pick(moveit::planning_interface::MoveGroup &group)
 //	outputFile << g;
 //	outputFile.close();
 
-	group.pick("coke_household", grasps);
+	group.pick(objectName, grasps);
 }
 
 void loadGraspFromFileAndPick(moveit::planning_interface::MoveGroup &group)
@@ -169,7 +170,7 @@ void loadGraspFromFileAndPick(moveit::planning_interface::MoveGroup &group)
 
 	bag.close();
 
-	group.pick("coke_household", grasps);
+	group.pick(objectName, grasps);
 }
 
 void place(moveit::planning_interface::MoveGroup &group)
@@ -178,9 +179,9 @@ void place(moveit::planning_interface::MoveGroup &group)
 
 	geometry_msgs::PoseStamped p;
 	p.header.frame_id = "base_link";
-	p.pose.position.x = 0.7;
-	p.pose.position.y = 0.0;
-	p.pose.position.z = 0.5;
+	p.pose.position.x = 0.5;
+	p.pose.position.y = -0.75;
+	p.pose.position.z = 0.58;
 	p.pose.orientation.x = 0;
 	p.pose.orientation.y = 0;
 	p.pose.orientation.z = 0;
@@ -223,7 +224,7 @@ void place(moveit::planning_interface::MoveGroup &group)
 	//  group.setPathConstraints(constr);
 	group.setPlannerId("RRTConnectkConfigDefault");
 
-	group.place("part", loc);
+	group.place(objectName, loc);
 }
 
 // No const pointer because otherwise it must be declared here
@@ -289,7 +290,7 @@ bool publishCokeBlockToPlanningScene(const ros::Publisher &pub_co, const geometr
 	co.header.stamp = ros::Time::now();
 	co.header.frame_id = "base_link";
 
-	co.id = "coke_household";
+	co.id = objectName;
 	co.primitives.resize(1);
 	co.primitives[0].type = shape_msgs::SolidPrimitive::BOX;
 	co.primitives[0].dimensions.resize(shape_tools::SolidPrimitiveDimCount<shape_msgs::SolidPrimitive::BOX>::value);
@@ -414,7 +415,7 @@ int main(int argc, char **argv)
 
 	ros::WallDuration(1.0).sleep();
 
-	//place(group);
+	place(group);
 
 	ros::waitForShutdown();
 	return 0;
