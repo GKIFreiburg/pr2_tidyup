@@ -26,7 +26,10 @@ Instructions:
 - Reference See: Pull Req
 https://bitbucket.org/awesomebytes/gazebo/src/74258505e58f9c432a9c68af8ad753e6f3e92b8b/gazebo/physics/Gripper.cc?at=gripper_fix_for_gazebo_1.9.3
 - I further modified that, Gripper.cc/Gripper.hh in gazebo_grasp_hack_fix should be merged to gazebo/physics manually (replace those two files in ~/gazebo_source/gazebo/gazebo/physics)
+Depending on user rights of gazebo_local directory:
 - make && make install
+OR
+- make && sudo make install
 
 3. Use overlayed Gazebo
 - Modify gazebo_setup.sh to match GAZEBO_LOCAL path

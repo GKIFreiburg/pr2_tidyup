@@ -85,13 +85,13 @@ fi
 alias ll='ls -lF'
 alias la='ls -A'
 alias l='ls -CF'
-#alias catkin='cd ~/ws && catkin_make'
+#alias catkin='cd ~/ws && catkin_make && alarm'
 alias pr2='cd ~/ws/src/pr2_tidyup'
 alias simulation='roslaunch tidyup_demo_launch screen_simulation.launch'
 alias killscreen='screen -S ros -X quit'
 alias gki='cd ~/ws/src/gki_pr2_symbolic_planning'
 alias actions.yaml='gedit ~/ws/src/pr2_tidyup/tidyup_demo_launch/config/planning/actions.yaml'
-alias alarm='speaker_alarm 1500 0.5 > bep 1500 0.5'
+alias alarm='speaker_alarm 1500 0.5 > /dev/null'
 
 # function to create a beep sound
 speaker_alarm() {
