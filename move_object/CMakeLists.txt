@@ -125,11 +125,15 @@ add_executable(move_object_main src/move_object_main.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(move_object moveit_simple_grasps)
+add_dependencies(move_object moveit_simple_grasps)
 
 ## Specify libraries to link a library or executable target against
+target_link_libraries(move_object
+  ${catkin_LIBRARIES}
+)
+
 target_link_libraries(move_object_main
-  ${catkin_LIBRARIES} move_object moveit_simple_grasps boost_filesystem boost_system
+  ${catkin_LIBRARIES} move_object boost_filesystem boost_system #moveit_simple_grasps
 )
 
 #############

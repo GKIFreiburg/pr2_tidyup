@@ -120,11 +120,11 @@ add_dependencies(plan_grasps moveit_simple_grasps)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(plan_grasps
-  ${catkin_LIBRARIES} moveit_simple_grasps
+  ${catkin_LIBRARIES} #moveit_simple_grasps
 )
 
 target_link_libraries(test_grasp_block
-  ${catkin_LIBRARIES} moveit_simple_grasps
+  ${catkin_LIBRARIES} #moveit_simple_grasps
 )
 
 #############
