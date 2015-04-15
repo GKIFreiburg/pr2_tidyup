@@ -6,11 +6,11 @@
             -
                 name: core
                 commands:
-                    - roscore\015
+                    - roscore
             -
                 name: robot-sim
                 commands:
-                    - roslaunch --wait executive_pr2 gazebo_table_coke.launch
+                    - roslaunch executive_pr2 gazebo_table_coke.launch
             -
                 <!-- pr2_move_group needs to be started before prerequisites, since it publishes
                      the robot describtion -->
@@ -24,7 +24,7 @@
             -
                 name: actionClient
                 commands:
-                    - rosrun actionlib axclient.py  
+                    - rosrun actionlib axclient.py /r_gripper_controller/gripper_action
         </rosparam>
     </node>
 </launch>

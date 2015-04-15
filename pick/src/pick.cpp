@@ -198,13 +198,13 @@ void place(moveit::planning_interface::MoveGroup &group)
 	g.post_place_retreat.min_distance = 0.1;
 	g.post_place_retreat.desired_distance = 0.25;
 
-	g.post_place_posture.joint_names.resize(1, "r_gripper_joint");
+	g.post_place_posture.joint_names.resize(1, "r_gripper_motor_screw_joint");
 	g.post_place_posture.points.resize(1);
 	g.post_place_posture.points[0].positions.resize(1);
 	g.post_place_posture.points[0].positions[0] = 1;
 
 	loc.push_back(g);
-	group.setSupportSurfaceName("table");
+	//group.setSupportSurfaceName("table");
 
 
 	// add path constraints
@@ -221,7 +221,7 @@ void place(moveit::planning_interface::MoveGroup &group)
 	ocm.absolute_y_axis_tolerance = 0.2;
 	ocm.absolute_z_axis_tolerance = M_PI;
 	ocm.weight = 1.0;
-	//  group.setPathConstraints(constr);
+	group.setPathConstraints(constr);
 	group.setPlannerId("RRTConnectkConfigDefault");
 
 	group.place(objectName, loc);
@@ -417,6 +417,6 @@ int main(int argc, char **argv)
 
 	place(group);
 
-	ros::waitForShutdown();
+	ros::shutdown();
 	return 0;
 }
