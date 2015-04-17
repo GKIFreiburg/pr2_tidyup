@@ -1,0 +1,40 @@
+<!-- -->
+<launch>
+    <!-- run on m1 -->
+    <node pkg="screenrun" type="screenrun" name="screenrun_m1" args="b" required="true">
+        <rosparam param="programs">
+            -
+                name: core
+                commands:
+                    - roscore\015
+            -
+                name: robot-sim
+                commands:
+                    - roslaunch --wait tidyup_executive gazebo_robot_single_room.launch config_pkg:=$(rospack find tidyup_single_room_launch)\015
+            -
+                <!-- pr2_move_group needs to be started before prerequisites, since it publishes
+                     the robot describtion -->
+                name: pr2_move_group
+                commands:
+                    - roslaunch tidyup_executive pr2_move_group.launch
+            -
+                name: prerequisites
+                commands:
+                    - export ROBOT=sim\015
+                    - roslaunch tidyup_executive prerequisites.launch config_pkg:=$(rospack find tidyup_single_room_launch) disable_move_base:=true
+            -
+                name: rviz
+                commands:
+                    - roslaunch tidyup_single_room_launch rviz.launch
+            -
+                name: monitor
+                commands:
+                    - rosrun continual_planning_monitor continual_planning_monitor
+            -
+                name: planner
+                commands:
+                    - roslaunch tidyup_single_room_launch continual_planning.launch config_pkg:=$(rospack find tidyup_single_room_launch)
+
+        </rosparam>
+    </node>
+</launch>

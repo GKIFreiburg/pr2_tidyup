@@ -12,7 +12,7 @@ This file is for tidyup stuff needed in reality and simulation.
   <arg name="run_db" default="false"/>
   <arg name="db_path" default=""/>
   <arg name="disable_move_base" default="0"/>
-  <arg name="sim" default="1"/> 
+  <arg name="sim" default="1"/>
 
   <include file="$(find tidyup_executive)/launch/pr2_basics.launch">
      <arg name="config_pkg" value="$(arg config_pkg)" />
@@ -30,7 +30,7 @@ This file is for tidyup stuff needed in reality and simulation.
       <!-- <remap from="map" to="map_server_map"/> -->
   </node>
 
-  <node machine="c2" name="octomap_server_combined" pkg="octomap_server" type="octomap_server_node" args="$(arg config_pkg)/maps/octomap.bt" >
+  <node unless="$(arg disable_move_base)" machine="c2" name="octomap_server_combined" pkg="octomap_server" type="octomap_server_node" args="$(arg config_pkg)/maps/octomap.bt" >
     <param name="resolution" value="0.025" />
     <param name="sensor_model/range" value="4.0" />
 

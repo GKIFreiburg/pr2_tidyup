@@ -67,7 +67,7 @@ task specific. For example, maps should not be in here.
 
   <node pkg="topic_tools" type="throttle" name="throttle_joint_states" args="messages joint_states 4.0"/>
 
-  <include file="$(find tidyup_executive)/launch/move_base_sbpl.launch"/>
+  <include unless="$(arg disable_move_base)" file="$(find tidyup_executive)/launch/move_base_sbpl.launch"/>
 <!--
   <include file="$(find tidyup_executive)/launch/move_base_sbpl_planning_scene.launch" unless="$(arg disable_move_base)">
      <arg name="config_pkg" value="$(arg config_pkg)" />

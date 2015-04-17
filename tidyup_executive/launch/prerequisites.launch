@@ -20,7 +20,6 @@
   <node pkg="clear_planning_scene" type="clear_planning_scene" name="clear_planning_scene" output="screen"/>
   </group>
 
-
   <include file="$(find tidyup_executive)/launch/common.launch">
      <arg name="config_pkg" value="$(arg config_pkg)" />
      <arg name="disable_move_base" value="$(arg disable_move_base)"/>

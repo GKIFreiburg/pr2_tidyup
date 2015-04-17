@@ -16,7 +16,7 @@
   <node name="spawn_map" pkg="gazebo_ros" type="spawn_model" 
    args="-urdf -file $(arg config_pkg)/simulation/map.urdf -model map" 
    respawn="false"/>
-  -->  
+  -->
 
   <!-- spawn tables   -->
   <param name="table1" command="$(find xacro)/xacro.py '$(find gazebo_worlds)/objects/table1.urdf.xacro'" />
