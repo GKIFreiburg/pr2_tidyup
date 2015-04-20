@@ -1,27 +1,13 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(pick)
+project(grasp_provider_msgs)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED roscpp
-actionlib
-moveit_core
-moveit_msgs
-moveit_planners_ompl
-moveit_ros_manipulation
-moveit_ros_move_group
-moveit_ros_planning
-moveit_ros_planning_interface
-moveit_ros_visualization
-moveit_ros_warehouse
-rosbag
-object_recognition_msgs
-shape_tools
-shape_msgs
-geometry_msgs
-grasp_provider_msgs
-tidyup_utils
+find_package(catkin REQUIRED COMPONENTS
+  actionlib
+  moveit_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -58,11 +44,10 @@ tidyup_utils
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
-# )
+add_message_files(
+  FILES
+  GraspProvider.msg
+)
 
 ## Generate services in the 'srv' folder
 # add_service_files(
@@ -72,17 +57,16 @@ tidyup_utils
 # )
 
 ## Generate actions in the 'action' folder
-# add_action_files(
-#   FILES
-#   Action1.action
-#   Action2.action
-# )
+add_action_files(
+  FILES
+  GenerateGrasps.action
+)
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  moveit_msgs
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -94,9 +78,9 @@ tidyup_utils
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES pick
-#  CATKIN_DEPENDS other_catkin_pkg
+  INCLUDE_DIRS include
+  LIBRARIES grasp_provider_msgs
+  CATKIN_DEPENDS actionlib moveit_msgs message_runtime
 #  DEPENDS system_lib
 )
 
@@ -106,37 +90,25 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
+include_directories(include)
 include_directories(
-	include
-	${catkin_INCLUDE_DIRS}
+  ${catkin_INCLUDE_DIRS}
 )
 
 ## Declare a cpp library
-# add_library(pick
-#   src/${PROJECT_NAME}/pick.cpp
-# )
+add_library(grasp_provider_msgs
+  src/grasp_provider_msgs.cpp
+)
 
 ## Declare a cpp executable
-add_executable(pick src/pick.cpp)
-
-add_executable(pick_place src/pick_place.cpp)
-
-add_executable(pick_grasp_provider src/pick_grasp_provider.cpp)
+# add_executable(grasp_provider_msgs_node src/grasp_provider_msgs_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(pick_node pick_generate_messages_cpp)
+add_dependencies(grasp_provider_msgs grasp_provider_msgs_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(pick
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(pick_place
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(pick_grasp_provider
+target_link_libraries(grasp_provider_msgs
   ${catkin_LIBRARIES}
 )
 
@@ -155,7 +127,7 @@ target_link_libraries(pick_grasp_provider
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS pick pick_node
+# install(TARGETS grasp_provider_msgs grasp_provider_msgs_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -180,7 +152,7 @@ target_link_libraries(pick_grasp_provider
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_pick.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_grasp_provider_msgs.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

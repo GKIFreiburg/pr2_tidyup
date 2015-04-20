@@ -1,0 +1,6 @@
+moveit_msgs/CollisionObject collision_object
+string eef_group_name
+---
+moveit_msgs/Grasp[] grasps
+---
+moveit_msgs/Grasp[] grasps

@@ -1,7 +1,0 @@
-<launch>
-  # The visualization in rviz
-  <include file="$(find executive_pr2)/launch/moveit_rviz.launch">
-    <arg name="config" value="true"/>
-    <arg name="debug" value="false"/>
-  </include>
-</launch>
