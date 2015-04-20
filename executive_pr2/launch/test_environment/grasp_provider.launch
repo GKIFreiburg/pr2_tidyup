@@ -1,0 +1,12 @@
+<launch>
+  <arg name="gui" default="false" />
+  <arg name="sim" default="false" />
+
+  <node if="$(arg gui)" name="grasp_provider_gui" pkg="grasp_provider" type="grasp_provider_gui" />
+
+  # action server to generate grasps
+  <include file="$(find grasp_provider)/launch/grasp_provider_pr2.launch">
+    <arg name="sim" value="$(arg sim)" />
+  </include>
+
+</launch>

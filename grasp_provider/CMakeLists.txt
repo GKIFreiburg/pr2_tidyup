@@ -1,32 +1,46 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(pick)
+project(grasp_provider)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED roscpp
-actionlib
-moveit_core
-moveit_msgs
-moveit_planners_ompl
-moveit_ros_manipulation
-moveit_ros_move_group
-moveit_ros_planning
-moveit_ros_planning_interface
-moveit_ros_visualization
-moveit_ros_warehouse
-rosbag
-object_recognition_msgs
-shape_tools
-shape_msgs
-geometry_msgs
-grasp_provider_msgs
-tidyup_utils
+find_package(catkin REQUIRED COMPONENTS
+  moveit_msgs
+  moveit_simple_grasps
+  roscpp
+  grasp_provider_msgs
+  actionlib
+  moveit_ros_warehouse
 )
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
 
+find_package(Qt4 REQUIRED)
+set( QT_USE_QTGUI TRUE )
+set( QT_USE_QTOPENGL TRUE )
+set( QT_USE_QTXML TRUE )
+include(${QT_USE_FILE})
+
+add_definitions(-DQT_NO_KEYWORDS)
+
+include_directories(include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR}) 
+include_directories(
+  ${catkin_INCLUDE_DIRS}
+)
+
+qt4_wrap_ui(uis_h
+   src/grasp_provider_gui.ui)
+
+set(qt_srcs
+   src/grasp_provider_gui.cpp)
+
+set(qt_hdrs
+   src/grasp_provider_gui.h)
+
+qt4_automoc(${qt_srcs})
+qt4_wrap_cpp(qt_moc_srcs ${qt_hdrs})
 
 ## Uncomment this if the package has a setup.py. This macro ensures
 ## modules and global scripts declared therein get installed
@@ -81,7 +95,7 @@ tidyup_utils
 ## Generate added messages and services with any dependencies listed here
 # generate_messages(
 #   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
+#   moveit_msgs
 # )
 
 ###################################
@@ -94,51 +108,43 @@ tidyup_utils
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
-#  LIBRARIES pick
-#  CATKIN_DEPENDS other_catkin_pkg
-#  DEPENDS system_lib
+  INCLUDE_DIRS include
+  LIBRARIES grasp_provider_storage
+  CATKIN_DEPENDS moveit_msgs moveit_simple_grasps roscpp grasp_provider_msgs actionlib moveit_ros_warehouse
+  DEPENDS libqt4-dev
 )
 
 ###########
 ## Build ##
 ###########
-
-## Specify additional locations of header files
-## Your package locations should be listed before other locations
 include_directories(
-	include
-	${catkin_INCLUDE_DIRS}
+  include 
+  ${catkin_INCLUDE_DIRS}
 )
 
+
 ## Declare a cpp library
-# add_library(pick
-#   src/${PROJECT_NAME}/pick.cpp
-# )
+add_library(grasp_provider_storage
+  src/grasp_provider_storage.cpp
+)
+add_dependencies(grasp_provider_storage grasp_provider_msgs_generate_messages_cpp)
 
 ## Declare a cpp executable
-add_executable(pick src/pick.cpp)
-
-add_executable(pick_place src/pick_place.cpp)
-
-add_executable(pick_grasp_provider src/pick_grasp_provider.cpp)
+add_executable(grasp_provider src/grasp_provider.cpp src/main.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(pick_node pick_generate_messages_cpp)
+add_dependencies(grasp_provider grasp_provider_msgs_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(pick
+target_link_libraries(grasp_provider
+  grasp_provider_storage
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(pick_place
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(pick_grasp_provider
-  ${catkin_LIBRARIES}
-)
+add_executable(grasp_provider_gui ${uis_h} ${qt_srcs} ${qt_moc_srcs}
+    src/grasp_provider_gui.cpp src/grasp_provider_gui_main.cpp)
+target_link_libraries(grasp_provider_gui grasp_provider_storage ${QT_LIBRARIES} ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -155,7 +161,7 @@ target_link_libraries(pick_grasp_provider
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS pick pick_node
+# install(TARGETS grasp_provider grasp_provider_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -180,7 +186,7 @@ target_link_libraries(pick_grasp_provider
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_pick.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_grasp_provider.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()
