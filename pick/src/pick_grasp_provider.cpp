@@ -32,8 +32,6 @@
  *  POSSIBILITY OF SUCH DAMAGE.
  *********************************************************************/
 
-/* Author: Ioan Sucan */
-
 #include <ros/ros.h>
 #include <cstdlib>
 
@@ -145,11 +143,10 @@ void publishCokeBlockToPlanningScene(const ros::Publisher &pub_co, const geometr
 
 	co.id = objName;
 	co.primitives.resize(1);
-	co.primitives[0].type = shape_msgs::SolidPrimitive::BOX;
-	co.primitives[0].dimensions.resize(shape_tools::SolidPrimitiveDimCount<shape_msgs::SolidPrimitive::BOX>::value);
-	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_X] = 0.067;
-	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Y] = 0.067;
-	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Z] = 0.12;
+	co.primitives[0].type = shape_msgs::SolidPrimitive::CYLINDER;
+	co.primitives[0].dimensions.resize(shape_tools::SolidPrimitiveDimCount<shape_msgs::SolidPrimitive::CYLINDER>::value);
+	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::CYLINDER_RADIUS] = 0.5 * 0.067;
+	co.primitives[0].dimensions[shape_msgs::SolidPrimitive::CYLINDER_HEIGHT] = 0.12;
 	co.primitive_poses.push_back(poseCokeBlock);
 //	co.primitive_poses.resize(1);
 //	co.primitive_poses[0].position.x = 0.5;
@@ -221,11 +218,13 @@ int main(int argc, char **argv)
 	if (!(object_detection_.compare("true") == 0))
 	{
 		geometry_msgs::PoseStamped p;
-		p.header.frame_id = "base_link";
+//		p.header.frame_id = "base_link";
+		p.header.frame_id = "odom_combined";
 		p.header.stamp = ros::Time::now();
 		p.pose.position.x = 0.70;
 		p.pose.position.y = -0.25;
-		p.pose.position.z = 0.61;
+//		p.pose.position.z = 0.61;
+		p.pose.position.z = 0.55;
 		p.pose.orientation.x = 0;
 		p.pose.orientation.y = 0;
 		p.pose.orientation.z = 0;
@@ -243,7 +242,7 @@ int main(int argc, char **argv)
 		ROS_WARN("pick_grasp_provider: Sending UpdatePlanningSceneFromORK request.");
 		ork_to_planning_scene_msgs::UpdatePlanningSceneFromOrkGoal updatePSGoal;
 		updatePSGoal.verify_planning_scene_update = false;
-		updatePSGoal.add_tables = true;
+		updatePSGoal.add_tables = false;
 		actionOrkToPs_.sendGoal(updatePSGoal);
 		bool finished_before_timeout = actionOrkToPs_.waitForResult(ros::Duration(30.0));
 		if (finished_before_timeout)
