@@ -21,7 +21,7 @@
                 name: prerequisites
                 commands:
                     - export ROBOT=sim\015
-                    - roslaunch tidyup_executive prerequisites.launch config_pkg:=$(rospack find tidyup_single_room_launch) disable_move_base:=true
+                    - roslaunch tidyup_executive prerequisites.launch config_pkg:=$(rospack find tidyup_single_room_launch) disable_move_base:=false
             -
                 name: rviz
                 commands:

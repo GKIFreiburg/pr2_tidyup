@@ -28,6 +28,10 @@ task specific. For example, maps should not be in here.
     <arg name="sim" value="$(arg sim)"/>
   </include>
 
+  <include file="$(find grasp_provider)/launch/grasp_provider_pr2.launch">
+    <arg name="sim" value="$(arg sim)"/>
+  </include>
+
   <node pkg="amcl" type="amcl" name="amcl" output="screen">
 	  <remap from="scan" to="base_scan" />
 	  <param name="base_frame_id" value="base_footprint"/>

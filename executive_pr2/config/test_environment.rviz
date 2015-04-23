@@ -6,12 +6,8 @@ Panels:
       Expanded:
         - /PlanningScene1
         - /TF1/Frames1
-        - /OrkTable1
-        - /OrkObject1
-        - /Object clusters1
-        - /MarkerArray2
       Splitter Ratio: 0.566502
-    Tree Height: 837
+    Tree Height: 760
   - Class: rviz/Help
     Name: Help
   - Class: rviz/Views
@@ -42,6 +38,7 @@ Visualization Manager:
       Value: true
     - Class: moveit_rviz_plugin/PlanningScene
       Enabled: true
+      Move Group Namespace: ""
       Name: PlanningScene
       Planning Scene Topic: /move_group/monitored_planning_scene
       Robot Description: robot_description
@@ -1024,9 +1021,9 @@ Visualization Manager:
       Transport Hint: raw
       Value: false
       Visibility:
-        "": true
         Grid: true
         InteractiveMarkers: true
+        Marker: true
         MarkerArray: true
         Object clusters: true
         OrkObject: true
@@ -1039,6 +1036,7 @@ Visualization Manager:
       Zoom Factor: 1
     - Bounding Box: false
       Class: object_recognition_ros/OrkTable
+      Color: 0; 255; 255
       Enabled: true
       Hull: true
       Name: OrkTable
@@ -1057,7 +1055,7 @@ Visualization Manager:
       Marker Topic: /tabletop/clusters
       Name: Object clusters
       Namespaces:
-        tabletop_node: true
+        {}
       Queue Size: 100
       Value: true
     - Class: rviz/MarkerArray
@@ -1073,7 +1071,7 @@ Visualization Manager:
       Marker Topic: /end_effector_marker
       Name: Marker
       Namespaces:
-        end_effector: true
+        {}
       Queue Size: 100
       Value: true
   Enabled: true
@@ -1113,14 +1111,14 @@ Window Geometry:
     collapsed: false
   Displays:
     collapsed: false
-  Height: 1056
+  Height: 1004
   Help:
     collapsed: false
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd00000002000000000000021d000003dafc0200000006fb000000100044006900730070006c0061007900730100000028000003da000000dd00fffffffb0000000800480065006c00700000000342000000bb0000007600fffffffb0000000a0056006900650077007300000003b0000000b0000000b000fffffffb0000000c00430061006d00650072006100000002ff000001610000001600fffffffb0000000c00430061006d00650072006100000002fc000000ca0000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e0067010000024f0000017f000000000000000000000003000004d80000017ffc0100000001fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e006700000002a8000004d800000000000000000000052c000003da00000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd00000002000000000000021d0000038dfc0200000006fb000000100044006900730070006c00610079007301000000410000038d000000dd00fffffffb0000000800480065006c00700000000342000000bb0000007600fffffffb0000000a0056006900650077007300000003b0000000b0000000b000fffffffb0000000c00430061006d00650072006100000002ff000001610000001600fffffffb0000000c00430061006d00650072006100000002fc000000ca0000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e0067010000024f0000017f000000000000000000000003000004d80000017ffc0100000001fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e006700000002a8000004d800000000000000000000055d0000038d00000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1871
-  X: 49
+  Width: 1920
+  X: 0
   Y: 24

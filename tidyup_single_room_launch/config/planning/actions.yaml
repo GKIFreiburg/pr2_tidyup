@@ -8,7 +8,7 @@ goal_creators:
     - tidyup_state_creators/goal_creator_from_planning_scene
     - tidyup_state_creators/goal_creator_move_objects_to_table
 action_executors:
-#    - object_manipulation_actions/action_executor_pickup_object pickup-object /tidyup/grasping_action
+    - object_manipulation_actions/action_executor_pickup_object pickup-object
 #    - object_manipulation_actions/action_executor_putdown_object putdown-object /tidyup/placing_action
 #    - object_manipulation_actions/action_executor_detect_objects detect-objects /tidyup/detect_narf_objects /tidyup/request_graspability table2
     - object_manipulation_actions/action_executor_inspect_location inspect-location /ork_to_planning_scene location-inspected location-inspected-recently
