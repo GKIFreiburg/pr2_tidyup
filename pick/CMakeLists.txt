@@ -119,7 +119,7 @@ include_directories(
 ## Declare a cpp executable
 add_executable(pick src/pick.cpp)
 
-add_executable(pick_place src/pick_place.cpp)
+add_executable(pick_place_tutorial src/pick_place.cpp)
 
 add_executable(pick_grasp_provider src/pick_grasp_provider.cpp)
 
@@ -132,7 +132,7 @@ target_link_libraries(pick
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(pick_place
+target_link_libraries(pick_place_tutorial
   ${catkin_LIBRARIES}
 )
 
