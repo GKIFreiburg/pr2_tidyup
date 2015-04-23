@@ -50,6 +50,10 @@
 - git: {local-name: pr2_controllers, uri: 'https://github.com/dornhege/pr2_controllers.git', version: "gazebo_grasp_tweaks"}
 - git: {local-name: pr2_simulator, uri: 'https://github.com/dornhege/pr2_simulator.git', version: "gazebo_grasp_tweaks"}
 
+# Grasp provider
+- git: {local-name: moveit_manipulation_tests, uri: 'git@aisgit.informatik.uni-freiburg.de:dornhege/moveit_manipulation_tests.git'}
+
+
 
 
 
