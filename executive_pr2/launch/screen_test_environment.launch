@@ -26,7 +26,7 @@
             -
                 name: ork
                 commands:
-                    - roslaunch ork_to_planning_scene ork_tabletop.launch
+                    - roslaunch  executive_pr2 object_detection.launch
             -
                 name: ork-detect
                 commands:
