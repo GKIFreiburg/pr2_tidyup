@@ -32,7 +32,7 @@
 
   <!-- spawn a coke can (.stl object) -->
   <node name="spawn_coke" pkg="gazebo_ros" type="spawn_model" 
-   args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 4.81 -y 5.28 -z 0.90" 
+   args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 4.61 -y 5.48 -z 0.90" 
    respawn="false"/>
 
 </launch>
