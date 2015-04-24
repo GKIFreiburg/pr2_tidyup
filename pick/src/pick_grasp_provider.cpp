@@ -314,7 +314,7 @@ int main(int argc, char **argv)
 		std::vector<moveit_msgs::Grasp> grasps = actionGenerateGrasps_.getResult()->grasps;
 		ROS_INFO("pick_grasp_provider: %lu grasps were found.", grasps.size());
 		//dumpGrasps(grasps);
-		group.pick(grasp_object_, grasps);
+		group.pick(collObj.id, grasps);
 	} else {
 		ROS_ERROR("pick_grasp_provider: Generate grasp action did not finish before the time out.");
 		return 1;
