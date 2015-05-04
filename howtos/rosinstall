@@ -53,7 +53,8 @@
 # Grasp provider
 - git: {local-name: moveit_manipulation_tests, uri: 'git@aisgit.informatik.uni-freiburg.de:dornhege/moveit_manipulation_tests.git'}
 
-
+# moveit fixes
+- git: {local-name: geometric_shapes, uri: "git@github.com:ros-planning/geometric_shapes.git", version: "hydro-devel"}
 
 
 
