@@ -1,6 +1,6 @@
 state_creators:
     - tidyup_state_creators/state_creator_robot_pose robot_location location robot-at location
-    - tidyup_state_creators/state_creator_arms_at_side /tidyup/arms_at_side arm-state arm_at_side
+    - tidyup_state_creators/state_creator_arms_at_side /tidyup/arms_at_side arm-state arm_at_side arm_unknown
     - tidyup_state_creators/state_creator_from_planning_scene
 goal_creators:
     - tidyup_state_creators/goal_creator_tidyup_initialize
@@ -9,7 +9,7 @@ goal_creators:
     - tidyup_state_creators/goal_creator_move_objects_to_table
 action_executors:
     - object_manipulation_actions/action_executor_pickup_object pickup-object
-#    - object_manipulation_actions/action_executor_putdown_object putdown-object /tidyup/placing_action
+    - object_manipulation_actions/action_executor_putdown_object putdown-object
 #    - object_manipulation_actions/action_executor_detect_objects detect-objects /tidyup/detect_narf_objects /tidyup/request_graspability table2
     - object_manipulation_actions/action_executor_inspect_location inspect-location /ork_to_planning_scene location-inspected location-inspected-recently
     - object_manipulation_actions/action_executor_arm_to_side arm-to-side /tidyup/side_position_action arm-state arm_at_side
