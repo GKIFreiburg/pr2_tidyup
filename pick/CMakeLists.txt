@@ -4,8 +4,10 @@ project(pick)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED roscpp
+find_package(catkin REQUIRED COMPONENTS
+roscpp
 actionlib
+tidyup_utils
 moveit_core
 moveit_msgs
 moveit_planners_ompl
@@ -21,7 +23,7 @@ shape_tools
 shape_msgs
 geometry_msgs
 grasp_provider_msgs
-tidyup_utils
+
 )
 
 ## System dependencies are found with CMake's conventions
