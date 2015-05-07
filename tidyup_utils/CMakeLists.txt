@@ -35,7 +35,6 @@ include_directories(
   include
 )
 
-
 set(qt_srcs
       src/geometryPosesCreatorGui.cpp)
 set(qt_hdrs
@@ -51,7 +50,6 @@ add_library(tidyup_utils
     src/hand_description.cpp
     src/arm_state.cpp
     src/geometryPoses.cpp
-    src/arms_at_side.cpp
 )
 
 add_dependencies(tidyup_utils tidyup_msgs_generate_messages_cpp)
