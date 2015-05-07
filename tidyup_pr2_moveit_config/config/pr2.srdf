@@ -72,22 +72,59 @@
     </group>
     <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
     <group_state name="tuck_right_arm" group="right_arm">
-        <joint name="r_elbow_flex_joint" value="-2.12441" />
-        <joint name="r_forearm_roll_joint" value="-1.4175" />
-        <joint name="r_shoulder_lift_joint" value="1.10728" />
-        <joint name="r_shoulder_pan_joint" value="-0.023593" />
-        <joint name="r_upper_arm_roll_joint" value="-1.55669" />
-        <joint name="r_wrist_flex_joint" value="-1.8417" />
-        <joint name="r_wrist_roll_joint" value="0.21436" />
+		<joint name="r_shoulder_pan_joint" value="-0.023593" />
+		<joint name="r_shoulder_lift_joint" value="1.10728" />
+		<joint name="r_upper_arm_roll_joint" value="-1.55669" />
+        <joint name="r_elbow_flex_joint" value="-2.12441" />  # r_upper_arm_joint
+        <joint name="r_forearm_roll_joint" value="-1.4175" /> # r_elbow_flex_joint      
+        <joint name="r_wrist_flex_joint" value="-1.8417" />	# r_forearm_roll_joint
+        <joint name="r_wrist_roll_joint" value="0.21436" /> # r_forearm_joint
     </group_state>
     <group_state name="tuck_left_arm" group="left_arm">
+		<joint name="l_shoulder_pan_joint" value="0.06024" />
+        <joint name="l_shoulder_lift_joint" value="1.24853" />
+        <joint name="l_upper_arm_roll_joint" value="1.78907" />
         <joint name="l_elbow_flex_joint" value="-1.68339" />
         <joint name="l_forearm_roll_joint" value="-1.73434" />
-        <joint name="l_shoulder_lift_joint" value="1.24853" />
-        <joint name="l_shoulder_pan_joint" value="0.06024" />
-        <joint name="l_upper_arm_roll_joint" value="1.78907" />
         <joint name="l_wrist_flex_joint" value="-0.0962141" />
         <joint name="l_wrist_roll_joint" value="-0.0864407" />
+    </group_state>
+	<!-- Self defined arm positions -->
+    <group_state name="right_arm_to_side" group="right_arm">
+		<joint name="r_shoulder_pan_joint" value="-2.110" />
+		<joint name="r_shoulder_lift_joint" value="1.230" />
+		<joint name="r_upper_arm_roll_joint" value="-2.06" />
+        <joint name="r_elbow_flex_joint" value="-1.69" />  # r_upper_arm_joint
+        <joint name="r_forearm_roll_joint" value="0.3" /> # r_elbow_flex_joint      
+        <joint name="r_wrist_flex_joint" value="-1.32" />	# r_forearm_roll_joint
+        <joint name="r_wrist_roll_joint" value="1.57" /> # r_forearm_joint
+    </group_state>
+    <group_state name="left_arm_to_side" group="left_arm">
+		<joint name="l_shoulder_pan_joint" value="2.110" />
+        <joint name="l_shoulder_lift_joint" value="1.230" />
+        <joint name="l_upper_arm_roll_joint" value="2.06" />
+        <joint name="l_elbow_flex_joint" value="-1.69" />
+        <joint name="l_forearm_roll_joint" value="-0.3" />
+        <joint name="l_wrist_flex_joint" value="-1.32" />
+        <joint name="l_wrist_roll_joint" value="1.57" />
+    </group_state>
+    <group_state name="right_arm_to_front" group="right_arm">
+		<joint name="r_shoulder_pan_joint" value="0.000020" />
+		<joint name="r_shoulder_lift_joint" value="0.014006" />
+		<joint name="r_upper_arm_roll_joint" value="0.001733" />
+        <joint name="r_elbow_flex_joint" value="-0.292850" />  # r_upper_arm_joint
+        <joint name="r_forearm_roll_joint" value="-0.001623" /> # r_elbow_flex_joint      
+        <joint name="r_wrist_flex_joint" value="-0.385758" />	# r_forearm_roll_joint
+        <joint name="r_wrist_roll_joint" value="-0.000961" /> # r_forearm_joint
+    </group_state>
+    <group_state name="left_arm_to_front" group="left_arm">
+		<joint name="l_shoulder_pan_joint" value="-0.000203" />
+        <joint name="l_shoulder_lift_joint" value="0.010128" />
+        <joint name="l_upper_arm_roll_joint" value="-0.003552" />
+        <joint name="l_elbow_flex_joint" value="-0.282219" />
+        <joint name="l_forearm_roll_joint" value="0.001276" />
+        <joint name="l_wrist_flex_joint" value="-0.415727" />
+        <joint name="l_wrist_roll_joint" value="0.000620" />
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="right_eef" parent_link="r_wrist_roll_link" group="right_gripper" />
