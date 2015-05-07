@@ -1,4 +1,0 @@
-# request to detect whether the arms are at side position
----
-bool right_arm
-bool left_arm

@@ -20,7 +20,6 @@ add_message_files(
 
 add_service_files(
 	FILES
-    ArmsAtSide.srv
     DetectDoorState.srv
     DetectExpectedGraspableObjects.srv
     DetectGraspableObjects.srv
@@ -34,7 +33,6 @@ add_service_files(
 add_action_files(
    FILES
    ArmToInspectObject.action
-   ArmToSide.action
    GraspObject.action
    OpenDoor.action
    PlaceObject.action
