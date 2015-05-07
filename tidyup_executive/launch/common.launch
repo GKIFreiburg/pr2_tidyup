@@ -23,9 +23,6 @@ This file is for tidyup stuff needed in reality and simulation.
      <arg name="sim" value="$(arg sim)"/>
   </include>
 
-  <!-- starting services and action servers -->
-  <include file="$(find tidyup)/launch/tidyup.launch" />
-
   <node pkg="map_server" name="tidyup_map" type="map_server" args="$(arg config_pkg)/maps/map.yaml" respawn="true" >
       <!-- <remap from="map" to="map_server_map"/> -->
   </node>
