@@ -5,26 +5,18 @@ project(planning)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED roscpp
-#moveit_commander
 moveit_core 
 moveit_msgs
 moveit_planners_ompl
-#moveit_ros_benchmarks
-#moveit_ros_benchmarks_gui
-#moveit_ros_manipulation
 moveit_ros_move_group
-#moveit_ros_perception
 moveit_ros_planning
 moveit_ros_planning_interface
-#moveit_ros_robot_interaction
 moveit_ros_visualization
 moveit_ros_warehouse
-#moveit_setup_assistant
-#moveit_simple_controller_manager
 )
 
 ## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+#find_package(Boost REQUIRED COMPONENTS system)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -122,6 +114,7 @@ add_executable(objects objects.cpp)
 add_executable(dual_arms dual_arms.cpp)
 add_executable(get_position get_position.cpp)
 add_executable(cube cube.cpp)
+add_executable(tuck_arms tuck_arms.cpp)
 
 # planning scene
 add_executable(planning_scene_tutorial planning_scene_tutorial.cpp)
@@ -202,6 +195,9 @@ target_link_libraries(kinematic_model_tutorial
   ${catkin_LIBRARIES}
 )
 
+target_link_libraries(tuck_arms
+  ${catkin_LIBRARIES}
+)
 
 #############
 ## Install ##
