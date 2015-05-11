@@ -12,7 +12,7 @@
 - git: {local-name: ecto/ecto, uri: "https://github.com/plasmodic/ecto", version: "0.6.7"}
 - git: {local-name: ecto/image_pipeline, uri: "https://github.com/plasmodic/ecto_image_pipeline"}
 - git: {local-name: ecto/openni, uri: "https://github.com/plasmodic/ecto_openni"}
-- git: {local-name: ecto/opencv, uri: "https://github.com/plasmodic/ecto_opencv"}
+- git: {local-name: ecto/opencv, uri: "https://github.com/plasmodic/ecto_opencv", version: "hydro"}
 - git: {local-name: ecto/pcl, uri: "https://github.com/plasmodic/ecto_pcl"}
 - git: {local-name: ecto/ros, uri: "https://github.com/plasmodic/ecto_ros"}
 
@@ -27,9 +27,8 @@
 - git: {local-name: ork/object_recognition_ros, uri: "https://github.com/wg-perception/object_recognition_ros"}
 - git: {local-name: ork/object_recognition_ros_visualization, uri: "https://github.com/wg-perception/object_recognition_ros_visualization"}
 # - git: {local-name: ork/object_recognition_msgs, uri: "https://github.com/wg-perception/object_recognition_msgs"}
-- git: {local-name: ork/object_recognition_household, uri: "https://github.com/wg-perception/object_recognition_household"}
 
-- git: {local-name: household_objects_database, uri: "https://github.com/ros-interactive-manipulation/household_objects_database"}
+
 
 # GKI Freiburg
 - git: {local-name: pr2_tidyup, uri: "git@github.com:GKIFreiburg/pr2_tidyup.git"}
@@ -55,6 +54,15 @@
 
 # moveit fixes
 - git: {local-name: geometric_shapes, uri: "git@github.com:ros-planning/geometric_shapes.git", version: "hydro-devel"}
+
+
+
+# - git: {local-name: moveit_ros, uri: "git@github.com:ros-planning/moveit_ros.git", version: "hydro-devel"}
+
+
+
+
+
 
 
 
