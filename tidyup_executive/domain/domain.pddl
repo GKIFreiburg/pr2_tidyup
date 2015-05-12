@@ -96,7 +96,8 @@
         )
         :effect
         (and
-            (at start (not (location-inspected-recently ?l)))
+            (at start (not (location-inspected-recently ?s)))
+            (at start (not (location-inspected-recently ?g)))
             (at start (not (robot-at ?s)))
             (at end (robot-at ?g))
         )
