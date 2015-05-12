@@ -23,7 +23,7 @@ shape_tools
 shape_msgs
 geometry_msgs
 grasp_provider_msgs
-
+ork_to_planning_scene
 )
 
 ## System dependencies are found with CMake's conventions
