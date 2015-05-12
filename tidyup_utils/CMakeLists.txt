@@ -50,6 +50,7 @@ add_library(tidyup_utils
     src/hand_description.cpp
     src/arm_state.cpp
     src/geometryPoses.cpp
+    src/get_pose_stamped_from_param.cpp
 )
 
 add_dependencies(tidyup_utils tidyup_msgs_generate_messages_cpp)
