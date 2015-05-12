@@ -108,6 +108,7 @@
         <joint name="l_wrist_flex_joint" value="-1.32" />
         <joint name="l_wrist_roll_joint" value="1.57" />
     </group_state>
+<!--
     <group_state name="right_arm_to_front" group="right_arm">
 		<joint name="r_shoulder_pan_joint" value="0.000020" />
 		<joint name="r_shoulder_lift_joint" value="0.014006" />
@@ -126,6 +127,7 @@
         <joint name="l_wrist_flex_joint" value="-0.415727" />
         <joint name="l_wrist_roll_joint" value="0.000620" />
     </group_state>
+-->
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="right_eef" parent_link="r_wrist_roll_link" group="right_gripper" />
     <end_effector name="left_eef" parent_link="l_wrist_roll_link" group="left_gripper" />
