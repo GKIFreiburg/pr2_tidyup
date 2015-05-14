@@ -5,7 +5,7 @@ state_creators:
 goal_creators:
     - tidyup_state_creators/goal_creator_tidyup_initialize
     - tidyup_state_creators/goal_creator_load_tables_into_planning_scene
-    - tidyup_state_creators/goal_creator_from_planning_scene
+#    - tidyup_state_creators/goal_creator_from_planning_scene
     - tidyup_state_creators/goal_creator_move_objects_to_table
 action_executors:
     - object_manipulation_actions/action_executor_arm_to_side arm-to-side right_arm_to_side left_arm_to_side
