@@ -25,10 +25,12 @@
   <node name="spawn_table2" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table2 -model table2 -x 0.50 -y 6.44" 
    respawn="false" output="screen" />
 
+<!--
   <param name="table_sink" 
    command="$(find xacro)/xacro.py '$(find gazebo_worlds)/objects/table_sink.urdf.xacro'" />
   <node name="spawn_table_sink" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table_sink -model table_sink -x 5.80 -y 6.40" 
    respawn="false" output="screen" />
+-->
 
   <!-- spawn a coke can (.stl object) -->
   <node name="spawn_coke" pkg="gazebo_ros" type="spawn_model" 
