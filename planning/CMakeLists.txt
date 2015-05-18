@@ -115,6 +115,7 @@ add_executable(dual_arms dual_arms.cpp)
 add_executable(get_position get_position.cpp)
 add_executable(cube cube.cpp)
 add_executable(tuck_arms tuck_arms.cpp)
+add_executable(lift_torso lift_torso.cpp)
 
 # planning scene
 add_executable(planning_scene_tutorial planning_scene_tutorial.cpp)
@@ -196,6 +197,10 @@ target_link_libraries(kinematic_model_tutorial
 )
 
 target_link_libraries(tuck_arms
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(lift_torso
   ${catkin_LIBRARIES}
 )
 
