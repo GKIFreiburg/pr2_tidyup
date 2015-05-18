@@ -1,0 +1,27 @@
+head_traj_controller:
+  type: robot_mechanism_controllers/JointTrajectoryActionController
+  joints: ['head_pan_joint', 'head_tilt_joint']
+  gains:
+    head_pan_joint:
+      p: 25.0
+      i: 12.0
+      d: 2.0
+      i_clamp: 0.5 
+    head_tilt_joint:
+      p: 49.6
+      i: 2.0
+      d: 1.6
+      i_clamp: 0.1
+
+  joint_trajectory_action_node:
+    joints:
+      - head_pan_joint
+      - head_tilt_joint
+    constraints:
+      goal_time: 10.0
+      stopped_velocity_tolerance: 0.15
+      head_pan_joint:
+        goal: 0.02
+      head_tilt_joint:
+        goal: 0.02
+
