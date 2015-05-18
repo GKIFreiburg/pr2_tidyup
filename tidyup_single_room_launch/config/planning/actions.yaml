@@ -11,6 +11,7 @@ action_executors:
     - object_manipulation_actions/action_executor_arm_to_side arm-to-side right_arm_to_side left_arm_to_side
     - object_manipulation_actions/action_executor_arm_to_front arm-to-front right_arm_to_front left_arm_to_front
     - object_manipulation_actions/action_executor_inspect_location inspect-location /ork_to_planning_scene location-inspected location-inspected-recently
+    - object_manipulation_actions/action_executor_lift_torso lift-torso torso-lifted
     - object_manipulation_actions/action_executor_pickup_object pickup-object
     - object_manipulation_actions/action_executor_inspect_object inspect-object object-inspected
     - object_manipulation_actions/action_executor_putdown_object putdown-object
