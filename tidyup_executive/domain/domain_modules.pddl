@@ -37,7 +37,9 @@
 
         (object-grasped ?o - movable_object ?a - arm)
         (object-on ?o - movable_object ?t - table)
-    )
+
+        (torso-lifted ?t - table)
+   )
 
     (:functions
         (arm-state ?a - arm) - arm_state
@@ -65,6 +67,7 @@
             (at start (location-near-table ?l ?t))
             (at start (not (location-inspected-recently ?l)))
             (at start (arms-drive-pose))
+            (at start (torso-lifted ?t))
         )
         :effect
         (and
@@ -145,6 +148,23 @@
             (at start (assign (arm-state ?a) arm_unknown))
             (at end (object-on ?o ?t))
             (at end (not (object-grasped ?o ?a)))
+        )
+    )
+
+    (:durative-action lift-torso
+        :parameters (?t - table ?l - manipulation_location)
+        :duration (= ?duration 15.0)
+        :condition
+        (and
+            (at start (robot-at ?l))
+            (at start (location-near-table ?l ?t))
+            (at start (arms-drive-pose))
+            (at start (not (torso-lifted ?t)))
+       )
+        :effect
+        (and
+            (at start (not (location-inspected-recently ?l)))
+            (at end (torso-lifted ?t))
         )
     )
 
