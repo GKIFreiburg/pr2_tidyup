@@ -38,11 +38,13 @@
         (object-grasped ?o - movable_object ?a - arm)
         (object-on ?o - movable_object ?t - table)
 
-        (torso-lifted ?t - table)
+        ;(torso-lifted ?t - table)
    )
 
     (:functions
         (arm-state ?a - arm) - arm_state
+
+        (torso-lift ) - number
 
         (x ?p - pose) - number
         (y ?p - pose) - number
