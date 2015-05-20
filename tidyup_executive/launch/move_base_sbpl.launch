@@ -8,19 +8,21 @@
     <param name="controller_frequency" value="10.0" />
     <param name="controller_patience" value="100.0" />
     <param name="base_global_planner" value="SBPLLatticePlanner" />
-    <param name="SBPLLatticePlanner/primitive_filename" value="$(find tidyup_executive)/config/mprim/pr2_002_unbiased.mprim" />
+    <param name="SBPLLatticePlanner/primitive_filename" value="$(find tidyup_executive)/config/mprim/pr2_002.mprim" />
     <rosparam file="$(find sbpl_lattice_planner)/launch/move_base/costmap_common_params.yaml" command="load" ns="global_costmap" />
     <rosparam file="$(find sbpl_lattice_planner)/launch/move_base/costmap_common_params.yaml" command="load" ns="local_costmap" />
     <rosparam file="$(find sbpl_lattice_planner)/launch/move_base/local_costmap_params_close.yaml" command="load" />
     <rosparam file="$(find sbpl_lattice_planner)/launch/move_base/global_costmap_params.yaml" command="load" />
     <rosparam file="$(find sbpl_lattice_planner)/launch/move_base/sbpl_global_params.yaml" command="load" />
     <rosparam file="$(find sbpl_lattice_planner)/launch/move_base/base_local_planner_params_close.yaml" command="load" />
+    
+    <rosparam file="$(find tidyup_executive)/config/sbpl_local_params.yaml" command="load" />
+    <rosparam file="$(find tidyup_executive)/config/base_local_planner_poses.yaml" command="load" />
 
     <remap from="cmd_vel" to="base_controller/command"/>
 <!--
     <rosparam file="$(find sbpl_lattice_planner)/config/sbpl_global_params.yaml" command="load"/>
     <rosparam file="$(find sbpl_lattice_planner)/config/base_local_planner_trajectory.yaml" command="load" />
-    <rosparam file="$(find sbpl_lattice_planner)/config/base_local_planner_poses.yaml" command="load" />
     -->
   </node>
 </launch>
