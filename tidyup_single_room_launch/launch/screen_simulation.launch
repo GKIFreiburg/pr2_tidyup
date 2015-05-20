@@ -33,7 +33,7 @@
             -
                 name: planner
                 commands:
-                    - roslaunch tidyup_single_room_launch continual_planning.launch config_pkg:=$(rospack find tidyup_single_room_launch)
+                    - roslaunch tidyup_executive continual_planning.launch config_pkg:=$(rospack find tidyup_single_room_launch)
 
         </rosparam>
     </node>
