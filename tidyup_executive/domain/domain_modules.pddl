@@ -17,6 +17,8 @@
 
     (:modules
         (path-cost ?start ?goal - location cost pathCost@libplanner_modules_pr2.so)
+        (lift-cost ?t - table cost liftTorsoCost@libplanner_modules_pr2.so)
+        (need-lift-torso ?t - table conditionchecker needToLiftTorso@libplanner_modules_pr2.so)
     )
 
     (:constants
@@ -38,13 +40,13 @@
         (object-grasped ?o - movable_object ?a - arm)
         (object-on ?o - movable_object ?t - table)
 
-        ;(torso-lifted ?t - table)
+        (torso-lifted ?t - table)
    )
 
     (:functions
         (arm-state ?a - arm) - arm_state
 
-        (torso-lift ) - number
+        (torso-position) - number
 
         (x ?p - pose) - number
         (y ?p - pose) - number
@@ -108,7 +110,9 @@
             (at start (not (location-inspected-recently ?s)))
             (at start (not (location-inspected-recently ?g)))
             (at start (not (robot-at ?s)))
+            (at end (not (torso-lifted ?t)))
             (at end (robot-at ?g))
+
         )
     )
 
@@ -155,13 +159,14 @@
 
     (:durative-action lift-torso
         :parameters (?t - table ?l - manipulation_location)
-        :duration (= ?duration 15.0)
+        ;:duration (= ?duration 15.0)
+        :duration (= ?duration [lift-cost ?t])
         :condition
         (and
             (at start (robot-at ?l))
             (at start (location-near-table ?l ?t))
             (at start (arms-drive-pose))
-            (at start (not (torso-lifted ?t)))
+            (at start ([need-lift-torso ?t]))
        )
         :effect
         (and
