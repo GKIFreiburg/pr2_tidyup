@@ -19,6 +19,9 @@
         (path-cost ?start ?goal - location cost pathCost@libplanner_modules_pr2.so)
         (lift-cost ?t - table cost liftTorsoCost@libplanner_modules_pr2.so)
         (need-lift-torso ?t - table conditionchecker needToLiftTorso@libplanner_modules_pr2.so)
+        ;(update-torso-position ?t - table
+        ;    (torso-position)
+        ;    effect updateTorsoPosition@libplanner_modules_pr2.so)
     )
 
     (:constants
@@ -110,7 +113,6 @@
             (at start (not (location-inspected-recently ?s)))
             (at start (not (location-inspected-recently ?g)))
             (at start (not (robot-at ?s)))
-            (at end (not (torso-lifted ?t)))
             (at end (robot-at ?g))
 
         )
@@ -166,12 +168,14 @@
             (at start (robot-at ?l))
             (at start (location-near-table ?l ?t))
             (at start (arms-drive-pose))
-            (at start ([need-lift-torso ?t]))
+            ;(at start (not (torso-lifted ?t)))
+            (at start [need-lift-torso ?t])
        )
         :effect
         (and
             (at start (not (location-inspected-recently ?l)))
             (at end (torso-lifted ?t))
+            ;(at end ([update-torso-position ?t]))
         )
     )
 
