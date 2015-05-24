@@ -169,7 +169,7 @@
             (at start (location-near-table ?l ?t))
             (at start (arms-drive-pose))
             ;(at start (not (torso-lifted ?t)))
-            ;(at start ([need-lift-torso ?t]))
+            (at start ([need-lift-torso ?t]))
        )
         :effect
         (and
