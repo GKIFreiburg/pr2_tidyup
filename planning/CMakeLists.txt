@@ -13,6 +13,9 @@ moveit_ros_planning
 moveit_ros_planning_interface
 moveit_ros_visualization
 moveit_ros_warehouse
+tf
+tf_conversions
+symbolic_planning_utils
 )
 
 ## System dependencies are found with CMake's conventions
@@ -96,7 +99,9 @@ catkin_package(
 ###########
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
+include_directories(include
+  ${catkin_INCLUDE_DIRS}
+)
 
 ## Declare a cpp library
 # add_library(planning
@@ -129,6 +134,8 @@ add_executable(move_to_initial_position move_to_initial_position.cpp)
 
 add_executable(kinematic_model_tutorial kinematic_model_tutorial.cpp)
 
+add_executable(planning_pipeline_tutorial planning_pipeline_tutorial.cpp)
+add_executable(planning_pipeline planning_pipeline.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -204,6 +211,13 @@ target_link_libraries(lift_torso
   ${catkin_LIBRARIES}
 )
 
+target_link_libraries(planning_pipeline_tutorial
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(planning_pipeline
+  ${catkin_LIBRARIES}
+)
 #############
 ## Install ##
 #############
