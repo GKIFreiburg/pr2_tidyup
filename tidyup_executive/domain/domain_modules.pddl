@@ -19,6 +19,7 @@
         (path-cost ?start ?goal - location cost pathCost@libplanner_modules_pr2.so)
         (lift-cost ?t - table cost liftTorsoCost@libplanner_modules_pr2.so)
         (need-lift-torso ?t - table conditionchecker needToLiftTorso@libplanner_modules_pr2.so)
+        (torso-lifted ?t - table conditionchecker torsoLifted@libplanner_modules_pr2.so)
         (update-torso-position ?t - table
             (torso-position)
             effect updateTorsoPosition@libplanner_modules_pr2.so)
@@ -42,8 +43,6 @@
 
         (object-grasped ?o - movable_object ?a - arm)
         (object-on ?o - movable_object ?t - table)
-
-        (torso-lifted ?t - table)
    )
 
     (:functions
@@ -74,7 +73,7 @@
             (at start (location-near-table ?l ?t))
             (at start (not (location-inspected-recently ?l)))
             (at start (arms-drive-pose))
-            (at start (torso-lifted ?t))
+            (at start ([torso-lifted ?t]))
         )
         :effect
         (and
@@ -174,7 +173,7 @@
         :effect
         (and
             (at start (not (location-inspected-recently ?l)))
-            (at end (torso-lifted ?t))
+            ;(at end ([torso-lifted ?t]))
             (at end ([update-torso-position ?t]))
         )
     )
