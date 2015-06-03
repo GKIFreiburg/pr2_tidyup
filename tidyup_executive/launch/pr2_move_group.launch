@@ -3,6 +3,7 @@
 
   <!-- arg name="db" default="false" / -->
   <arg name="debug" default="false" />
+  <arg name="openni_nodelet_manager_name" default="openni_nodelet_manager" />
 
   <include file="$(find tidyup_pr2_moveit_config)/launch/planning_context.launch">
     <arg name="load_robot_description" value="true"/>
@@ -22,6 +23,7 @@
     <arg name="fake_execution" value="false"/>
     <arg name="info" value="true"/>
     <arg name="debug" value="$(arg debug)"/>
+    <arg name="openni_nodelet_manager_name" value="$(arg openni_nodelet_manager_name)" />
   </include>
 
 
