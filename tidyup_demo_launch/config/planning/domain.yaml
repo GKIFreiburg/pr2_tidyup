@@ -1,2 +1,2 @@
-domain_file: package://tidyup_demo_launch/domain/domain.pddl
+domain_file: package://tidyup_executive/domain/domain.pddl
 
