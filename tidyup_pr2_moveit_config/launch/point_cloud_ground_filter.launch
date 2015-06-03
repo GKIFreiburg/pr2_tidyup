@@ -1,0 +1,18 @@
+<!-- -->
+<launch>
+	<arg name="sim" default="false"/>
+	<node pkg="nodelet" type="nodelet" name="standalone_nodelet"  args="manager"/>
+	<node pkg="nodelet" type="nodelet" name="kinect_gound_filter" args="load pcl/PassThrough standalone_nodelet" respawn="false">
+		<rosparam>
+			filter_field_name: z
+			filter_limit_min: 0.05
+			filter_limit_max: 2.0
+			filter_limit_negative: false
+			keep_organized: true
+			input_frame: /base_link
+		</rosparam>
+		<remap from="~input" to="/head_mount_kinect/depth_registered/points"/>
+		<remap from="~output" to="/head_mount_kinect/depth_registered/points_ground_filtered"/>
+	</node>
+</launch>
+
