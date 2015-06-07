@@ -11,6 +11,7 @@
 
   <build_depend>geometry_msgs</build_depend>
   <build_depend>sensor_msgs</build_depend>
+  <build_depend>gki_3dnav_planner</build_depend>
 #  <build_depend>analyze_object_actions</build_depend>
   <build_depend>object_manipulation_actions</build_depend>
   <build_depend>tidyup_state_creators</build_depend>
@@ -24,6 +25,7 @@
 
   <run_depend>geometry_msgs</run_depend>
   <run_depend>sensor_msgs</run_depend>
+  <run_depend>gki_3dnav_planner</run_depend>
 #  <run_depend>analyze_object_actions</run_depend>
   <run_depend>object_manipulation_actions</run_depend>
   <run_depend>tidyup_state_creators</run_depend>

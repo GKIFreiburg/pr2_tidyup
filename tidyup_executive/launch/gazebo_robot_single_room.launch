@@ -3,9 +3,12 @@
   <arg name="config_pkg" />
   <arg name="gui" default="true"/>
   <arg name="kinect_frame_prefix" default="/openni"/>
+  <arg name="openni_nodelet_manager_name" default="openni_nodelet_manager" />
   <param name="/use_sim_time" value="true" />
   <!-- Does not work when using screen, define ROBOT_INITIAL_POSE in bashrc 
   export ROBOT_INITIAL_POSE="-x 4.25 -y 8.5 -z 0 -R 0 -P 0 -Y -1.57" -->
+
+  <node pkg="nodelet" type="nodelet" name="$(arg openni_nodelet_manager_name)"  args="manager"/>
 
   <include file="$(find pr2_gazebo)/launch/pr2_empty_world.launch">
     <arg name="gui" value="$(arg gui)" />
