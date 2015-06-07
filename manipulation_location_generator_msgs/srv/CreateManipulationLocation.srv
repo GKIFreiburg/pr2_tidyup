@@ -1,0 +1,13 @@
+# name of the sampling method to use
+uint32 sampling_method
+# topic name indicating where planning scene should be taken from
+string planning_scene_topic
+# table object containing width, height and pose in map frame
+moveit_msgs/CollisionObject table
+# maximum number of manipulation location that should be computed 
+int32 max_samples
+# number of attempts before aborting sampling
+int32 attempts
+---
+# computed manipulation locations
+geometry_msgs/PoseStamped[] manipulation_locations

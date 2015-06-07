@@ -1,0 +1,9 @@
+<!-- -->
+<launch>
+<node name="manipulation_location_generator"
+    pkg="manipulation_location_generator" 
+    type="manipulation_location_generator"
+    respawn="false" output="screen" 
+    launch-prefix="xterm -e gdb --args" >
+</node>
+</launch>
