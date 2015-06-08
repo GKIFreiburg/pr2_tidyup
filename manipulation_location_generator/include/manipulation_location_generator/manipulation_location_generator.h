@@ -22,16 +22,19 @@ namespace manipulation_location_generator
 
 		protected:
 			ros::NodeHandle nh_;
-			ros::ServiceServer srv_;
+			ros::ServiceServer mani_loc_gen_server_;
 
 //			ManipulationLocationGeneratorInterface* mlgi_;
 			boost::shared_ptr<ManipulationLocationGeneratorInterface> mlgi_;
 
+			// Service Callback, parse input and generate output
 			bool executeCallBack(manipulation_location_generator_msgs::CreateManipulationLocationRequest &req,
 					manipulation_location_generator_msgs::CreateManipulationLocationResponse &res);
 
+			// Initialize sampling method and sets mlgi_
 			void selectSamplingMethod(unsigned sampling_method);
 
+			// Get the name of the chosen sampling_method
 			std::string getSamplingMethod(unsigned sampling_method);
 	};
 

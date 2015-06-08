@@ -7,10 +7,8 @@ namespace manipulation_location_generator
 
 	ManipulationLocationGenerator::ManipulationLocationGenerator()
 	{
-		srv_ = nh_.advertiseService("generate_manipulation_locations",
+		mani_loc_gen_server_ = nh_.advertiseService("generate_manipulation_locations",
 				&ManipulationLocationGenerator::executeCallBack, this);
-
-
 	}
 
 	ManipulationLocationGenerator::~ManipulationLocationGenerator()

@@ -32,17 +32,10 @@ ManipulationLocationGeneratorInterface::ManipulationLocationGeneratorInterface()
 
 	get_map_client_ = nh.serviceClient<nav_msgs::GetMap>("/static_map", false);
 
-	// necessary to init planning scene otherwise assertion failure
-	// TODO: INIT planning scene monitor is slow!!!
-	// DOES NOT WORK - results in segmentation fault
-//	planning_scene_monitor::PlanningSceneMonitorPtr scene_monitor;
-//	scene_monitor.reset(new planning_scene_monitor::PlanningSceneMonitor("robot_description"));
-//	//scene_monitor->requestPlanningSceneState("/get_planning_scene");
-//	scene_monitor->requestPlanningSceneState();
-//	planning_scene_.reset(new planning_scene::PlanningScene(scene_monitor->getRobotModel()));
-
+	// Publishers to publish the different kinds of samples
 	pub_samples_ = ros::NodeHandle("~").advertise<geometry_msgs::PoseArray>("samples", 1, true);
 	pub_not_in_collision_samples_ = ros::NodeHandle("~").advertise<geometry_msgs::PoseArray>("notInCollisionSamples", 1, true);
+	pub_in_map_ = ros::NodeHandle("~").advertise<geometry_msgs::PoseArray>("inMapSamples", 1, true);
 	pub_reachable_samples_ = ros::NodeHandle("~").advertise<geometry_msgs::PoseArray>("reachableSamples", 1, true);
 }
 
@@ -74,9 +67,11 @@ ManipulationLocations ManipulationLocationGeneratorInterface::generateSamples()
 
 	geometry_msgs::PoseArray samples;
 	geometry_msgs::PoseArray not_in_collision_samples;
+	geometry_msgs::PoseArray in_map_samples;
 	geometry_msgs::PoseArray reachable_samples;
 	samples.header 					= table_pose_.header;
 	not_in_collision_samples.header = table_pose_.header;
+	in_map_samples.header			= table_pose_.header;
 	reachable_samples.header 		= table_pose_.header;
 
 	unsigned i;
@@ -107,22 +102,26 @@ ManipulationLocations ManipulationLocationGeneratorInterface::generateSamples()
 			continue;
 		not_in_collision_samples.poses.push_back(robot_pose.pose);
 
+		// check if sample is in map
 		if (!inMap(robot_pose))
 			continue;
+		in_map_samples.poses.push_back(robot_pose.pose);
 
 //		// check if sampled robot pose is reachable
 //		if (!isReachable(robot_pose))
 //			continue;
-		reachable_samples.poses.push_back(robot_pose.pose);
+//		reachable_samples.poses.push_back(robot_pose.pose);
 
 		mani_locs.push_back(robot_pose);
 	}
-	ROS_INFO("ManipulationLocationGeneratorInterface::%s: attempts: %u, possible robot poses: %lu",
-			__func__, i, mani_locs.size());
+
 	pub_samples_.publish(samples);
 	pub_not_in_collision_samples_.publish(not_in_collision_samples);
+	pub_in_map_.publish(in_map_samples);
 	pub_reachable_samples_.publish(reachable_samples);
 
+	ROS_INFO("ManipulationLocationGeneratorInterface::%s: attempts: %u, possible robot poses: %lu",
+			__func__, i, mani_locs.size());
 	return mani_locs;
 }
 
@@ -142,8 +141,7 @@ bool ManipulationLocationGeneratorInterface::setPlanningScene(const std::string&
     request.components.components = moveit_msgs::PlanningSceneComponents::ALLOWED_COLLISION_MATRIX |
     		moveit_msgs::PlanningSceneComponents::LINK_PADDING_AND_SCALING |
     		moveit_msgs::PlanningSceneComponents::OBJECT_COLORS |
-    		// FIXME: remove ground from octomap - otherwise always in collision
-//    		moveit_msgs::PlanningSceneComponents::OCTOMAP |
+    		moveit_msgs::PlanningSceneComponents::OCTOMAP |
     		moveit_msgs::PlanningSceneComponents::ROBOT_STATE |
     		moveit_msgs::PlanningSceneComponents::ROBOT_STATE_ATTACHED_OBJECTS |
     		moveit_msgs::PlanningSceneComponents::SCENE_SETTINGS |
@@ -158,7 +156,7 @@ bool ManipulationLocationGeneratorInterface::setPlanningScene(const std::string&
 		return false;
 	}
 	// Verify that planning scene is not empty, should have at least some collision objects
-	ROS_ASSERT(response.scene.world.collision_objects.size() != 0);
+	//ROS_ASSERT(response.scene.world.collision_objects.size() != 0);
 
 	moveit_msgs::PlanningScene msg = response.scene;
 	planning_scene_->setPlanningSceneMsg(msg);
