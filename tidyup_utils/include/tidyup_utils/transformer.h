@@ -57,6 +57,8 @@ public:
             const moveit_msgs::RobotState& robotState,
             moveit_msgs::Constraints& constraint);
 
+    static void printTransform(const tf::Transform &transform);
+
 private:
     static Transformer* instance;
     bool getTransform_(const std::string& to_frame,
