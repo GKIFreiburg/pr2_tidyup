@@ -39,6 +39,12 @@ task specific. For example, maps should not be in here.
         <rosparam if="$(arg sim)" command="load" file="$(find moveit_simple_grasps)/config/pr2_grasp_data.gazebo.yaml" />
   </group>
 
+  <node pkg="manipulation_location_generator" type="manipulation_location_generator"
+name="manipulation_location_generator" output="screen">
+    <param name="sample_dist_table" value="0.5"/>
+    <param name="sample_angle_table" value="1.57"/>
+  </node>
+
   <!-- load arm to front positions on param -->
   <rosparam command="load" file="$(find tidyup_executive)/config/left_arm_to_front.yaml" ns="left_arm_to_front"/>
   <rosparam command="load" file="$(find tidyup_executive)/config/right_arm_to_front.yaml" ns="right_arm_to_front"/>

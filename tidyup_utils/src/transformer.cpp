@@ -68,6 +68,7 @@ bool Transformer::getTransform_(const std::string& to_frame,
     //HOWEVER, the transform that takes a pose expressed in from and transforms
     //it to a pose expressed in to is the INVERSE of this transform
     transform = (global_to_to.inverse()) * global_to_from;
+
     return true;
 }
 
@@ -117,7 +118,9 @@ bool Transformer::getWorldTransform_(const std::string& frame_id,
  	//Converts an Eigen Affine3d into a tf Transform.
 
     tf::transformEigenToTF(link_state, transform);
-    //transform = link->getGlobalLinkTransform();
+
+//    transform = link->getGlobalLinkTransform();
+
     return true;
 }
 
@@ -258,4 +261,17 @@ bool Transformer::transform(const std::string& new_frame,
     }
     return ok;
     */
+}
+
+void Transformer::printTransform(const tf::Transform &transform)
+{
+    ROS_INFO_STREAM("Translation: \n" <<
+    	transform.getOrigin().x() << "\n" <<
+		transform.getOrigin().y() << "\n" <<
+		transform.getOrigin().z() << "\n" <<
+   		"Rotation: \n" <<
+   		transform.getRotation().x() << "\n" <<
+   		transform.getRotation().y() << "\n" <<
+   		transform.getRotation().z() << "\n" <<
+   		transform.getRotation().w() );
 }

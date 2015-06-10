@@ -1,25 +1,19 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(planning)
+project(manipulation_location_generator_msgs)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED roscpp
-moveit_core 
-moveit_msgs
-moveit_planners_ompl
-moveit_ros_move_group
-moveit_ros_planning
-moveit_ros_planning_interface
-moveit_ros_visualization
-moveit_ros_warehouse
-tf
-tf_conversions
-symbolic_planning_utils
+find_package(catkin REQUIRED
+  roscpp
+  genmsg
+  std_msgs
+  geometry_msgs
+  moveit_msgs
 )
 
 ## System dependencies are found with CMake's conventions
-#find_package(Boost REQUIRED COMPONENTS system)
+# find_package(Boost REQUIRED COMPONENTS system)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -59,11 +53,10 @@ symbolic_planning_utils
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+add_service_files(
+  FILES
+  CreateManipulationLocation.srv
+)
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -73,10 +66,12 @@ symbolic_planning_utils
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs  # Or other packages containing msgs
-# )
+generate_messages(
+   DEPENDENCIES
+   std_msgs  # Or other packages containing msgs
+   geometry_msgs
+   moveit_msgs
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -89,7 +84,7 @@ symbolic_planning_utils
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES planning
+#  LIBRARIES manipulation_location_generator_msgs
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -97,133 +92,27 @@ catkin_package(
 ###########
 ## Build ##
 ###########
+
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-include_directories(include
-  ${catkin_INCLUDE_DIRS}
-)
+# include_directories(include)
 
 ## Declare a cpp library
-# add_library(planning
-#   src/${PROJECT_NAME}/planning.cpp
+# add_library(manipulation_location_generator_msgs
+#   src/${PROJECT_NAME}/manipulation_location_generator_msgs.cpp
 # )
 
 ## Declare a cpp executable
-# move group tutorial
-add_executable(move_group_tutorial move_group_tutorial.cpp)
-add_executable(pose_goal pose_goal.cpp)
-add_executable(joint_space joint_space.cpp)
-add_executable(path_constraints path_constraints.cpp)
-add_executable(cartesian_paths cartesian_paths.cpp)
-add_executable(objects objects.cpp)
-add_executable(dual_arms dual_arms.cpp)
-add_executable(get_position get_position.cpp)
-add_executable(cube cube.cpp)
-add_executable(tuck_arms tuck_arms.cpp)
-add_executable(lift_torso lift_torso.cpp)
-
-# planning scene
-add_executable(planning_scene_tutorial planning_scene_tutorial.cpp)
-
-# planning scene ros api
-add_executable(planning_scene_ros_api_tutorial planning_scene_ros_api_tutorial.cpp)
-
-add_executable(move_body_parts_for_detection move_body_parts_for_detection.cpp)
-
-add_executable(move_to_initial_position move_to_initial_position.cpp)
-
-add_executable(kinematic_model_tutorial kinematic_model_tutorial.cpp)
-
-add_executable(planning_pipeline_tutorial planning_pipeline_tutorial.cpp)
-add_executable(planning_pipeline planning_pipeline.cpp)
-
-add_executable(sampling_around_table sampling_around_table.cpp)
+# add_executable(manipulation_location_generator_msgs_node src/manipulation_location_generator_msgs_node.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(planning_node planning_generate_messages_cpp)
+# add_dependencies(manipulation_location_generator_msgs_node manipulation_location_generator_msgs_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# move group tutorial
-target_link_libraries(move_group_tutorial
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(pose_goal
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(joint_space
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(path_constraints
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(cartesian_paths
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(objects
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(dual_arms
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(get_position
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(cube
-  ${catkin_LIBRARIES}
-)
-
-# planning scene
-target_link_libraries(planning_scene_tutorial
-  ${catkin_LIBRARIES}
-)
-
-# planning scene ros api
-target_link_libraries(planning_scene_ros_api_tutorial
-  ${catkin_LIBRARIES}
-)
-
-# needed by detection
-target_link_libraries(move_body_parts_for_detection
-  ${catkin_LIBRARIES}
-)
-
-# move to initial position
-target_link_libraries(move_to_initial_position
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(kinematic_model_tutorial
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(tuck_arms
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(lift_torso
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(planning_pipeline_tutorial
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(planning_pipeline
-  ${catkin_LIBRARIES}
-)
-
-target_link_libraries(sampling_around_table
-  ${catkin_LIBRARIES}
-)
+# target_link_libraries(manipulation_location_generator_msgs_node
+#   ${catkin_LIBRARIES}
+# )
 
 #############
 ## Install ##
@@ -240,7 +129,7 @@ target_link_libraries(sampling_around_table
 # )
 
 ## Mark executables and/or libraries for installation
-# install(TARGETS planning planning_node
+# install(TARGETS manipulation_location_generator_msgs manipulation_location_generator_msgs_node
 #   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
 #   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
@@ -265,7 +154,7 @@ target_link_libraries(sampling_around_table
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_planning.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_manipulation_location_generator_msgs.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

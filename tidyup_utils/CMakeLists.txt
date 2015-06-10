@@ -45,7 +45,7 @@ QT4_WRAP_CPP(qt_moc_srcs ${qt_hdrs})
 
 add_library(tidyup_utils 
     src/stringutil.cpp
-    src/planning_scene_interface.cpp
+    src/planning_scene_msg_interface.cpp
     src/transformer.cpp
     src/hand_description.cpp
     src/arm_state.cpp
@@ -59,8 +59,11 @@ target_link_libraries(tidyup_utils
   ${catkin_LIBRARIES}
 )
 
-add_executable(geometryPoses_test src/geometryPoses_test.cpp)
-target_link_libraries(geometryPoses_test ${PROJECT_NAME} ${catkin_LIBRARIES})
+add_executable(test_geometryPoses test/test_geometryPoses.cpp)
+target_link_libraries(test_geometryPoses ${PROJECT_NAME} ${catkin_LIBRARIES})
+
+add_executable(test_planning_scene_msg_interface test/test_planning_scene_msg_interface.cpp)
+target_link_libraries(test_planning_scene_msg_interface ${PROJECT_NAME} ${catkin_LIBRARIES})
 
 add_executable(geometryPosesCreatorGui src/geometryPosesCreatorGuiMain.cpp
     ${uis_h} ${qt_srcs} ${qt_moc_srcs})
