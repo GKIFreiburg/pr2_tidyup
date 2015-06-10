@@ -84,7 +84,7 @@ void PlanningSceneMsgInterface::publishPlanningScene()
 {
 	ROS_INFO("PlanningSceneMsgInterface::%s: sending planning scene diff on topic: %s", __func__, planning_scene_topic_.c_str());
 //	planning_scene_.is = true;
-//	ROS_WARN_STREAM(planning_scene_);
+//	ROS_WARN_STREAM(planning_scene_.robot_state);
 	planning_scene_publisher_.publish(planning_scene_);
 }
 
@@ -93,45 +93,38 @@ void PlanningSceneMsgInterface::resetPlanningScene()
 	planning_scene_ = moveit_msgs::PlanningScene();
 }
 
-bool PlanningSceneMsgInterface::getCollisionObject(const std::string& id, const moveit_msgs::CollisionObject*& object)
+const moveit_msgs::CollisionObject* PlanningSceneMsgInterface::getCollisionObject(const std::string& id)
 {
-	return getCollisionObject_(id, object);
+    return getCollisionObject_(id);
 }
 
-bool PlanningSceneMsgInterface::getCollisionObject_(const std::string& id, const moveit_msgs::CollisionObject*& object)
+moveit_msgs::CollisionObject* PlanningSceneMsgInterface::getCollisionObject_(const std::string& id)
 {
-	std::vector<moveit_msgs::CollisionObject>& objects = getCollisionObjects_();
-	for(std::vector<moveit_msgs::CollisionObject>::iterator it = objects.begin(); it != objects.end(); it++)
-	{
-		if (it->id == id && it->operation != it->REMOVE)
-		{
-			object = &*it;
-			return true;
-		}
-	}
-	return false;
+    std::vector<moveit_msgs::CollisionObject>& objects = getCollisionObjects_();
+    for(std::vector<moveit_msgs::CollisionObject>::iterator it = objects.begin(); it != objects.end(); it++)
+    {
+        if (it->id == id && it->operation != it->REMOVE)
+            return &*it;
+    }
+    return NULL;
 }
 
-bool PlanningSceneMsgInterface::getAttachedCollisionObject(const std::string& id, const moveit_msgs::AttachedCollisionObject*& object)
+const moveit_msgs::AttachedCollisionObject* PlanningSceneMsgInterface::getAttachedCollisionObject(const std::string& id)
 {
-	return getAttachedCollisionObject_(id, object);
+    return getAttachedCollisionObject_(id);
 }
 
-bool PlanningSceneMsgInterface::getAttachedCollisionObject_(const std::string& id, const moveit_msgs::AttachedCollisionObject*& object)
+moveit_msgs::AttachedCollisionObject* PlanningSceneMsgInterface::getAttachedCollisionObject_(const std::string& id)
 {
     std::vector<moveit_msgs::AttachedCollisionObject>& objects = getAttachedCollisionObjects_();
     for(std::vector<moveit_msgs::AttachedCollisionObject>::iterator it = objects.begin(); it != objects.end(); it++)
     {
         if (it->object.id == id && it->object.operation != it->object.REMOVE)
-        {
-        	object = &*it;
-            return true;
-        }
+            return &*it;
     }
-    return false;
+    return NULL;
 }
 
-/*
 void PlanningSceneMsgInterface::setRobotState(const moveit_msgs::RobotState& state)
 {
 	planning_scene_.robot_state = state;
@@ -240,7 +233,6 @@ void PlanningSceneMsgInterface::attachObjectToGripper(const std::string& id, con
     {
     	ROS_ERROR("PlanningSceneMsgInterface::%s: object %s does not have a pose", __func__, attached.object.id.c_str());
     }
-    ROS_ERROR_STREAM(object->mesh_poses[0]);
     attached.object.header.frame_id = hand.getAttachLink();
 //    attached.object.header.frame_id = "base_footprint";
 //    ROS_ERROR("attached frame id: %s", hand.getAttachLink().c_str());
@@ -371,5 +363,3 @@ bool PlanningSceneMsgInterface::isDifferent(const geometry_msgs::Pose& pose, con
     return different;
 }
 
-
-*/

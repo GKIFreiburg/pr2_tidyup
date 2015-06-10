@@ -67,80 +67,46 @@ int main(int argc, char** argv)
     PlanningSceneMsgInterface* psi = PlanningSceneMsgInterface::getInstance();
     const std::vector<moveit_msgs::CollisionObject>& cos = psi->getCollisionObjects();
     ROS_INFO("Number of collision objects: %lu - address: %p", cos.size(), &cos);
+    psi->publishPlanningScene();
 //    ROS_WARN_STREAM(psi->getRobotState());
 
 
-    const moveit_msgs::CollisionObject* obj = NULL;
-    ROS_ERROR("first address %p", obj);
-    if (psi->getCollisionObject("coke_1", obj))
-    {
-    	ROS_INFO("address: %p", obj);
-    	moveit_msgs::CollisionObject test = *obj;
-    	ROS_INFO("address copy: %p", &test);
-    }
-
-
-
-
-
-//    moveit_msgs::CollisionObject obj = *(psi->getCollisionObject("coke_1"));
-//    obj.id = "asd";
-
-
-
-//    moveit_msgs::CollisionObject obj;
-//    ROS_WARN("1");
-//    ROS_ERROR("ADDRESS: %p", &obj);
-//    if (psi->getCollisionObject("coke_1", &obj))
+//    std::string id = "coke_1";
+//    const moveit_msgs::CollisionObject* obj = psi->getCollisionObject(id);
+//    if (obj == NULL)
 //    {
-//    	ROS_ERROR("ADDRESS: %p", &obj);
-//    	ROS_WARN_STREAM(obj);
-//    	ROS_WARN("2");
-//		obj.id = "fanta";
-//		obj.header.frame_id = "r_wrist_roll_link";
-//		obj.mesh_poses[0].position.x = 0.18;
-//		obj.mesh_poses[0].position.y = 0;
-//		obj.mesh_poses[0].position.z = 0;
-//		obj.mesh_poses[0].orientation.x = 0;
-//		obj.mesh_poses[0].orientation.y = 0;
-//		obj.mesh_poses[0].orientation.z = 0;
-//		obj.mesh_poses[0].orientation.w = 1;
-//
-//		psi->addObject(obj);
-//
-//		psi->attachObjectToGripper("fanta", "right_arm");
+//    	ROS_ERROR("Could not find object %s", id.c_str());
 //    }
+//
+//    ROS_ASSERT(obj != NULL);
+//    moveit_msgs::CollisionObject can = *obj;
+//	can.id = "fanta";
+//	can.header.frame_id = "r_wrist_roll_link";
+//	can.mesh_poses[0].position.x = 0.18;
+//	can.mesh_poses[0].position.y = 0;
+//	can.mesh_poses[0].position.z = -0.07;
+//	can.mesh_poses[0].orientation.x = 0;
+//	can.mesh_poses[0].orientation.y = 0;
+//	can.mesh_poses[0].orientation.z = 0;
+//	can.mesh_poses[0].orientation.w = 1;
+//
+//	psi->addObject(can);
+//	psi->attachObjectToGripper(can.id, "right_arm");
+//	psi->publishPlanningScene();
+//	const moveit_msgs::AttachedCollisionObject* aco = psi->getAttachedCollisionObject(can.id);
+//	ROS_INFO_STREAM(*aco);
+
 
 
 //    moveit_msgs::RobotState robot = psi->getRobotState();
 //    robot.joint_state.position[30] = -1;
 //    psi->setRobotState(robot);
-//
+////
 //    const std::vector<moveit_msgs::AttachedCollisionObject> acos = psi->getAttachedCollisionObjects();
 //    ROS_INFO("Number of attached collision objects: %lu", acos.size());
 //    psi->publishPlanningScene();
 
 
-
-
-
-
-//    ros::ServiceClient client = nh.serviceClient
-//    		<manipulation_location_generator_msgs::CreateManipulationLocation>
-//    		("generate_manipulation_locations");
-//
-//    manipulation_location_generator_msgs::CreateManipulationLocation srv;
-//    srv.request.sampling_method = manipulation_location_generator::UNIFORM_SAMPLING;
-//    srv.request.planning_scene_topic = "get_planning_scene";
-//    moveit_msgs::CollisionObject table = getTable("table1");
-//    srv.request.table = table;
-//    srv.request.max_samples = 100;
-//    srv.request.attempts = 1000;
-//
-//    if (!client.call(srv))
-//    	ROS_ERROR("service call: %s failed", client.getService().c_str());
-//	std::vector<geometry_msgs::PoseStamped> mani_locs = srv.response.manipulation_locations;
-//    ROS_INFO("Found %lu manipulation locations.", mani_locs.size());
 
     ros::shutdown();
 }

@@ -29,10 +29,8 @@ public:
     		{ return planning_scene_.world.collision_objects; }
     const std::vector<moveit_msgs::AttachedCollisionObject>& getAttachedCollisionObjects() const
     		{ return planning_scene_.robot_state.attached_collision_objects; }
-    bool getCollisionObject(const std::string& id, const moveit_msgs::CollisionObject*& object);
-//    const moveit_msgs::CollisionObject* getCollisionObject(const std::string& id);
-//    const moveit_msgs::AttachedCollisionObject* getAttachedCollisionObject(const std::string& id);
-    bool getAttachedCollisionObject(const std::string& id, const moveit_msgs::AttachedCollisionObject*& object);
+    const moveit_msgs::CollisionObject* getCollisionObject(const std::string& id);
+    const moveit_msgs::AttachedCollisionObject* getAttachedCollisionObject(const std::string& id);
 
     void setRobotState(const moveit_msgs::RobotState& state);
     void addObject(const moveit_msgs::CollisionObject& object);
@@ -72,10 +70,8 @@ private:
     		{ return planning_scene_.world.collision_objects; }
     std::vector<moveit_msgs::AttachedCollisionObject>& getAttachedCollisionObjects_()
     		{ return planning_scene_.robot_state.attached_collision_objects; }
-    bool getCollisionObject_(const std::string& id, const moveit_msgs::CollisionObject*& object);
-//    moveit_msgs::CollisionObject* getCollisionObject_(const std::string& id);
-//    moveit_msgs::AttachedCollisionObject* getAttachedCollisionObject_(const std::string& id);
-    bool getAttachedCollisionObject_(const std::string& id, const moveit_msgs::AttachedCollisionObject*& object);
+    moveit_msgs::CollisionObject* getCollisionObject_(const std::string& id);
+    moveit_msgs::AttachedCollisionObject* getAttachedCollisionObject_(const std::string& id);
 
 
 //    //bool setPlanningSceneDiff(const arm_navigation_msgs::PlanningScene& scene);
