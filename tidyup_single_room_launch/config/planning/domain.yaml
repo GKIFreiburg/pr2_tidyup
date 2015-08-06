@@ -1,2 +1,2 @@
-domain_file: package://tidyup_executive/domain/domain_modules.pddl
+domain_file: package://tidyup_executive/domain/domain_grounding_modules.pddl
 

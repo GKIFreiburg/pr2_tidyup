@@ -25,3 +25,6 @@ queue_management_mode: priority_based
 use_tss_known: false
 plan_name: plan
 monitoring_verify_timestamps: false
+
+grounding_mode: ground_n
+ground_n_max_groundings: 1
