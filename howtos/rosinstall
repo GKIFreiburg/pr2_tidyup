@@ -58,6 +58,9 @@
 # Capability Map
 - git: {local-name: capability_map, uri: "git@github.com:dornhege/capability_map.git", version: "hydro-devel"}
 
+# Inverse Capability Map
+- git: {local-name: inverse_capability_map, uri: "git@github.com:lannersluc/inverse_capability_map.git"}
+
 
 
 
