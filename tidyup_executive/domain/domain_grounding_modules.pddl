@@ -1,4 +1,4 @@
-(define (domain hybris_demo)
+(define (domain tidyup_grounding)
     (:requirements :strips :typing :durative-actions :modules :fluents :derived-predicates :equality :grounding-modules)
 
     (:types
@@ -6,7 +6,7 @@
         frameid                         ; the coordinate frame of a pose, ideally a fixed frame
 
         location - pose                 ; a pose for the robot base
-        manipulation_location - location       ; a location that grasp actions can be applied from
+        ;manipulation_location - location       ; a location that grasp actions can be applied from
 
         table - pose                    ; something static like a table
         movable_object - pose           ; an object with pose that can be grasped
@@ -16,32 +16,37 @@
     )
 
     (:modules
-        (path-cost ?start ?goal - location cost pathCost@libplanner_modules_pr2.so)
-        (lift-cost ?t - table cost liftTorsoCost@libplanner_modules_pr2.so)
-        (need-lift-torso ?t - table conditionchecker needToLiftTorso@libplanner_modules_pr2.so)
-        (torso-lifted ?t - table conditionchecker torsoLifted@libplanner_modules_pr2.so)
-        (update-torso-position ?t - table
-            (torso-position)
-            effect updateTorsoPosition@libplanner_modules_pr2.so)
+        (path-cost ?t - table cost pathCostGrounding@libplanner_modules_pr2.so)
+        (path-condition ?t - table conditionchecker pathConditionGrounding@libplanner_modules_pr2.so)
+        (update-robot-pose 
+            (robot-x)
+            (robot-y)
+            (robot-theta)
+            effect updateRobotPose@libplanner_modules_pr2.so)
+            
+        ;(robot-near-table ?t - table conditionchecker robotNear@libplanner_modules_pr2.so)
 
-        (determine-drive-pose grounding determineDrivePose@libdrive_pose_modules.so)
+        ;(lift-cost ?t - table cost liftTorsoCost@libplanner_modules_pr2.so)
+        ;(need-lift-torso ?t - table conditionchecker needToLiftTorso@libplanner_modules_pr2.so)
+        ;(torso-lifted ?t - table conditionchecker torsoLifted@libplanner_modules_pr2.so)
+        ;(update-torso-position ?t - table
+        ;    (torso-position)
+        ;    effect updateTorsoPosition@libplanner_modules_pr2.so)
+
+        (determine-drive-pose grounding determineDrivePose@libplanner_modules_pr2.so)
     )
 
     (:constants
         left_arm right_arm - arm
         arm_at_side arm_unknown arm_at_front - arm_state
-        robot_location - location
     )
 
     (:predicates
-        ; location was scanned at least once
-        (location-inspected ?l - manipulation_location)
-        ; location is updated with sensor data
-        (location-inspected-recently ?l - manipulation_location) 
-        (object-inspected ?o - movable_object)              ; object is inspected
+        (table-inspected ?t - table)
+        (object-inspected ?o - movable_object)
 
-        (robot-at ?l - location)
-        (location-near-table ?l - manipulation_location ?t - table)
+        (robot-near-table ?t - table)
+        (sensor-data-stale)
 
         (object-grasped ?o - movable_object ?a - arm)
         (object-on ?o - movable_object ?t - table)
@@ -49,8 +54,6 @@
 
     (:functions
         (arm-state ?a - arm) - arm_state
-
-        (torso-position) - number
 
         (x ?p - pose) - number
         (y ?p - pose) - number
@@ -63,28 +66,30 @@
         (timestamp ?p - pose) - number
         (inspection-timestamp ?l - manipulation_location) - number
         (frame-id ?p - pose) - frameid
+
+        (robot-x) - number
+        (robot-y) - number
+        (robot-theta) - number
+        (torso-position) - number
     )
 
-	; aquire sensor data from this location
-    (:durative-action inspect-location
-        :parameters (?l - manipulation_location ?t - table)
-        :duration (= ?duration 1.0)
-        :condition
-        (and
-            (at start (robot-at ?l))
-            (at start (location-near-table ?l ?t))
-            (at start (not (location-inspected-recently ?l)))
-            (at start (arms-drive-pose))
-            (at start ([torso-lifted ?t]))
-        )
-        :effect
-        (and
-            (at end (location-inspected-recently ?l))
-            (at end (location-inspected ?l))
-        )
-    )
+;    (:durative-action inspect-table
+;        :parameters (?t - table)
+;        :duration (= ?duration 10.0)
+;        :condition
+;        (and
+;            (at start ([robot-near-table ?t]))
+;            (at start (sensor-data-stale))
+;            (at start (arms-drive-pose))
+;            (at start ([torso-lifted ?t]))
+;        )
+;        :effect
+;        (and
+;            (at end (not (sensor-data-stale)))
+;            (at end (table-inspected ?t))
+;        )
+;    )
 
-	; aquire sensor data of object in hand
     (:durative-action inspect-object
         :parameters (?o - movable_object ?a - arm)
         :duration (= ?duration 5.0)
@@ -100,84 +105,75 @@
         )
     )
 
-    (:durative-action move-robot
-        :parameters (?s - location ?g - location)
-        :grounding ([determine-drive-pose])
-;        :duration (= ?duration [path-cost ?s ?g])
-        :duration (= ?duration 1000)
-        :condition
-        (and
-            (at start (robot-at ?s))
-            (at start (not (= ?s ?g)))
-            (at start (arms-drive-pose))
-        )
-        :effect
-        (and
-            (at start (not (location-inspected-recently ?s)))
-            (at start (not (location-inspected-recently ?g)))
-            (at start (not (robot-at ?s)))
-            (at end (robot-at ?g))
-
-        )
-    )
-
-    (:durative-action pickup-object
-        :parameters (?o - movable_object ?a - arm ?t - table ?l - manipulation_location)
+    (:durative-action move-robot-to-table
+        :parameters (?t - table)
+        :grounding ([determine-drive-pose ])
+        ;:duration (= ?duration [path-cost ?t])
         :duration (= ?duration 20.0)
         :condition
         (and
-            (at start (robot-at ?l))
-            (at start (location-near-table ?l ?t))
-            (at start (location-inspected-recently ?l))
+        	(at start ([path-condition ?t]))
             (at start (arms-drive-pose))
-            (at start (object-on ?o ?t))
-            (at start (hand-free ?a))
         )
         :effect
         (and
-            (at start (not (location-inspected-recently ?l)))
-            (at start (assign (arm-state ?a) arm_unknown))
-            (at end (not (object-on ?o ?t)))
-            (at end (object-grasped ?o ?a))
+            (at start (sensor-data-stale))
+            (at end ([update-robot-pose ]))
         )
     )
 
-    (:durative-action putdown-object
-        :parameters (?o - movable_object ?a - arm ?t - table ?l - manipulation_location)
-        :duration (= ?duration 20.0)
-        :condition
-        (and
-            (at start (robot-at ?l))
-            (at start (location-near-table ?l ?t))
-            (at start (location-inspected-recently ?l))
-            (at start (arms-drive-pose))
-            (at start (object-grasped ?o ?a))
-        )
-        :effect
-        (and
-            (at start (not (location-inspected-recently ?l)))
-            (at start (assign (arm-state ?a) arm_unknown))
-            (at end (object-on ?o ?t))
-            (at end (not (object-grasped ?o ?a)))
-        )
-    )
+;    (:durative-action pickup-object
+;        :parameters (?o - movable_object ?a - arm ?t - table)
+;        :duration (= ?duration 20.0)
+;        :condition
+;        (and
+;            (at start ([robot-near-table ?t]))
+;            (at end (not (sensor-data-stale)))
+;            (at start (arms-drive-pose))
+;            (at start (object-on ?o ?t))
+;            (at start (hand-free ?a))
+;        )
+;        :effect
+;        (and
+;            (at start (sensor-data-stale))
+;            (at start (assign (arm-state ?a) arm_unknown))
+;            (at end (not (object-on ?o ?t)))
+;            (at end (object-grasped ?o ?a))
+;        )
+;    )
+
+;    (:durative-action putdown-object
+;        :parameters (?o - movable_object ?a - arm ?t - table)
+;        :duration (= ?duration 20.0)
+;        :condition
+;        (and
+;            (at start ([robot-near-table ?t]))
+;            (at start (not (sensor-data-stale)))
+;            (at start (arms-drive-pose))
+;            (at start (object-grasped ?o ?a))
+;        )
+;        :effect
+;        (and
+;            (at start (sensor-data-stale))
+;            (at start (assign (arm-state ?a) arm_unknown))
+;            (at end (object-on ?o ?t))
+;            (at end (not (object-grasped ?o ?a)))
+;        )
+;    )
 
     (:durative-action lift-torso
-        :parameters (?t - table ?l - manipulation_location)
+        :parameters (?t - table)
         ;:duration (= ?duration 15.0)
         :duration (= ?duration [lift-cost ?t])
         :condition
         (and
-            (at start (robot-at ?l))
-            (at start (location-near-table ?l ?t))
+            (at start (robot-near-table ?t))
             (at start (arms-drive-pose))
-            ;(at start (not (torso-lifted ?t)))
             (at start ([need-lift-torso ?t]))
        )
         :effect
         (and
-            (at start (not (location-inspected-recently ?l)))
-            ;(at end ([torso-lifted ?t]))
+            (at start (sensor-data-stale))
             (at end ([update-torso-position ?t]))
         )
     )
