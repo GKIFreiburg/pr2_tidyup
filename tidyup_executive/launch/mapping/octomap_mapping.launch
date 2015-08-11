@@ -14,7 +14,8 @@ and incrementally build an octomap. The data is sent out in different representa
 		<param name="max_sensor_range" value="3.0" />
 		
 		<!-- data source to integrate (PointCloud2) -->
-		<remap from="cloud_in" to="/kinect_head/depth_registered/points_throttled" />
+		<!--remap from="cloud_in" to="/kinect_head/depth_registered/points_throttled" /-->
+		<remap from="cloud_in" to="/head_mount_kinect/depth_registered/points" />
 	
 	</node>
 </launch>

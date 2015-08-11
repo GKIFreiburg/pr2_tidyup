@@ -9,6 +9,11 @@ awk -f $(rospack find mk)/eclipse.awk build/.project > build/.project_with_env &
 3.) Import the project in Eclipse, ATTENTION: DO NOT COPY FILES INTO ECLIPSE WORKSPACE
 
 4.) Include some folders to get all inclusion resolved
+Go to your project-> right click-> Properties -> C/C++ Project Paths -> Path Containers
+add all of them
+
+/*
+4.) Include some folders to get all inclusion resolved
 Go to your project-> right click-> Properties -> C/C++ Include Paths and Symbols
 add the following folders:
 
@@ -23,4 +28,4 @@ add the following folders:
 /usr/include/c++/4.6
 /usr/include/c++/4.6/x86_64-linux-gnu
 /usr/include/c++/4.6/backward
-
+*/

@@ -32,7 +32,6 @@
         ;(update-torso-position ?t - table
         ;    (torso-position)
         ;    effect updateTorsoPosition@libplanner_modules_pr2.so)
-
         (determine-drive-pose grounding determineDrivePose@libplanner_modules_pr2.so)
     )
 

@@ -1,0 +1,4 @@
+inverse_reachability_maps:
+  table1: 
+    package: tidyup_single_room_launch
+    path: maps/inv_cap_table1_pr2_combined_0.1m_16t.icpm
