@@ -106,18 +106,18 @@
 
     (:durative-action move-robot-to-table
         :parameters (?t - table)
-        :grounding ([determine-drive-pose ])
+        :grounding ([determine-drive-pose])
         ;:duration (= ?duration [path-cost ?t])
         :duration (= ?duration 20.0)
         :condition
         (and
-        	(at start ([path-condition ?t]))
+            (at start ([path-condition ?t]))
             (at start (arms-drive-pose))
         )
         :effect
         (and
             (at start (sensor-data-stale))
-            (at end ([update-robot-pose ]))
+            (at end ([update-robot-pose]))
         )
     )
 
