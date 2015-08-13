@@ -18,7 +18,7 @@
     (:modules
         (path-cost ?t - table cost pathCostGrounding@libplanner_modules_pr2.so)
         (path-condition ?t - table conditionchecker pathConditionGrounding@libplanner_modules_pr2.so)
-        (update-robot-pose 
+        (update-robot-pose ?t - table
             (robot-x)
             (robot-y)
             (robot-theta)
@@ -117,7 +117,7 @@
         :effect
         (and
             (at start (sensor-data-stale))
-            (at end ([update-robot-pose]))
+            (at end ([update-robot-pose ?t]))
         )
     )
 
