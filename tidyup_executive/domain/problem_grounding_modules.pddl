@@ -7,9 +7,9 @@
     table1 table2 - table
   )
   (:init
-    (robot-x 5.0)
-    (robot-y 5.0)
-    (robot-theta 0.0)
+    (= (robot-x) 4.8550)
+    (= (robot-y) 6.7)
+    (= (robot-theta) -1.57)
     (= (torso-position) 0.0117837)
     (= (qw table1) 1)
     (= (qx table1) 0)
