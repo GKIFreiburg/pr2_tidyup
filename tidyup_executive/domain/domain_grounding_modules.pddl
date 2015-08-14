@@ -72,22 +72,22 @@
         (torso-position) - number
     )
 
-;    (:durative-action inspect-table
-;        :parameters (?t - table)
-;        :duration (= ?duration 10.0)
-;        :condition
-;        (and
-;            (at start ([robot-near-table ?t]))
-;            (at start (sensor-data-stale))
-;            (at start (arms-drive-pose))
+    (:durative-action inspect-table
+        :parameters (?t - table)
+        :duration (= ?duration 10.0)
+        :condition
+        (and
+            (at start (robot-near-table ?t))
+            (at start (sensor-data-stale))
+            (at start (arms-drive-pose))
 ;            (at start ([torso-lifted ?t]))
-;        )
-;        :effect
-;        (and
-;            (at end (not (sensor-data-stale)))
-;            (at end (table-inspected ?t))
-;        )
-;    )
+        )
+        :effect
+        (and
+            (at end (not (sensor-data-stale)))
+            (at end (table-inspected ?t))
+        )
+    )
 
     (:durative-action inspect-object
         :parameters (?o - movable_object ?a - arm)
@@ -117,6 +117,7 @@
         :effect
         (and
             (at start (sensor-data-stale))
+            (at end (robot-near-table ?t))
             (at end ([update-robot-pose ?t]))
         )
     )
@@ -160,22 +161,22 @@
 ;        )
 ;    )
 
-    (:durative-action lift-torso
-        :parameters (?t - table)
-        ;:duration (= ?duration 15.0)
-        :duration (= ?duration [lift-cost ?t])
-        :condition
-        (and
-            (at start (robot-near-table ?t))
-            (at start (arms-drive-pose))
-            (at start ([need-lift-torso ?t]))
-       )
-        :effect
-        (and
-            (at start (sensor-data-stale))
-            (at end ([update-torso-position ?t]))
-        )
-    )
+;    (:durative-action lift-torso
+;        :parameters (?t - table)
+;        ;:duration (= ?duration 15.0)
+;        :duration (= ?duration [lift-cost ?t])
+;        :condition
+;        (and
+;            (at start (robot-near-table ?t))
+;            (at start (arms-drive-pose))
+;            (at start ([need-lift-torso ?t]))
+;       )
+;        :effect
+;        (and
+;            (at start (sensor-data-stale))
+;            (at end ([update-torso-position ?t]))
+;        )
+;    )
 
     (:durative-action arm-to-side
         :parameters (?a - arm)
