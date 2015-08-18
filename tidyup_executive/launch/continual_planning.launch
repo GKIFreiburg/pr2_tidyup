@@ -28,14 +28,7 @@
         <rosparam command="load" file="$(arg config_pkg)/config/planning/domain.yaml" />
 		<!-- needed to load inverse reachability maps -->
         <rosparam command="load" file="$(arg config_pkg)/config/planning/inverse_reachability_maps.yaml" />
-
-        <rosparam param="planner_options">
-            - (navstack_init@libplanner_modules_pr2.so /map 0.05 1)
-            - (liftTorsoInit@libplanner_modules_pr2.so)
-            - (drivePoseInit@libplanner_modules_pr2.so)
-        </rosparam>
-            <!-- - (putdown_init@libputdown_modules.so /map)-->
-        <!--<env name="LD_LIBRARY_PATH" value="$(find planner_modules_pr2)/lib:$(optenv LD_LIBRARY_PATH)" />-->
+        <rosparam command="load" file="$(arg config_pkg)/config/planning/module_options.yaml" />
     </node>
 
     <node if="$(arg gui)" pkg="continual_planning_monitor" type="continual_planning_monitor" name="continual_planning_monitor" />

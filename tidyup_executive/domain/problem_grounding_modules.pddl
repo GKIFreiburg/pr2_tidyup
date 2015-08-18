@@ -1,7 +1,10 @@
 (define (problem p01)
   (:domain tidyup_grounding)
-  (:moduleoptions (navstack_init@libplanner_modules_pr2.so /map 0.05 1) (liftTorsoInit@libplanner_modules_pr2.so) (drivePoseInit@libplanner_modules_pr2.so) )
-  (:moduleexitoptions )
+  (:moduleoptions 
+    (navstack_init@libplanner_modules_pr2.so /map 0.05 1) 
+    (liftTorsoInit@libplanner_modules_pr2.so) 
+    (drivePoseInit@libplanner_modules_pr2.so) )
+  (:moduleexitoptions (drivePoseExit@libplanner_modules_pr2.so) )
   (:objects
     /map - frameid
     table1 table2 - table

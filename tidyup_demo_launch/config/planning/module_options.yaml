@@ -1,0 +1,7 @@
+# module options for init and exit modules.
+# If an option string contains "exit" (lower case) it will be treated as exit module.
+planner_options:
+- (navstack_init@libplanner_modules_pr2.so /map 0.05 1)
+- (lift_torso_init@libplanner_modules_pr2.so)
+- (drive_pose_init@libplanner_modules_pr2.so)
+- (drive_pose_exit@libplanner_modules_pr2.so)
