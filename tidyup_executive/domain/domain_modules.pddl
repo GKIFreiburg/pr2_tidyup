@@ -16,13 +16,13 @@
     )
 
     (:modules
-        (path-cost ?start ?goal - location cost pathCost@libplanner_modules_pr2.so)
-        (lift-cost ?t - table cost liftTorsoCost@libplanner_modules_pr2.so)
-        (need-lift-torso ?t - table conditionchecker needToLiftTorso@libplanner_modules_pr2.so)
-        (torso-lifted ?t - table conditionchecker torsoLifted@libplanner_modules_pr2.so)
+        (path-cost ?start ?goal - location cost path_cost@libplanner_modules_pr2.so)
+        (lift-cost ?t - table cost lift_torso_cost@libplanner_modules_pr2.so)
+        (need-lift-torso ?t - table conditionchecker need_to_lift_torso@libplanner_modules_pr2.so)
+        (torso-lifted ?t - table conditionchecker torso_lifted@libplanner_modules_pr2.so)
         (update-torso-position ?t - table
             (torso-position)
-            effect updateTorsoPosition@libplanner_modules_pr2.so)
+            effect update_torso_position@libplanner_modules_pr2.so)
     )
 
     (:constants

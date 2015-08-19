@@ -16,23 +16,23 @@
     )
 
     (:modules
-        (path-cost ?t - table cost pathCostGrounding@libplanner_modules_pr2.so)
-        (path-condition ?t - table conditionchecker pathConditionGrounding@libplanner_modules_pr2.so)
+        (path-cost ?t - table cost path_cost_grounding@libplanner_modules_pr2.so)
+        (path-condition ?t - table conditionchecker path_condition_grounding@libplanner_modules_pr2.so)
         (update-robot-pose ?t - table
             (robot-x)
             (robot-y)
             (robot-theta)
-            effect updateRobotPose@libplanner_modules_pr2.so)
+            effect update_robot_pose@libplanner_modules_pr2.so)
             
         ;(robot-near-table ?t - table conditionchecker robotNear@libplanner_modules_pr2.so)
 
-        ;(lift-cost ?t - table cost liftTorsoCost@libplanner_modules_pr2.so)
-        ;(need-lift-torso ?t - table conditionchecker needToLiftTorso@libplanner_modules_pr2.so)
-        ;(torso-lifted ?t - table conditionchecker torsoLifted@libplanner_modules_pr2.so)
+        ;(lift-cost ?t - table cost lift_torso_cost@libplanner_modules_pr2.so)
+        ;(need-lift-torso ?t - table conditionchecker need_to_lift_torso@libplanner_modules_pr2.so)
+        ;(torso-lifted ?t - table conditionchecker torso_lifted@libplanner_modules_pr2.so)
         ;(update-torso-position ?t - table
         ;    (torso-position)
-        ;    effect updateTorsoPosition@libplanner_modules_pr2.so)
-        (determine-drive-pose grounding determineDrivePose@libplanner_modules_pr2.so)
+        ;    effect update_torso_position@libplanner_modules_pr2.so)
+        (determine-drive-pose grounding determine_drive_pose@libplanner_modules_pr2.so)
     )
 
     (:constants
@@ -45,7 +45,7 @@
         (object-inspected ?o - movable_object)
 
         (robot-near-table ?t - table)
-        (sensor-data-stale)
+        (sensor-data-stale ?t - table)
 
         (object-grasped ?o - movable_object ?a - arm)
         (object-on ?o - movable_object ?t - table)
@@ -78,13 +78,13 @@
         :condition
         (and
             (at start (robot-near-table ?t))
-            (at start (sensor-data-stale))
+            (at start (sensor-data-stale ?t))
             (at start (arms-drive-pose))
 ;            (at start ([torso-lifted ?t]))
         )
         :effect
         (and
-            (at end (not (sensor-data-stale)))
+            (at end (not (sensor-data-stale ?t)))
             (at end (table-inspected ?t))
         )
     )
@@ -116,7 +116,7 @@
         )
         :effect
         (and
-            (at start (sensor-data-stale))
+            (at start (sensor-data-stale ?t))
             (at end (robot-near-table ?t))
             (at end ([update-robot-pose ?t]))
         )
@@ -128,14 +128,14 @@
 ;        :condition
 ;        (and
 ;            (at start ([robot-near-table ?t]))
-;            (at end (not (sensor-data-stale)))
+;            (at end (not (sensor-data-stale ?t)))
 ;            (at start (arms-drive-pose))
 ;            (at start (object-on ?o ?t))
 ;            (at start (hand-free ?a))
 ;        )
 ;        :effect
 ;        (and
-;            (at start (sensor-data-stale))
+;            (at start (sensor-data-stale ?t))
 ;            (at start (assign (arm-state ?a) arm_unknown))
 ;            (at end (not (object-on ?o ?t)))
 ;            (at end (object-grasped ?o ?a))
@@ -148,13 +148,13 @@
 ;        :condition
 ;        (and
 ;            (at start ([robot-near-table ?t]))
-;            (at start (not (sensor-data-stale)))
+;            (at start (not (sensor-data-stale ?t)))
 ;            (at start (arms-drive-pose))
 ;            (at start (object-grasped ?o ?a))
 ;        )
 ;        :effect
 ;        (and
-;            (at start (sensor-data-stale))
+;            (at start (sensor-data-stale ?t))
 ;            (at start (assign (arm-state ?a) arm_unknown))
 ;            (at end (object-on ?o ?t))
 ;            (at end (not (object-grasped ?o ?a)))
@@ -173,7 +173,7 @@
 ;       )
 ;        :effect
 ;        (and
-;            (at start (sensor-data-stale))
+;            (at start (sensor-data-stale ?t))
 ;            (at end ([update-torso-position ?t]))
 ;        )
 ;    )
