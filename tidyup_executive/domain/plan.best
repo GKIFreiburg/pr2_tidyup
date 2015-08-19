@@ -1,0 +1,4 @@
+0.00000000: (move-robot-to-table table1 table1_0) [20.00000000]
+20.00000000: (inspect-table table1) [10.00000000]
+30.00000000: (move-robot-to-table table2 table2_2) [20.00000000]
+50.00000000: (inspect-table table2) [10.00000000]
