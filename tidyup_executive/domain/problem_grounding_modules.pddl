@@ -1,19 +1,18 @@
 (define (problem p01)
   (:domain tidyup_grounding)
-  (:moduleoptions 
-    (navstack_init@libplanner_modules_pr2.so /map 0.05 1) 
-    (liftTorsoInit@libplanner_modules_pr2.so) 
-    (drivePoseInit@libplanner_modules_pr2.so) )
-  (:moduleexitoptions (drivePoseExit@libplanner_modules_pr2.so) )
+  (:moduleoptions
+	(navstack_init@libplanner_modules_pr2.so /map 0.05 1)
+	(lift_torso_init@libplanner_modules_pr2.so)
+	(drive_pose_init@libplanner_modules_pr2.so) )
+  (:moduleexitoptions (drive_pose_exit@libplanner_modules_pr2.so) )
   (:objects
     /map - frameid
     table1 table2 - table
   )
   (:init
-    (= (robot-x) 4.8550)
-    (= (robot-y) 6.7)
-    (= (robot-theta) -1.57)
-    (= (torso-position) 0.0117837)
+    (= (robot-theta) -1.57588)
+    (= (robot-x) 4.82629)
+    (= (robot-y) 6.79231)
     (= (qw table1) 1)
     (= (qx table1) 0)
     (= (qy table1) 0)
@@ -37,10 +36,6 @@
   )
   (:goal (and
     (forall (?o - arm) (hand-free ?o))
-    (arms-drive-pose)
-    (sensor-data-stale)
-    ;(table-inspected table1)
-    ;(forall (?t - table) (table-inspected ?t))
-    ;(forall (?o - movable_object) (object-inspected ?o))
+    (forall (?o - table) (table-inspected ?o))
   ))
 )
