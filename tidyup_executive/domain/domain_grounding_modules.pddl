@@ -6,7 +6,6 @@
         frameid                         ; the coordinate frame of a pose, ideally a fixed frame
 
         location - pose                 ; a pose for the robot base
-        ;manipulation_location - location       ; a location that grasp actions can be applied from
 
         table - pose                    ; something static like a table
         movable_object - pose           ; an object with pose that can be grasped
@@ -42,10 +41,10 @@
 
     (:predicates
         (table-inspected ?t - table)
+        (table-inspected-recently ?t - table)
         (object-inspected ?o - movable_object)
 
         (robot-near-table ?t - table)
-        (sensor-data-stale ?t - table)
 
         (object-grasped ?o - movable_object ?a - arm)
         (object-on ?o - movable_object ?t - table)
@@ -78,13 +77,13 @@
         :condition
         (and
             (at start (robot-near-table ?t))
-            (at start (sensor-data-stale ?t))
+            (at start (not (table-inspected-recently ?t)))
             (at start (arms-drive-pose))
 ;            (at start ([torso-lifted ?t]))
         )
         :effect
         (and
-            (at end (not (sensor-data-stale ?t)))
+            (at end (table-inspected-recently ?t))
             (at end (table-inspected ?t))
         )
     )
@@ -116,7 +115,7 @@
         )
         :effect
         (and
-            (at start (sensor-data-stale ?t))
+            (at start (not (table-inspected-recently ?t)))
             (at end (robot-near-table ?t))
             (at end ([update-robot-pose ?t]))
         )
@@ -128,14 +127,14 @@
 ;        :condition
 ;        (and
 ;            (at start ([robot-near-table ?t]))
-;            (at end (not (sensor-data-stale ?t)))
+;            (at end (table-inspected-recently ?t))
 ;            (at start (arms-drive-pose))
 ;            (at start (object-on ?o ?t))
 ;            (at start (hand-free ?a))
 ;        )
 ;        :effect
 ;        (and
-;            (at start (sensor-data-stale ?t))
+;            (at start (not (table-inspected-recently ?t)))
 ;            (at start (assign (arm-state ?a) arm_unknown))
 ;            (at end (not (object-on ?o ?t)))
 ;            (at end (object-grasped ?o ?a))
@@ -148,13 +147,13 @@
 ;        :condition
 ;        (and
 ;            (at start ([robot-near-table ?t]))
-;            (at start (not (sensor-data-stale ?t)))
+;            (at start (table-inspected-recently ?t))
 ;            (at start (arms-drive-pose))
 ;            (at start (object-grasped ?o ?a))
 ;        )
 ;        :effect
 ;        (and
-;            (at start (sensor-data-stale ?t))
+;            (at start (not (table-inspected-recently ?t)))
 ;            (at start (assign (arm-state ?a) arm_unknown))
 ;            (at end (object-on ?o ?t))
 ;            (at end (not (object-grasped ?o ?a)))
@@ -173,7 +172,7 @@
 ;       )
 ;        :effect
 ;        (and
-;            (at start (sensor-data-stale ?t))
+;            (at start (not (table-inspected-recently ?t)))
 ;            (at end ([update-torso-position ?t]))
 ;        )
 ;    )
