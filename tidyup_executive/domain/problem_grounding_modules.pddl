@@ -12,6 +12,8 @@
     coke_1 - movable_object
   )
   (:init
+    (= (current-torso-height) 0.802173)
+    (= (sampled-torso-height) 0.802)
     (= (robot-theta) -1.57588)
     (= (robot-x) 4.82629)
     (= (robot-y) 6.79231)
