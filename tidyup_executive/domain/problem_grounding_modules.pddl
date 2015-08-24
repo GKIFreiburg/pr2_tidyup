@@ -3,11 +3,13 @@
   (:moduleoptions
 	(navstack_init@libplanner_modules_pr2.so /map 0.05 1)
 	(lift_torso_init@libplanner_modules_pr2.so)
-	(drive_pose_init@libplanner_modules_pr2.so) )
+	(drive_pose_init@libplanner_modules_pr2.so) 
+	(pickup_init@libplanner_modules_pr2.so) )
   (:moduleexitoptions (drive_pose_exit@libplanner_modules_pr2.so) )
   (:objects
     /map - frameid
     table1 table2 - table
+    coke_1 - movable_object
   )
   (:init
     (= (current-torso-height) 0.802173)
@@ -15,6 +17,16 @@
     (= (robot-theta) -1.57588)
     (= (robot-x) 4.82629)
     (= (robot-y) 6.79231)
+    (= (torso-position) 0.3)
+	(= (qw coke_1) 0.0327481)
+	(= (qx coke_1) 3.49964e-05)
+	(= (qy coke_1) -0.000724461) 
+	(= (qz coke_1) 0.999463)
+	(= (timestamp coke_1) 0)
+	(= (x coke_1) 4.63646)
+	(= (y coke_1) 5.23256)
+	(= (z coke_1) 0.906418) 
+	(object-on coke_1 table1) 
     (= (qw table1) 1)
     (= (qx table1) 0)
     (= (qy table1) 0)
@@ -37,7 +49,9 @@
     (= (frame-id table2) /map)
   )
   (:goal (and
-    (forall (?o - arm) (hand-free ?o))
-    (forall (?o - table) (table-inspected ?o))
+    ;(forall (?o - arm) (hand-free ?o))
+    ;(forall (?o - table) (table-inspected ?o))
+    (robot-near-table table1)
+    (object-grasped coke_1 right_arm)
   ))
 )

@@ -21,19 +21,9 @@
             (robot-x)
             (robot-y)
             (robot-theta)
+            (robot-torso-position)
             effect update_robot_pose@libplanner_modules_pr2.so)
-        (update-torso-height ?t - table
-            (sampled-torso-height)
-            effect update_torso_height@libplanner_modules_pr2.so)
-            
-        ;(robot-near-table ?t - table conditionchecker robotNear@libplanner_modules_pr2.so)
-
-        ;(lift-cost ?t - table cost lift_torso_cost@libplanner_modules_pr2.so)
-        ;(need-lift-torso ?t - table conditionchecker need_to_lift_torso@libplanner_modules_pr2.so)
-        ;(torso-lifted ?t - table conditionchecker torso_lifted@libplanner_modules_pr2.so)
-        ;(update-torso-position ?t - table
-        ;    (torso-position)
-        ;    effect update_torso_position@libplanner_modules_pr2.so)
+         
         (determine-drive-pose grounding determine_drive_pose@libplanner_modules_pr2.so)
     )
 
@@ -61,21 +51,17 @@
         (x ?p - pose) - number
         (y ?p - pose) - number
         (z ?p - pose) - number
-        ; quaternion orientation
         (qx ?p - pose) - number
         (qy ?p - pose) - number
         (qz ?p - pose) - number
         (qw ?p - pose) - number
         (timestamp ?p - pose) - number
-        (inspection-timestamp ?l - manipulation_location) - number
         (frame-id ?p - pose) - frameid
 
         (robot-x) - number
         (robot-y) - number
         (robot-theta) - number
-
-        (current-torso-height) - number
-        (sampled-torso-height) - number
+        (robot-torso-position) - number
     )
 
     (:durative-action inspect-table
@@ -86,7 +72,6 @@
             (at start (robot-near-table ?t))
             (at start (not (table-inspected-recently ?t)))
             (at start (arms-drive-pose))
-            (at start (torso-lifted ?t))
         )
         :effect
         (and
@@ -123,40 +108,43 @@
         :effect
         (and
             (at start (not (table-inspected-recently ?t)))
+            (at start 
+                (forall (?_t - table)
+                    (not (robot-near-table ?_t))
+                )
+            )
             (at end (robot-near-table ?t))
             (at end ([update-robot-pose ?t]))
-            ; set sampled torso height
-            (at end ([update-torso-height ?t]))
-            ;noetig?(at end (not (torso-lifted ?t)))
         )
     )
 
-;    (:durative-action pickup-object
-;        :parameters (?o - movable_object ?a - arm ?t - table)
-;        :duration (= ?duration 20.0)
-;        :condition
-;        (and
-;            (at start ([robot-near-table ?t]))
-;            (at end (table-inspected-recently ?t))
-;            (at start (arms-drive-pose))
-;            (at start (object-on ?o ?t))
-;            (at start (hand-free ?a))
-;        )
-;        :effect
-;        (and
-;            (at start (not (table-inspected-recently ?t)))
-;            (at start (assign (arm-state ?a) arm_unknown))
-;            (at end (not (object-on ?o ?t)))
-;            (at end (object-grasped ?o ?a))
-;        )
-;    )
+    (:durative-action pickup-object
+        :parameters (?o - movable_object ?a - arm ?t - table)
+        :duration (= ?duration 20.0)
+        :condition
+        (and
+            (at start (robot-near-table ?t))
+            (at start (table-inspected-recently ?t))
+            (at start (arms-drive-pose))
+            (at start (object-on ?o ?t))
+            (at start (hand-free ?a))
+            (at start ([can-pickup ?o ?a ?t]))
+        )
+        :effect
+        (and
+            (at start (not (table-inspected-recently ?t)))
+            (at start (assign (arm-state ?a) arm_unknown))
+            (at end (not (object-on ?o ?t)))
+            (at end (object-grasped ?o ?a))
+        )
+    )
 
 ;    (:durative-action putdown-object
 ;        :parameters (?o - movable_object ?a - arm ?t - table)
 ;        :duration (= ?duration 20.0)
 ;        :condition
 ;        (and
-;            (at start ([robot-near-table ?t]))
+;            (at start (robot-near-table ?t))
 ;            (at start (table-inspected-recently ?t))
 ;            (at start (arms-drive-pose))
 ;            (at start (object-grasped ?o ?a))
@@ -169,25 +157,6 @@
 ;            (at end (not (object-grasped ?o ?a)))
 ;        )
 ;    )
-
-    (:durative-action lift-torso
-        :parameters (?t - table)
-        :duration (= ?duration 15.0)
-;        :duration (= ?duration [lift-cost ?t])
-        :condition
-        (and
-            (at start (robot-near-table ?t))
-            (at start (arms-drive-pose))
-            (at start (not (torso-lifted ?t)))
-;            (at start ([need-lift-torso ?t]))
-       )
-        :effect
-        (and
-            (at start (not (table-inspected-recently ?t)))
-            (at end (torso-lifted ?t))
-;            (at end ([update-torso-position ?t]))
-        )
-    )
 
     (:durative-action arm-to-side
         :parameters (?a - arm)
