@@ -15,6 +15,8 @@
     )
 
     (:modules
+        (determine-drive-pose grounding determine_drive_pose@libplanner_modules_pr2.so)
+        
         (path-cost ?t - table cost path_cost_grounding@libplanner_modules_pr2.so)
         (path-condition ?t - table conditionchecker path_condition_grounding@libplanner_modules_pr2.so)
         (update-robot-pose ?t - table
@@ -24,7 +26,7 @@
             (robot-torso-position)
             effect update_robot_pose@libplanner_modules_pr2.so)
          
-        (determine-drive-pose grounding determine_drive_pose@libplanner_modules_pr2.so)
+        (can-pickup ?o - movable_object ?a - arm ?t - table conditionchecker can_pickup@libplanner_modules_pr2.so)
     )
 
     (:constants
@@ -41,8 +43,6 @@
 
         (object-grasped ?o - movable_object ?a - arm)
         (object-on ?o - movable_object ?t - table)
-
-        (torso-lifted ?t - table)
    )
 
     (:functions
@@ -108,11 +108,11 @@
         :effect
         (and
             (at start (not (table-inspected-recently ?t)))
-            (at start 
-                (forall (?_t - table)
-                    (not (robot-near-table ?_t))
-                )
-            )
+            ;(at start 
+            ;    (forall (?_t - table)
+            ;        (not (robot-near-table ?_t))
+            ;    )
+            ;)
             (at end (robot-near-table ?t))
             (at end ([update-robot-pose ?t]))
         )

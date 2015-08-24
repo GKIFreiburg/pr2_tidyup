@@ -2,9 +2,9 @@
   (:domain tidyup_grounding)
   (:moduleoptions
 	(navstack_init@libplanner_modules_pr2.so /map 0.05 1)
-	(lift_torso_init@libplanner_modules_pr2.so)
 	(drive_pose_init@libplanner_modules_pr2.so) 
-	(pickup_init@libplanner_modules_pr2.so) )
+	(pickup_init@libplanner_modules_pr2.so) 
+  )
   (:moduleexitoptions (drive_pose_exit@libplanner_modules_pr2.so) )
   (:objects
     /map - frameid
@@ -12,12 +12,10 @@
     coke_1 - movable_object
   )
   (:init
-    (= (current-torso-height) 0.802173)
-    (= (sampled-torso-height) 0.802)
     (= (robot-theta) -1.57588)
     (= (robot-x) 4.82629)
     (= (robot-y) 6.79231)
-    (= (torso-position) 0.3)
+    (= (robot-torso-position) 0.2)
 	(= (qw coke_1) 0.0327481)
 	(= (qx coke_1) 3.49964e-05)
 	(= (qy coke_1) -0.000724461) 
@@ -52,6 +50,7 @@
     ;(forall (?o - arm) (hand-free ?o))
     ;(forall (?o - table) (table-inspected ?o))
     (robot-near-table table1)
+    (table-inspected table1)
     (object-grasped coke_1 right_arm)
   ))
 )
