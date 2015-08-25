@@ -27,7 +27,7 @@
             (robot-torso-position)
             effect update_robot_pose@libplanner_modules_pr2.so)
          
-        ;(can-pickup ?o - movable_object ?a - arm ?t - table conditionchecker can_pickup@libplanner_modules_pr2.so)
+        (can-pickup ?o - movable_object ?a - arm ?t - table conditionchecker can_pickup@libplanner_modules_pr2.so)
     )
 
     (:constants
