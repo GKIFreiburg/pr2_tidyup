@@ -7,6 +7,8 @@
 
     <rosparam command="load" ns="tfd_modules" file="$(arg config_pkg)/config/planning/planner_params.yaml" />
 
+    <rosparam command="load" ns="tfd_modules/irs" file="$(arg config_pkg)/config/planning/inverse_reachability_sampling.yaml" />
+
     <!-- start executive -->
     <node pkg="continual_planning_executive" type="continual_planning_executive" args="" respawn="false" name="continual_planning_executive" output="screen" >
         <param name="start_paused" value="true" />
