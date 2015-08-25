@@ -16,6 +16,7 @@
 
     (:modules
         (determine-drive-pose grounding determine_drive_pose@libplanner_modules_pr2.so)
+        (robot-near-table ?t - table conditionchecker robot_near_table@libplanner_modules_pr2.so)
         
         (path-cost ?t - table cost path_cost_grounding@libplanner_modules_pr2.so)
         (path-condition ?t - table conditionchecker path_condition_grounding@libplanner_modules_pr2.so)
@@ -26,7 +27,7 @@
             (robot-torso-position)
             effect update_robot_pose@libplanner_modules_pr2.so)
          
-        (can-pickup ?o - movable_object ?a - arm ?t - table conditionchecker can_pickup@libplanner_modules_pr2.so)
+        ;(can-pickup ?o - movable_object ?a - arm ?t - table conditionchecker can_pickup@libplanner_modules_pr2.so)
     )
 
     (:constants
@@ -39,7 +40,7 @@
         (table-inspected-recently ?t - table)
         (object-inspected ?o - movable_object)
 
-        (robot-near-table ?t - table)
+;        (robot-near-table ?t - table)
 
         (object-grasped ?o - movable_object ?a - arm)
         (object-on ?o - movable_object ?t - table)
@@ -69,7 +70,8 @@
         :duration (= ?duration 10.0)
         :condition
         (and
-            (at start (robot-near-table ?t))
+;            (at start (robot-near-table ?t))
+            (at start ([robot-near-table ?t]))
             (at start (not (table-inspected-recently ?t)))
             (at start (arms-drive-pose))
         )
@@ -113,38 +115,40 @@
             ;        (not (robot-near-table ?_t))
             ;    )
             ;)
-            (at end (robot-near-table ?t))
+;            (at end (robot-near-table ?t))
             (at end ([update-robot-pose ?t]))
         )
     )
 
-    (:durative-action pickup-object
-        :parameters (?o - movable_object ?a - arm ?t - table)
-        :duration (= ?duration 20.0)
-        :condition
-        (and
-            (at start (robot-near-table ?t))
-            (at start (table-inspected-recently ?t))
-            (at start (arms-drive-pose))
-            (at start (object-on ?o ?t))
-            (at start (hand-free ?a))
-            (at start ([can-pickup ?o ?a ?t]))
-        )
-        :effect
-        (and
-            (at start (not (table-inspected-recently ?t)))
-            (at start (assign (arm-state ?a) arm_unknown))
-            (at end (not (object-on ?o ?t)))
-            (at end (object-grasped ?o ?a))
-        )
-    )
+;    (:durative-action pickup-object
+;        :parameters (?o - movable_object ?a - arm ?t - table)
+;        :duration (= ?duration 20.0)
+;        :condition
+;        (and
+;            ;(at start (robot-near-table ?t))
+;            (at start ([robot-near-table ?t]))
+;            (at start (table-inspected-recently ?t))
+;            (at start (arms-drive-pose))
+;            (at start (object-on ?o ?t))
+;            (at start (hand-free ?a))
+;            (at start ([can-pickup ?o ?a ?t]))
+;        )
+;        :effect
+;        (and
+;            (at start (not (table-inspected-recently ?t)))
+;            (at start (assign (arm-state ?a) arm_unknown))
+;            (at end (not (object-on ?o ?t)))
+;            (at end (object-grasped ?o ?a))
+;        )
+;    )
 
 ;    (:durative-action putdown-object
 ;        :parameters (?o - movable_object ?a - arm ?t - table)
 ;        :duration (= ?duration 20.0)
 ;        :condition
 ;        (and
-;            (at start (robot-near-table ?t))
+;            ;(at start (robot-near-table ?t))
+;            (at start ([robot-near-table ?t]))
 ;            (at start (table-inspected-recently ?t))
 ;            (at start (arms-drive-pose))
 ;            (at start (object-grasped ?o ?a))
