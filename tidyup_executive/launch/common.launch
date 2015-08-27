@@ -27,6 +27,11 @@ This file is for tidyup stuff needed in reality and simulation.
       <!-- <remap from="map" to="map_server_map"/> -->
   </node>
 
+  <node pkg="load_octomap" name="load_octomap" type="load_octomap" args="$(arg config_pkg)/maps/octomap.bt" output="screen">
+  </node>
+
+
+<!-- 
   <node unless="$(arg disable_move_base)" machine="c2" name="octomap_server_combined" pkg="octomap_server" type="octomap_server_node" args="$(arg config_pkg)/maps/octomap.bt" >
     <param name="resolution" value="0.025" />
     <param name="sensor_model/range" value="4.0" />
@@ -51,6 +56,7 @@ This file is for tidyup stuff needed in reality and simulation.
 
     <remap from="map" to="octomap_map"/>
   </node>
+-->
 
   <!--node if="$(arg run_db)" pkg="mongodb" type="wrapper.py" name="sushi_db" output="screen">
       <param name="database_path" value="$(arg db_path)"/>
