@@ -9,7 +9,7 @@ goal_creators:
 #    - tidyup_state_creators/goal_creator_tidyup_initialize
     - tidyup_state_creators/goal_creator_tidyup_initialize_grounding
     - tidyup_state_creators/goal_creator_load_tables_into_planning_scene table
-    - tidyup_state_creators/goal_creator_move_objects_to_table_grounding
+    - tidyup_state_creators/goal_creator_inspect_objects
 #    - tidyup_state_creators/goal_creator_from_planning_scene
 action_executors:
     - object_manipulation_actions/action_executor_arm_to_side arm-to-side right_arm_to_side left_arm_to_side

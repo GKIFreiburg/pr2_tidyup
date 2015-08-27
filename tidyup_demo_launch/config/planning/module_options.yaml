@@ -5,3 +5,4 @@ planner_options:
 - (drive_pose_init@libplanner_modules_pr2.so)
 - (drive_pose_exit@libplanner_modules_pr2.so)
 - (pickup_init@libplanner_modules_pr2.so)
+- (putdown_init@libplanner_modules_pr2.so)
