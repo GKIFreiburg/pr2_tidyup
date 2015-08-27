@@ -34,8 +34,8 @@
   <build_depend>roscpp</build_depend>
   <build_depend>moveit_msgs</build_depend>
 
-  <ros_depend>roscpp</ros_depend>
-  <ros_depend>moveit_msgs</ros_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>moveit_msgs</run_depend>
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
