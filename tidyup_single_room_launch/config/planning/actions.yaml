@@ -14,7 +14,7 @@ goal_creators:
 action_executors:
     - object_manipulation_actions/action_executor_arm_to_side arm-to-side right_arm_to_side left_arm_to_side
     - object_manipulation_actions/action_executor_arm_to_front arm-to-front right_arm_to_front left_arm_to_front
-#    - object_manipulation_actions/action_executor_inspect_location inspect-location /ork_to_planning_scene location-inspected location-inspected-recently
+#    - object_manipulation_actions/action_executor_inspect_location inspect-location /ork_to_planning_scene /head_traj_controller/point_head_action location-inspected location-inspected-recently
     - object_manipulation_actions/action_executor_inspect_table_grounding inspect-table /ork_to_planning_scene table-inspected table-inspected-recently
 #    - object_manipulation_actions/action_executor_lift_torso lift-torso
 #    - object_manipulation_actions/action_executor_lift_torso_grounding lift-torso sampled-torso-height
