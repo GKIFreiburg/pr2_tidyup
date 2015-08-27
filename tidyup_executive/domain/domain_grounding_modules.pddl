@@ -142,25 +142,25 @@
         )
     )
 
-;    (:durative-action putdown-object
-;        :parameters (?o - movable_object ?a - arm ?t - table)
-;        :duration (= ?duration 20.0)
-;        :condition
-;        (and
-;            ;(at start (robot-near-table ?t))
-;            (at start ([robot-near-table ?t]))
-;            (at start (table-inspected-recently ?t))
-;            (at start (arms-drive-pose))
-;            (at start (object-grasped ?o ?a))
-;        )
-;        :effect
-;        (and
-;            (at start (not (table-inspected-recently ?t)))
-;            (at start (assign (arm-state ?a) arm_unknown))
-;            (at end (object-on ?o ?t))
-;            (at end (not (object-grasped ?o ?a)))
-;        )
-;    )
+    (:durative-action putdown-object
+        :parameters (?o - movable_object ?a - arm ?t - table)
+        :duration (= ?duration 20.0)
+        :condition
+        (and
+            ;(at start (robot-near-table ?t))
+            (at start ([robot-near-table ?t]))
+            (at start (table-inspected-recently ?t))
+            (at start (arms-drive-pose))
+            (at start (object-grasped ?o ?a))
+        )
+        :effect
+        (and
+            (at start (not (table-inspected-recently ?t)))
+            (at start (assign (arm-state ?a) arm_unknown))
+            (at end (object-on ?o ?t))
+            (at end (not (object-grasped ?o ?a)))
+        )
+    )
 
     (:durative-action arm-to-side
         :parameters (?a - arm)
