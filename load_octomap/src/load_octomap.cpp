@@ -6,7 +6,12 @@ int main(int argc, char **argv)
 	ros::init(argc, argv, "load_octomap");
 	ros::NodeHandle nh;
 
-	ROS_ASSERT(argc == 2);
+	if (argc != 2)
+	{
+		ROS_ERROR("No octomap found!\n"
+				"load_octomap <path-to-octomap>");
+		return 1;
+	}
 	std::string octomap_path = argv[1];
 
 	// send recorded octomap to move_group

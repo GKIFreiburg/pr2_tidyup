@@ -126,6 +126,8 @@ add_executable(pick_place_tutorial src/pick_place_tutorial.cpp)
 
 add_executable(pick_grasp_provider src/pick_grasp_provider.cpp)
 
+add_executable(show_grasps src/show_grasps.cpp)
+
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(pick_node pick_generate_messages_cpp)
@@ -144,6 +146,10 @@ target_link_libraries(pick_place_tutorial
 )
 
 target_link_libraries(pick_grasp_provider
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(show_grasps
   ${catkin_LIBRARIES}
 )
 
