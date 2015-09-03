@@ -45,10 +45,6 @@ name="manipulation_location_generator" output="screen">
     <param name="sample_angle_table" value="1.57"/>
   </node>
 
-  <!-- load arm to front positions on param -->
-  <rosparam command="load" file="$(find tidyup_executive)/config/left_arm_to_front.yaml" ns="left_arm_to_front"/>
-  <rosparam command="load" file="$(find tidyup_executive)/config/right_arm_to_front.yaml" ns="right_arm_to_front"/>
-
   <node pkg="amcl" type="amcl" name="amcl" output="screen">
 	  <remap from="scan" to="base_scan" />
 	  <param name="base_frame_id" value="base_footprint"/>
