@@ -15,11 +15,6 @@
   <node pkg="control_robot" type="control_robot" name="control_robot" output="screen"/>
   </group>
 
-  <group if="$(arg clear_planning_scene)">
-  <!-- Clearing planning_scene using service calls -->
-  <node pkg="clear_planning_scene" type="clear_planning_scene" name="clear_planning_scene" output="screen"/>
-  </group>
-
   <include file="$(find tidyup_executive)/launch/common.launch">
      <arg name="config_pkg" value="$(arg config_pkg)" />
      <arg name="disable_move_base" value="$(arg disable_move_base)"/>
