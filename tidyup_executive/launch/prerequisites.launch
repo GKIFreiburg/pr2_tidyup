@@ -21,6 +21,4 @@
      <arg name="sim" value="$(arg sim)"/>
   </include>
 
-  <!--include file="$(find tidyup_executive)/launch/household_objects_database.launch"/-->
-
 </launch>
