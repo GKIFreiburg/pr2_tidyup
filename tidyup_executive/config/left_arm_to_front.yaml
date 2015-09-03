@@ -1,0 +1,15 @@
+header: 
+  seq: 0
+  stamp: 0
+  frame_id: head_mount_kinect_rgb_link
+pose: 
+  position: 
+    x: 0.48
+    y: 0.2
+    z: 0
+  orientation: 
+    x: 0
+    y: 0
+    z: -0.707107
+    w: 0.707107
+
