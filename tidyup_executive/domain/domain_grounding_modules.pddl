@@ -132,6 +132,7 @@
             (at start (arms-drive-pose))
             (at start (object-on ?o ?t))
             (at start (hand-free ?a))
+            (at start (not (object-inspected ?o)))
             (at start ([can-pickup ?o ?a ?t]))
         )
         :effect
