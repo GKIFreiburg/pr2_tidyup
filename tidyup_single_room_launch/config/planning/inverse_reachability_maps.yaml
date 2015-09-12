@@ -1,9 +1,9 @@
 inverse_reachability_maps:
   table1: 
     package: tidyup_single_room_launch
-    path: maps/inv_cap_table1_pr2_combined_0.1m_16t.icpm
-#    path: maps/inv_cap_table1_padding_0.1_pr2_combined_0.1m_16t.icpm
+#    path: maps/inv_cap_table1_pr2_combined_0.1m_16t.icpm
+    path: maps/inv_cap_table1_pr2_combined_0.05m_16t.icpm
   table2: 
     package: tidyup_single_room_launch
-    path: maps/inv_cap_table2_pr2_combined_0.1m_16t.icpm
-#    path: maps/inv_cap_table2_padding_0.1_pr2_combined_0.1m_16t.icpm
+#    path: maps/inv_cap_table2_pr2_combined_0.1m_16t.icpm
+    path: maps/inv_cap_table2_pr2_combined_0.05m_16t.icpm
