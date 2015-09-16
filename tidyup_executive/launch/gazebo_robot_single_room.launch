@@ -10,13 +10,15 @@
 
   <node pkg="nodelet" type="nodelet" name="$(arg openni_nodelet_manager_name)"  args="manager"/>
 
-
-
   <include file="$(arg config_pkg)/launch/pr2_single_room_world.launch">
     <arg name="config_pkg" value="$(arg config_pkg)" />
     <arg name="gui" value="$(arg gui)" />
     <arg name="paused" value="false" />
   </include>
+
+  <node name="spawn_coke" pkg="gazebo_ros" type="spawn_model" 
+   args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 4.61 -y 5.48 -z 0.90" 
+   respawn="false"/>
 
   <!-- spawn .sdf map (singleRoom)
   <node name="spawn_singleRoom" pkg="gazebo_ros" type="spawn_model" args="-sdf -file $(arg config_pkg)/simulation/single_room.sdf -model map" respawn="false" />
@@ -29,10 +31,6 @@
    command="$(find xacro)/xacro.py '$(find gazebo_worlds)/objects/table2.urdf.xacro'" />
   <node name="spawn_table2" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table2 -model table2 -x 0.50 -y 6.44" 
    respawn="false" output="screen" />
-
-  <node name="spawn_coke" pkg="gazebo_ros" type="spawn_model" 
-   args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 4.61 -y 5.48 -z 0.90" 
-   respawn="false"/>
 -->
 
 </launch>
