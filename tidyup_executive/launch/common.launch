@@ -26,6 +26,7 @@ This file is for tidyup stuff needed in reality and simulation.
   <node pkg="map_server" name="tidyup_map" type="map_server" args="$(arg config_pkg)/maps/map.yaml" respawn="true" >
       <!-- <remap from="map" to="map_server_map"/> -->
   </node>
+  <node pkg="m3rsm_global_localization" name="global_localization" type="global_localize_once" respawn="true" />
 
   <node pkg="load_octomap" name="load_octomap" type="load_octomap" args="$(arg config_pkg)/maps/octomap.bt" output="screen">
   </node>

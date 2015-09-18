@@ -17,6 +17,7 @@ continual_planning_executive
 continual_planning_monitor
 tfd_modules
 screenrun
+m3rsm_global_localization
 )
 
 ###################################
