@@ -1,0 +1,6 @@
+# module options for init and exit modules.
+# If an option string contains "exit" (lower case) it will be treated as exit module.
+planner_options:
+- (navigation_init@libplanner_modules_pr2.so)
+- (pickup_init@libplanner_modules_pr2.so)
+- (putdown_init@libplanner_modules_pr2.so)
