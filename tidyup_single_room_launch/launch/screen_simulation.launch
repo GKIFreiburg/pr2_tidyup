@@ -33,7 +33,7 @@
             -
                 name: planner
                 commands:
-                    - roslaunch tidyup_executive continual_planning.launch config_pkg:=$(rospack find tidyup_single_room_launch)
+                    - roslaunch tidyup_executive continual_planning.launch config_pkg:=$(rospack find tidyup_single_room_launch) use_inverse_reachability_maps:=true
 
         </rosparam>
     </node>
