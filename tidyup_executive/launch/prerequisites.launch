@@ -1,7 +1,7 @@
 <!-- -->
 <launch>
   <arg name="config_pkg" />
-  <arg name="disable_move_base" default="0"/>
+  <arg name="disable_move_base" default="false"/>
   <arg name="sim" default="true"/>
   <arg name="control_robot" default="true"/>
 
