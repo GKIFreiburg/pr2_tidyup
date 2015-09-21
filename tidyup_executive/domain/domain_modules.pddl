@@ -21,6 +21,13 @@
             (x) (y) (z) (qx) (qy) (qz) (qw)
             effect navigation_effect@libplanner_modules_pr2.so)
 
+         (can-pickup ?o - movable_object ?a - arm ?t - table ?l - manipulation_location conditionchecker can_pickup@libplanner_modules_pr2.so)
+
+         (can-putdown ?o - movable_object ?a - arm ?t - table ?l - manipulation_location conditionchecker can_putdown@libplanner_modules_pr2.so)
+         (apply-putdown ?o - movable_object ?a - arm ?t - table ?l - manipulation_location
+            (x) (y) (z) (qx) (qy) (qz) (qw)
+            effect putdown_effect@libplanner_modules_pr2.so)
+
 ;        (path-cost ?start ?goal - location cost path_cost@libplanner_modules_pr2.so)
 ;        (lift-cost ?t - table cost lift_torso_cost@libplanner_modules_pr2.so)
 ;        (need-lift-torso ?t - table conditionchecker need_to_lift_torso@libplanner_modules_pr2.so)
@@ -135,11 +142,13 @@
             (at start (arms-drive-pose))
             (at start (object-on ?o ?t))
             (at start (hand-free ?a))
+            (at start (not (object-inspected ?o)))
+            (at start ([can-pickup ?o ?a ?t ?l]))
         )
         :effect
         (and
-            (at start (not (location-inspected-recently ?l)))
             (at start (assign (arm-state ?a) arm_unknown))
+            (at end (not (location-inspected-recently ?l)))
             (at end (not (object-on ?o ?t)))
             (at end (object-grasped ?o ?a))
         )
@@ -155,13 +164,16 @@
             (at start (location-inspected-recently ?l))
             (at start (arms-drive-pose))
             (at start (object-grasped ?o ?a))
+            (at start (object-inspected ?o))
+            (at start ([can-putdown ?o ?a ?t ?l]))
         )
         :effect
         (and
-            (at start (not (location-inspected-recently ?l)))
             (at start (assign (arm-state ?a) arm_unknown))
+            (at end (not (location-inspected-recently ?l)))
             (at end (object-on ?o ?t))
             (at end (not (object-grasped ?o ?a)))
+            (at end ([apply-putdown ?o ?a ?t ?l]))
         )
     )
 
