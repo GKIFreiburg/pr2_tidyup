@@ -1,0 +1,27 @@
+<!-- -->
+<launch>
+
+  <arg name="config_pkg" default="$(find single_room_objects)" />
+
+  <include file="$(find tidyup_executive)/launch/gazebo_robot_single_room.launch">
+	<arg name="config_pkg" value="$(arg config_pkg)" />
+  </include>
+
+  <include file="$(find tidyup_executive)/launch/pr2_move_group.launch">
+  </include>
+
+  <include file="$(find tidyup_executive)/launch/prerequisites.launch">
+	<arg name="config_pkg" value="$(arg config_pkg)" />
+  </include>
+
+  <include file="$(find single_room_objects)/launch/rviz.launch">
+  </include>
+
+  <node pkg="continual_planning_monitor" type="continual_planning_monitor" name="continual_planning_monitor" >
+  </node>
+
+  <include file="$(find tidyup_executive)/launch/continual_planning.launch">
+	<arg name="config_pkg" value="$(arg config_pkg)" />
+  </include>
+
+</launch>

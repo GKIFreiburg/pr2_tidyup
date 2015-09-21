@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="fr_tools" type="sxserver.py" args="/pcl_db_merge/record tidyup_c1_msgs/RecordData" respawn="false" name="record_data" output="screen" />
+    <node pkg="fr_tools" type="sxserver.py" args="/pcl_db_merge/merge tidyup_c1_msgs/MergePointClouds" respawn="false" name="merge_point_clouds" output="screen" />
+</launch>

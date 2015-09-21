@@ -1,19 +1,20 @@
 <!-- -->
 <launch>
 
-    # "1" means show gui
     <arg name="gui" default="false" />
     <arg name="config_pkg" default="$(find tidyup_demo_launch)"/>
+	<arg name="start_paused" default="true" />
+	<arg name="use_inverse_reachability_maps" default="false" />
 
-    <rosparam command="load" ns="tfd_modules" file="$(arg config_pkg)/config/planning/planner_params.yaml" />
+    <rosparam command="load" ns="tfd_modules" file="$(arg config_pkg)/config/planner_params.yaml" />
 
-    <rosparam command="load" ns="tfd_modules/irs" file="$(arg config_pkg)/config/planning/inverse_reachability_sampling.yaml" />
+    <rosparam if="$(arg use_inverse_reachability_maps)" command="load" ns="tfd_modules/irs" file="$(arg config_pkg)/config/inverse_reachability_sampling.yaml" />
 
     <!-- start executive -->
     <node pkg="continual_planning_executive" type="continual_planning_executive" args="" respawn="false" name="continual_planning_executive" output="screen" >
-        <param name="start_paused" value="true" />
-        <param name="locations" value="$(arg config_pkg)/config/planning/locations.dat" />
-        <param name="tables" value="$(arg config_pkg)/config/planning/tables.dat" />
+        <param name="start_paused" value="$(arg start_paused)" />
+        <param name="locations" value="$(arg config_pkg)/config/locations.dat" />
+        <param name="tables" value="$(arg config_pkg)/config/tables.dat" />
         <!-- tolerance to use when determining if navigation has reached a target (i.e. we are AT a target)
             if nav_target_tolerance_relative_to_move_base is true, nav_base_local_planner_ns should give
             the namespace that holds the xy_goal_tolerance parameter the base_local_planner uses.
@@ -24,12 +25,12 @@
         <param name="nav_base_local_planner_ns" value="/move_base/TrajectoryPlannerROS" />
 
         <!--<param name="door_location_file" value="$(arg config_pkg)/config/doors.dat" /> -->
-        <rosparam command="load" file="$(arg config_pkg)/config/planning/actions.yaml" />
+        <rosparam command="load" file="$(arg config_pkg)/config/actions.yaml" />
         <rosparam command="load" file="$(find tfd_modules)/config/tfdm_interface.yaml" />
-        <rosparam command="load" file="$(arg config_pkg)/config/planning/domain.yaml" />
+        <rosparam command="load" file="$(arg config_pkg)/config/domain.yaml" />
+        <rosparam command="load" file="$(arg config_pkg)/config/module_options.yaml" />
 		<!-- needed to load inverse reachability maps -->
-        <rosparam command="load" file="$(arg config_pkg)/config/planning/inverse_reachability_maps.yaml" />
-        <rosparam command="load" file="$(arg config_pkg)/config/planning/module_options.yaml" />
+        <rosparam if="$(arg use_inverse_reachability_maps)" command="load" file="$(arg config_pkg)/config/inverse_reachability_maps.yaml" />
     </node>
 
     <node if="$(arg gui)" pkg="continual_planning_monitor" type="continual_planning_monitor" name="continual_planning_monitor" />

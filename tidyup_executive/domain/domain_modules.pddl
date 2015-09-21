@@ -16,13 +16,18 @@
     )
 
     (:modules
-        (path-cost ?start ?goal - location cost path_cost@libplanner_modules_pr2.so)
-        (lift-cost ?t - table cost lift_torso_cost@libplanner_modules_pr2.so)
-        (need-lift-torso ?t - table conditionchecker need_to_lift_torso@libplanner_modules_pr2.so)
-        (torso-lifted ?t - table conditionchecker torso_lifted@libplanner_modules_pr2.so)
-        (update-torso-position ?t - table
-            (torso-position)
-            effect update_torso_position@libplanner_modules_pr2.so)
+         (path-condition ?s - location ?g - location conditionchecker navigation_cost@libplanner_modules_pr2.so)
+         (update-robot-pose ?s - location ?g - location
+            (x) (y) (z) (qx) (qy) (qz) (qw)
+            effect navigation_effect@libplanner_modules_pr2.so)
+
+;        (path-cost ?start ?goal - location cost path_cost@libplanner_modules_pr2.so)
+;        (lift-cost ?t - table cost lift_torso_cost@libplanner_modules_pr2.so)
+;        (need-lift-torso ?t - table conditionchecker need_to_lift_torso@libplanner_modules_pr2.so)
+;        (torso-lifted ?t - table conditionchecker torso_lifted@libplanner_modules_pr2.so)
+;        (update-torso-position ?t - table
+;            (torso-position)
+;            effect update_torso_position@libplanner_modules_pr2.so)
     )
 
     (:constants
@@ -73,7 +78,7 @@
             (at start (location-near-table ?l ?t))
             (at start (not (location-inspected-recently ?l)))
             (at start (arms-drive-pose))
-            (at start ([torso-lifted ?t]))
+;            (at start ([torso-lifted ?t]))
         )
         :effect
         (and
@@ -100,11 +105,13 @@
 
     (:durative-action move-robot
         :parameters (?s - location ?g - location)
-        :duration (= ?duration [path-cost ?s ?g])
+;        :duration (= ?duration [path-cost ?s ?g])
+        :duration (= ?duration 1000)
         :condition
         (and
             (at start (robot-at ?s))
             (at start (not (= ?s ?g)))
+            (at start ([path-condition ?s ?g]))
             (at start (arms-drive-pose))
         )
         :effect
@@ -158,25 +165,25 @@
         )
     )
 
-    (:durative-action lift-torso
-        :parameters (?t - table ?l - manipulation_location)
-        ;:duration (= ?duration 15.0)
-        :duration (= ?duration [lift-cost ?t])
-        :condition
-        (and
-            (at start (robot-at ?l))
-            (at start (location-near-table ?l ?t))
-            (at start (arms-drive-pose))
-            ;(at start (not (torso-lifted ?t)))
-            (at start ([need-lift-torso ?t]))
-       )
-        :effect
-        (and
-            (at start (not (location-inspected-recently ?l)))
-            ;(at end ([torso-lifted ?t]))
-            (at end ([update-torso-position ?t]))
-        )
-    )
+;    (:durative-action lift-torso
+;        :parameters (?t - table ?l - manipulation_location)
+;        ;:duration (= ?duration 15.0)
+;        :duration (= ?duration [lift-cost ?t])
+;        :condition
+;        (and
+;            (at start (robot-at ?l))
+;            (at start (location-near-table ?l ?t))
+;            (at start (arms-drive-pose))
+;            ;(at start (not (torso-lifted ?t)))
+;            (at start ([need-lift-torso ?t]))
+;       )
+;        :effect
+;        (and
+;            (at start (not (location-inspected-recently ?l)))
+;            ;(at end ([torso-lifted ?t]))
+;            (at end ([update-torso-position ?t]))
+;        )
+;    )
 
     (:durative-action arm-to-side
         :parameters (?a - arm)

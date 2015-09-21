@@ -1,0 +1,6 @@
+<launch>
+    <node pkg="map_server" type="map_server" name="continual_planning_executive" 
+        args="$(find tidyup_single_room_launch)/maps/map.yaml" respawn="false">
+    </node>
+
+</launch>

@@ -10,7 +10,7 @@
             -
                 name: robot-sim
                 commands:
-                    - roslaunch --wait tidyup_executive gazebo_robot_single_room.launch config_pkg:=$(rospack find tidyup_single_room_launch)\015
+                    - roslaunch --wait tidyup_executive gazebo_robot_single_room.launch config_pkg:=$(rospack find single_room_objects)\015
             -
                 <!-- pr2_move_group needs to be started before prerequisites, since it publishes
                      the robot describtion -->
@@ -21,11 +21,11 @@
                 name: prerequisites
                 commands:
                     - export ROBOT=sim\015
-                    - roslaunch tidyup_executive prerequisites.launch config_pkg:=$(rospack find tidyup_single_room_launch) disable_move_base:=false
+                    - roslaunch tidyup_executive prerequisites.launch config_pkg:=$(rospack find single_room_objects) disable_move_base:=false
             -
                 name: rviz
                 commands:
-                    - roslaunch tidyup_single_room_launch rviz.launch
+                    - roslaunch single_room_objects rviz.launch
             -
                 name: monitor
                 commands:
@@ -33,7 +33,7 @@
             -
                 name: planner
                 commands:
-                    - roslaunch tidyup_executive continual_planning.launch config_pkg:=$(rospack find tidyup_single_room_launch) use_inverse_reachability_maps:=true
+                    - roslaunch tidyup_executive continual_planning.launch config_pkg:=$(rospack find single_room_objects)
 
         </rosparam>
     </node>
