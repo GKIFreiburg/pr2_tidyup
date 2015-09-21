@@ -2,7 +2,7 @@ state_creators:
     - tidyup_state_creators/state_creator_robot_pose_grounding robot-x robot-y robot-theta robot-torso-position robot-near-table
 #    - tidyup_state_creators/state_creator_robot_pose robot_location location robot-at location
     - tidyup_state_creators/state_creator_arms_status right_arm_to_side left_arm_to_side right_arm_to_front left_arm_to_front arm-state arm_at_side arm_at_front arm_unknown
-    - tidyup_state_creators/state_creator_from_planning_scene
+    - tidyup_state_creators/state_creator_from_planning_scene table-inspected-recently
 #    - tidyup_state_creators/state_creator_lift_torso torso-position torso-lifted
 #    - tidyup_state_creators/state_creator_lift_torso_grounding current-torso-height sampled-torso-height torso-lifted
 goal_creators:
