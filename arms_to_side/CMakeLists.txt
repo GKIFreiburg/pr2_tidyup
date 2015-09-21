@@ -10,6 +10,8 @@ find_package(catkin REQUIRED
 	moveit_ros_planning_interface
 	roscpp
 	symbolic_planning_utils
+	control_robot
+	control_robot_msgs
 )
 
 ## System dependencies are found with CMake's conventions
