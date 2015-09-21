@@ -27,6 +27,10 @@
                 commands:
                     - roslaunch single_room_objects rviz.launch
             -
+                name: arms-to-side
+                commands:
+                    - rosrun arms_to_side arms_to_side
+            -
                 name: monitor
                 commands:
                     - rosrun continual_planning_monitor continual_planning_monitor
