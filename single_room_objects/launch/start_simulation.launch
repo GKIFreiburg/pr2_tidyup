@@ -17,6 +17,10 @@
   <include file="$(find single_room_objects)/launch/rviz.launch">
   </include>
 
+  <!-- Until Navigation is fixed -->
+  <node pkg="arms_to_side" type="arms_to_side" name="arms_to_side" >
+  </node>
+
   <node pkg="continual_planning_monitor" type="continual_planning_monitor" name="continual_planning_monitor" >
   </node>
 

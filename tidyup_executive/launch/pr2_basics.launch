@@ -33,8 +33,16 @@ task specific. For example, maps should not be in here.
     <arg name="sim" value="$(arg sim)"/>
   </include>
 
+
+  <!-- FIXME: ONLY LOAD THESE PARAMETERS ONCE -->
   <!-- load grasp data on param server under different namespace needed by surface placements -->
   <group ns="continual_planning_executive/grasp_data">
+        <rosparam unless="$(arg sim)" command="load" file="$(find moveit_simple_grasps)/config/pr2_grasp_data.yaml" />
+        <rosparam if="$(arg sim)" command="load" file="$(find moveit_simple_grasps)/config/pr2_grasp_data.gazebo.yaml" />
+  </group>
+
+  <!-- load grasp data on param server under different namespace needed by surface placements -->
+  <group ns="tfd_modules/grasp_data">
         <rosparam unless="$(arg sim)" command="load" file="$(find moveit_simple_grasps)/config/pr2_grasp_data.yaml" />
         <rosparam if="$(arg sim)" command="load" file="$(find moveit_simple_grasps)/config/pr2_grasp_data.gazebo.yaml" />
   </group>
