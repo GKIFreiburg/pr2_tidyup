@@ -41,8 +41,6 @@
         (table-inspected-recently ?t - table)
         (object-inspected ?o - movable_object)
 
-;        (robot-near-table ?t - table)
-
         (object-grasped ?o - movable_object ?a - arm)
         (object-on ?o - movable_object ?t - table)
    )
@@ -71,7 +69,6 @@
         :duration (= ?duration 10.0)
         :condition
         (and
-;            (at start (robot-near-table ?t))
             (at start ([robot-near-table ?t]))
             (at start (not (table-inspected-recently ?t)))
             (at start (arms-drive-pose))
@@ -101,8 +98,8 @@
     (:durative-action move-robot-to-table
         :parameters (?t - table)
         :grounding ([determine-drive-pose])
-        ;:duration (= ?duration [path-cost ?t])
-        :duration (= ?duration 20.0)
+        :duration (= ?duration [path-cost ?t])
+        ;:duration (= ?duration 20.0)
         :condition
         (and
             (at start ([path-condition ?t]))
@@ -111,12 +108,6 @@
         :effect
         (and
             (at start (not (table-inspected-recently ?t)))
-            ;(at start 
-            ;    (forall (?_t - table)
-            ;        (not (robot-near-table ?_t))
-            ;    )
-            ;)
-;            (at end (robot-near-table ?t))
             (at end ([update-robot-pose ?t]))
         )
     )
@@ -126,7 +117,6 @@
         :duration (= ?duration 20.0)
         :condition
         (and
-;            (at start (robot-near-table ?t))
             (at start ([robot-near-table ?t]))
             (at start (table-inspected-recently ?t))
             (at start (arms-drive-pose))
@@ -149,7 +139,6 @@
         :duration (= ?duration 20.0)
         :condition
         (and
-            ;(at start (robot-near-table ?t))
             (at start ([robot-near-table ?t]))
             (at start (table-inspected-recently ?t))
             (at start (arms-drive-pose))
