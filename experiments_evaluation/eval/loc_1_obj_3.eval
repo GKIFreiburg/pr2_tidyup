@@ -1,0 +1,21 @@
+start_time: 1443085630.036
+end_time: 1443085881.150
+execution time: 251.115
+
+Number of replannings: 3
+
+(RE-)PLANNING 	10.290
+SUC: 1443085658.155 	0.000: (move-robot robot_location table1_loc1) [1000.000]
+SUC: 1443085694.106 	0.000: (inspect-location table1_loc1 table1) [1.000]
+(RE-)PLANNING 	76.139
+SUC: 1443085827.354 	0.000: (pickup-object coke_2 right_arm table1 table1_loc1) [20.000]
+ERR: 1443085848.791 	0.000: (arm-to-front right_arm) [15.000]
+(RE-)PLANNING 	22.337
+Planning failed, result: PR_FAILURE_OTHER
+
+
+
+Continual planning ended.
+GOAL REACHED by agent!
+
+

@@ -1,0 +1,13 @@
+(RE-)PLANNING 	17.003
+SUC: 1443032201.935 	0.000: (move-robot robot_location table1_loc1) [1000.000]
+SUC: 1443032254.492 	0.000: (inspect-location table1_loc1 table1) [1.000]
+(RE-)PLANNING 	37.617
+SUC: 1443032373.643 	0.000: (move-robot table1_loc1 table1_loc2) [1000.000]
+(RE-)PLANNING 	26.901
+Planning failed, result: PR_FAILURE_OTHER
+
+
+
+Continual planning ended.
+GOAL was NOT REACHED.
+
