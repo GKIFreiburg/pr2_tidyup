@@ -114,6 +114,7 @@ add_executable(control_robot
 	src/main.cpp
 	src/control_head.cpp
 	src/control_arms.cpp
+	src/control_torso.cpp
 )
 
 ## Add cmake target dependencies of the executable/library
