@@ -139,6 +139,8 @@ add_executable(planning_pipeline planning_pipeline.cpp)
 
 add_executable(sampling_around_table sampling_around_table.cpp)
 
+add_executable(convertPose2DToPose convertPose2DToPose)
+
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 # add_dependencies(planning_node planning_generate_messages_cpp)
@@ -222,6 +224,10 @@ target_link_libraries(planning_pipeline
 )
 
 target_link_libraries(sampling_around_table
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(convertPose2DToPose
   ${catkin_LIBRARIES}
 )
 
