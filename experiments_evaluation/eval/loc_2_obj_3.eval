@@ -1,0 +1,19 @@
+start_time: 1443079343.675
+end_time: 1443079670.422
+execution time: 326.746
+
+Number of replannings: 3
+
+(RE-)PLANNING 	36.960
+SUC: 1443079400.273 	0.000: (move-robot robot_location table1_loc1) [1000.000]
+SUC: 1443079453.506 	0.000: (inspect-location table1_loc1 table1) [1.000]
+(RE-)PLANNING 	64.431
+SUC: 1443079622.224 	0.000: (move-robot table1_loc1 table1_loc2) [1000.000]
+(RE-)PLANNING 	33.737
+Planning failed, result: PR_FAILURE_OTHER
+
+
+
+Continual planning ended.
+GOAL was NOT REACHED.
+

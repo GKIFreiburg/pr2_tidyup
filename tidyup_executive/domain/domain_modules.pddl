@@ -27,7 +27,13 @@
             effect navigation_effect@libplanner_modules_pr2.so)
          
         (can-pickup ?o - movable_object ?a - arm ?t - table conditionchecker can_pickup@libplanner_modules_pr2.so)
+        (apply-pickup ?o - movable_object ?a - arm ?t - table ?l - manipulation_location
+            (x ?o) (y ?o) (z ?o) (qx ?o) (qy ?o) (qz ?o) (qw ?o)
+            effect pickup_effect@libplanner_modules_pr2.so)
         (can-putdown ?o - movable_object ?a - arm ?t - table conditionchecker can_putdown@libplanner_modules_pr2.so)
+        (apply-putdown ?o - movable_object ?a - arm ?t - table ?l - manipulation_location
+            (x ?o) (y ?o) (z ?o) (qx ?o) (qy ?o) (qz ?o) (qw ?o)
+            effect putdown_effect@libplanner_modules_pr2.so)
     )
 
     (:constants
@@ -132,6 +138,7 @@
             (at start (assign (arm-state ?a) arm_unknown))
             (at end (not (object-on ?o ?t)))
             (at end (object-grasped ?o ?a))
+            (at end ([apply-pickup ?o ?a ?t ?l]))
         )
     )
 
@@ -173,6 +180,7 @@
         :duration (= ?duration 15.0)
         :condition
         (and
+            ;(at start (arms-drive-pose))
             (at start (not (= (arm-state ?a) arm_at_front)))
         )
         :effect

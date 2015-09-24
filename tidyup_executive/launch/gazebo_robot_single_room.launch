@@ -16,9 +16,15 @@
     <arg name="paused" value="false" />
   </include>
 
+<!--
   <node name="spawn_coke" pkg="gazebo_ros" type="spawn_model" 
    args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 4.61 -y 5.48 -z 0.90" 
    respawn="false"/>
+
+  <node name="spawn_coke2" pkg="gazebo_ros" type="spawn_model" 
+   args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can2 -x 4.81 -y 5.48 -z 0.90" 
+   respawn="false"/>
+-->
 
   <!-- spawn .sdf map (singleRoom)
   <node name="spawn_singleRoom" pkg="gazebo_ros" type="spawn_model" args="-sdf -file $(arg config_pkg)/simulation/single_room.sdf -model map" respawn="false" />
