@@ -18,7 +18,7 @@
     (:modules
          (path-condition ?s - location ?g - location conditionchecker navigation_cost@libplanner_modules_pr2.so)
          (update-robot-pose ?s - location ?g - location
-            (x) (y) (z) (qx) (qy) (qz) (qw)
+            (x robot_location) (y robot_location) (z robot_location) (qx robot_location) (qy robot_location) (qz robot_location) (qw robot_location)
             effect navigation_effect@libplanner_modules_pr2.so)
 
          (can-pickup ?o - movable_object ?a - arm ?t - table ?l - manipulation_location conditionchecker can_pickup@libplanner_modules_pr2.so)
@@ -130,7 +130,7 @@
             (at start (not (location-inspected-recently ?g)))
             (at start (not (robot-at ?s)))
             (at end (robot-at ?g))
-
+            (at end ([update-robot-pose ?s ?g]))
         )
     )
 
