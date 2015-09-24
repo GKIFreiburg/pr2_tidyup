@@ -18,8 +18,8 @@
         (robot-near-table ?t - table conditionchecker robot_near_table@libplanner_modules_pr2.so)
         
         (path-cost ?t - table cost navigation_cost@libplanner_modules_pr2.so)
-        (path-condition ?t - table conditionchecker navigation_cost@libplanner_modules_pr2.so)
-        (update-robot-pose ?t - table
+        (path-condition ?t - table ?l - manipulation_location conditionchecker navigation_cost@libplanner_modules_pr2.so)
+        (update-robot-pose ?t - table ?l - manipulation_location
             (robot-x)
             (robot-y)
             (robot-theta)
@@ -27,11 +27,12 @@
             effect navigation_effect@libplanner_modules_pr2.so)
          
         (can-pickup ?o - movable_object ?a - arm ?t - table conditionchecker can_pickup@libplanner_modules_pr2.so)
-        (apply-pickup ?o - movable_object ?a - arm ?t - table ?l - manipulation_location
+        (apply-pickup ?o - movable_object ?a - arm ?t - table
             (x ?o) (y ?o) (z ?o) (qx ?o) (qy ?o) (qz ?o) (qw ?o)
             effect pickup_effect@libplanner_modules_pr2.so)
+
         (can-putdown ?o - movable_object ?a - arm ?t - table conditionchecker can_putdown@libplanner_modules_pr2.so)
-        (apply-putdown ?o - movable_object ?a - arm ?t - table ?l - manipulation_location
+        (apply-putdown ?o - movable_object ?a - arm ?t - table
             (x ?o) (y ?o) (z ?o) (qx ?o) (qy ?o) (qz ?o) (qw ?o)
             effect putdown_effect@libplanner_modules_pr2.so)
     )
@@ -104,18 +105,18 @@
 
     (:durative-action move-robot-to-table
         :parameters (?t - table ?l - manipulation_location)
-        :duration (= ?duration [path-cost ?t])
-        ;:duration (= ?duration 20.0)
+        ;:duration (= ?duration [path-cost ?t])
+        :duration (= ?duration 20.0)
         :condition
         (and
             (at start (location-near-table ?l ?t))
-            (at start ([path-condition ?t]))
+            (at start ([path-condition ?t ?l]))
             (at start (arms-drive-pose))
         )
         :effect
         (and
             (at start (not (table-inspected-recently ?t)))
-            (at end ([update-robot-pose ?t]))
+            (at end ([update-robot-pose ?t ?l]))
         )
     )
 
@@ -138,7 +139,7 @@
             (at start (assign (arm-state ?a) arm_unknown))
             (at end (not (object-on ?o ?t)))
             (at end (object-grasped ?o ?a))
-            (at end ([apply-pickup ?o ?a ?t ?l]))
+            (at end ([apply-pickup ?o ?a ?t]))
         )
     )
 
@@ -151,6 +152,7 @@
             (at start (table-inspected-recently ?t))
             (at start (arms-drive-pose))
             (at start (object-grasped ?o ?a))
+            (at start ([can-putdown ?o ?a ?t]))
         )
         :effect
         (and
@@ -158,6 +160,7 @@
             (at start (assign (arm-state ?a) arm_unknown))
             (at end (object-on ?o ?t))
             (at end (not (object-grasped ?o ?a)))
+            (at end ([apply-putdown ?o ?a ?t]))
         )
     )
 
