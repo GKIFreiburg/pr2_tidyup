@@ -11,15 +11,31 @@ int main(int argc, char **argv)
 	ros::AsyncSpinner spinner(1);
 	spinner.start();
 
+	ros::ServiceClient torso_client = nh.serviceClient<control_robot_msgs::MoveIt>("/control_robot/torso_lift_max");
+	control_robot_msgs::MoveIt srv;
+
+	ROS_INFO("Wait for existence of service: %s", torso_client.getService().c_str());
+	torso_client.waitForExistence();
+
+	if (!torso_client.exists())
+		ROS_ERROR("Client %s does not exist.", torso_client.getService().c_str());
+
+	if (!torso_client.call(srv))
+	{
+		ROS_ERROR("Could not send service message to client: %s", torso_client.getService().c_str());
+		return 1;
+	}
+	ROS_INFO("Service call for torso was successful.");
+
+
+	// move arms to side
 	ros::ServiceClient client = nh.serviceClient<control_robot_msgs::MoveIt>("/control_robot/arms_to_side");
 
 	ROS_INFO("Wait for existence of service: %s", client.getService().c_str());
 	client.waitForExistence();
 
-	control_robot_msgs::MoveIt srv;
-
 	if(!client.exists())
-		ROS_ERROR("Client does not exists");
+		ROS_ERROR("Client %s does not exist.", client.getService().c_str());
 
 	if (!client.call(srv))
 	{
@@ -27,10 +43,28 @@ int main(int argc, char **argv)
 		return 1;
 	}
 
-	ROS_INFO("Service call was successful.");
+	ROS_INFO("Service call for arms was successful.");
 	return 0;
 
+
 	// using service calls of control_robot -> allows to move both arms simultaneously
+//	// lifting torso
+//	moveit::planning_interface::MoveGroup* torso;
+//	torso = symbolic_planning_utils::MoveGroupInterface::getInstance()->getTorsoGroup();
+//	std::vector<std::string> torso_joints = torso->getJoints();
+//	ROS_ASSERT(torso_joints.size() > 0);
+//	double max_position = torso->getCurrentState().get()->getJointModel(torso_joints[0])->getVariableBounds()[0].max_position_;
+//	// ROS_INFO("Max Position: %lf", max_position);
+//	torso->setJointValueTarget(torso_joints[0], max_position);
+//	moveit::planning_interface::MoveItErrorCode error_code;
+//	ROS_INFO("Lifting torso to max position");
+//	error_code = torso->move();
+//	if (error_code != moveit::planning_interface::MoveItErrorCode::SUCCESS)
+//	{
+//		ROS_ERROR("Could not lift torso!");
+//		return 1;
+//	}
+
 //	moveit::planning_interface::MoveGroup* left_arm;
 //	moveit::planning_interface::MoveGroup* right_arm;
 //	moveit::planning_interface::MoveItErrorCode error_code;
