@@ -8,6 +8,14 @@
 
     <rosparam command="load" ns="tfd_modules" file="$(arg config_pkg)/config/planner_params.yaml" />
 
+	<!-- gki_3dnav_planner and costmaps for navigation modules -->
+	<group ns="tfd_modules">
+		<param name="base_global_planner" value="gki_3dnav_planner/GKI3dNavPlanner" />
+		<param name="GKI3dNavPlanner/primitive_filename" value="$(find gki_3dnav_planner)/config/pr2_base.mprim" />
+		<rosparam file="$(find planner_modules_pr2)/config/global_costmap_static_params.yaml" command="load" ns="global_costmap"/>
+		<rosparam file="$(find gki_3dnav_planner)/config/sbpl_global_params.yaml" command="load" />
+	</group>
+
     <rosparam if="$(arg use_inverse_reachability_maps)" command="load" ns="tfd_modules/irs" file="$(arg config_pkg)/config/inverse_reachability_sampling.yaml" />
 
     <!-- start executive / if required = true, kill roslaunch when node dies -->
@@ -29,7 +37,7 @@
         <rosparam command="load" file="$(find tfd_modules)/config/tfdm_interface.yaml" />
         <rosparam command="load" file="$(arg config_pkg)/config/domain.yaml" />
         <rosparam command="load" file="$(arg config_pkg)/config/module_options.yaml" />
-		<!-- needed to load inverse reachability maps -->
+		<!-- inverse reachability maps -->
         <rosparam if="$(arg use_inverse_reachability_maps)" command="load" file="$(arg config_pkg)/config/inverse_reachability_maps.yaml" />
     </node>
 
