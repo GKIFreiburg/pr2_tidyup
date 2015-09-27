@@ -20,6 +20,8 @@ int main(int argc, char **argv)
 	if (!torso_client.exists())
 		ROS_ERROR("Client %s does not exist.", torso_client.getService().c_str());
 
+	ROS_INFO("Lifting torso...");
+
 	if (!torso_client.call(srv))
 	{
 		ROS_ERROR("Could not send service message to client: %s", torso_client.getService().c_str());

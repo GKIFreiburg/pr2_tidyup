@@ -117,12 +117,28 @@ add_executable(control_robot
 	src/control_torso.cpp
 )
 
+add_executable(lift_torso
+	src/lift_torso.cpp
+)
+
+add_executable(arms_to_side
+	src/arms_to_side.cpp
+)
+
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
 add_dependencies(control_robot control_robot_msgs_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(control_robot
+	${catkin_LIBRARIES}
+)
+
+target_link_libraries(lift_torso
+	${catkin_LIBRARIES}
+)
+
+target_link_libraries(arms_to_side
 	${catkin_LIBRARIES}
 )
 

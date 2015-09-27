@@ -54,6 +54,7 @@ add_service_files(
    FILES
    MoveIt.srv
    MoveItDegrees.srv
+   MoveItPosition.srv
 )
 
 ## Generate actions in the 'action' folder

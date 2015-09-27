@@ -5,6 +5,7 @@
 #include <moveit/move_group_interface/move_group.h>
 #include <control_robot_msgs/MoveIt.h>
 #include <control_robot_msgs/MoveItDegrees.h>
+#include <control_robot_msgs/MoveItPosition.h>
 
 namespace control_robot
 {
@@ -21,6 +22,9 @@ namespace control_robot
 		// Service callback for lifting torso of robot
 		bool torsoLiftMin(control_robot_msgs::MoveIt::Request &req,
 				control_robot_msgs::MoveIt::Response &res);
+		// Service callback for lifting torso of robot to the given position
+		bool torsoLift(control_robot_msgs::MoveItPosition::Request &req,
+				control_robot_msgs::MoveItPosition::Response &res);
 
 		private:
 

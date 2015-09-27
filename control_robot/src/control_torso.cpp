@@ -12,12 +12,15 @@ namespace control_robot
 				"torso_lift_max", &ControlTorso::torsoLiftMax, this);
 		srvTorsoLiftMin_ = nhPriv.advertiseService(
 				"torso_lift_min", &ControlTorso::torsoLiftMin, this);
+		srvTorsoLift_ = nhPriv.advertiseService(
+						"torso_lift", &ControlTorso::torsoLift, this);
 
 	    ROS_INFO("Waiting for %s services.", ros::this_node::getName().c_str());
 	    ros::Duration timeout = ros::Duration(0.5);
 	    // If one service is not online, we get an info message
 	    ros::service::waitForService("control_robot/torso_lift_max", timeout);
 	    ros::service::waitForService("control_robot/torso_lift_min", timeout);
+	    ros::service::waitForService("control_robot/torso_lift", timeout);
 
 	    ROS_INFO("Torso control services are Ready!");
 	}
@@ -31,7 +34,8 @@ namespace control_robot
 	{
 		std::vector<std::string> torso_joints = torso_group_->getJoints();
 		ROS_ASSERT(torso_joints.size() > 0);
-		double max_position = torso_group_->getCurrentState().get()->getJointModel(torso_joints[0])->getVariableBounds()[0].max_position_;
+//		double max_position = torso_group_->getCurrentState().get()->getJointModel(torso_joints[0])->getVariableBounds()[0].max_position_;
+		double max_position = 0.3;
 		moveit::planning_interface::MoveItErrorCode error_code;
 		error_code = moveTorsoJointPosition(max_position);
 		return error_code == moveit::planning_interface::MoveItErrorCode::SUCCESS;
@@ -45,6 +49,15 @@ namespace control_robot
 		double min_position = torso_group_->getCurrentState().get()->getJointModel(torso_joints[0])->getVariableBounds()[0].min_position_;
 		moveit::planning_interface::MoveItErrorCode error_code;
 		error_code = moveTorsoJointPosition(min_position);
+		return error_code == moveit::planning_interface::MoveItErrorCode::SUCCESS;
+	}
+
+	bool ControlTorso::torsoLift(control_robot_msgs::MoveItPosition::Request &req,
+			control_robot_msgs::MoveItPosition::Response &res)
+	{
+		double position = req.position.data;
+		moveit::planning_interface::MoveItErrorCode error_code;
+		error_code = moveTorsoJointPosition(position);
 		return error_code == moveit::planning_interface::MoveItErrorCode::SUCCESS;
 	}
 
