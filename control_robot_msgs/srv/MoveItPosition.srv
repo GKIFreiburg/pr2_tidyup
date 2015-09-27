@@ -1,0 +1,3 @@
+std_msgs/Float64 position
+---
+moveit_msgs/MoveItErrorCodes error_code
