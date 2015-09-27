@@ -1,0 +1,24 @@
+start_time: 1443167854.874
+end_time: 1443168384.361
+execution time: 529.487
+
+Number of replannings: 2
+
+(RE-)PLANNING 	25.671
+SUC: 1443167979.047 	0.000: (move-robot-to-table table1 table1_loc1) [20.000]
+SUC: 1443168019.647 	0.000: (inspect-table table1) [10.000]
+(RE-)PLANNING 	21.393
+SUC: 1443168105.365 	0.000: (pickup-object coke_1 right_arm table1) [20.000]
+SUC: 1443168156.327 	0.000: (arm-to-front right_arm) [15.000]
+SUC: 1443168169.530 	0.000: (inspect-object coke_1 right_arm) [5.000]
+SUC: 1443168235.437 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1443168308.601 	0.000: (inspect-table table1) [10.000]
+SUC: 1443168380.809 	0.000: (putdown-object coke_1 right_arm table1) [20.000]
+
+
+
+Continual planning ended.
+GOAL REACHED by agent!
+ContinualPlanningState: FinishedAtGoal!
+
+

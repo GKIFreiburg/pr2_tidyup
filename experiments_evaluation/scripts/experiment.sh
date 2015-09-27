@@ -52,7 +52,7 @@ else
 fi
 
 ### Step 3
-rosrun arms_to_side arms_to_side
+rosrun control_robot arms_to_side
 if [ $? != 0 ]; then
 	echo "ERROR IN MOVE_GROUP"
 	kill -INT $PID_simulation
