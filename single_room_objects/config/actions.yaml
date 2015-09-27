@@ -1,18 +1,19 @@
 state_creators:
-    - tidyup_state_creators/state_creator_robot_pose robot_location location robot-at location
+    - tidyup_state_creators/state_creator_robot_pose robot-x robot-y robot-theta robot-torso-position robot-at
     - tidyup_state_creators/state_creator_arms_status right_arm_to_side left_arm_to_side right_arm_to_front left_arm_to_front arm-state arm_at_side arm_at_front arm_unknown
-    - tidyup_state_creators/state_creator_from_planning_scene 
+    - tidyup_state_creators/state_creator_from_planning_scene
 goal_creators:
     - tidyup_state_creators/goal_creator_tidyup_initialize
     - tidyup_state_creators/goal_creator_load_tables_into_planning_scene table
     - tidyup_state_creators/goal_creator_define_goal
-#    - tidyup_state_creators/goal_creator_from_planning_scene
 action_executors:
     - object_manipulation_actions/action_executor_arm_to_side arm-to-side right_arm_to_side left_arm_to_side
     - object_manipulation_actions/action_executor_arm_to_front arm-to-front right_arm_to_front left_arm_to_front
-    - object_manipulation_actions/action_executor_inspect_location inspect-location /ork_to_planning_scene /head_traj_controller/point_head_action head_mount_kinect_rgb_link location-inspected location-inspected-recently
+    - object_manipulation_actions/action_executor_inspect_location inspect-location /ork_to_planning_scene /head_traj_controller/point_head_action head_mount_kinect_rgb_link location-inspected table-inspected-recently
+    - object_manipulation_actions/action_executor_arm_to_side arm-to-side right_arm_to_side left_arm_to_side
+    - object_manipulation_actions/action_executor_arm_to_front arm-to-front right_arm_to_front left_arm_to_front
     - object_manipulation_actions/action_executor_inspect_object inspect-object object-inspected
-    - object_manipulation_actions/action_executor_pickup_object pickup-object location-inspected-recently
-    - object_manipulation_actions/action_executor_putdown_object putdown-object location-inspected-recently
-    - navigation_actions/action_executor_ros_navigation move-robot move_base start location-inspected-recently false
-
+    - object_manipulation_actions/action_executor_pickup_object_grounding pickup-object table-inspected-recently
+    - object_manipulation_actions/action_executor_putdown_object_grounding putdown-object table-inspected-recently
+#    - navigation_actions/action_executor_ros_navigation_grounding move-robot-to-table move_base table-inspected-recently sampled-torso-height
+    - navigation_actions/action_executor_ros_navigation move-robot-to-table move_base start table-inspected-recently false
