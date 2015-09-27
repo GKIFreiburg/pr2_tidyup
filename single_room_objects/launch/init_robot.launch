@@ -1,0 +1,7 @@
+<!-- -->
+<launch>
+  <node pkg="control_robot" type="lift_torso" name="lift_torso" args="0.3" output="screen"/>
+
+  <node pkg="control_robot" type="arms_to_side" name="arms_to_side"/>
+
+</launch>

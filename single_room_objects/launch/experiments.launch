@@ -35,13 +35,17 @@
                 commands:
                     - rosrun control_robot arms_to_side
             -
-                name: monitor
+                name: environment
+                commands:
+                    - rosrun experiments_evaluation setLocationsAndObjects single_room_objects 1 3
+            -
+                name: gui
                 commands:
                     - rosrun continual_planning_monitor continual_planning_monitor
             -
                 name: planner
                 commands:
-                    - roslaunch tidyup_executive continual_planning.launch config_pkg:=$(rospack find single_room_objects)
+                    - roslaunch tidyup_executive continual_planning.launch config_pkg:=$(rospack find single_room_objects) start_paused:=false
 
         </rosparam>
     </node>
