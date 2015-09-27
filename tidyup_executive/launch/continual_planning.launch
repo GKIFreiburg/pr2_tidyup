@@ -4,14 +4,14 @@
     <arg name="gui" default="false" />
     <arg name="config_pkg" default="$(find tidyup_demo_launch)"/>
 	<arg name="start_paused" default="true" />
-	<arg name="use_inverse_reachability_maps" default="false" />
+	<arg name="use_inverse_reachability_maps" default="true" />
 
     <rosparam command="load" ns="tfd_modules" file="$(arg config_pkg)/config/planner_params.yaml" />
 
     <rosparam if="$(arg use_inverse_reachability_maps)" command="load" ns="tfd_modules/irs" file="$(arg config_pkg)/config/inverse_reachability_sampling.yaml" />
 
     <!-- start executive / if required = true, kill roslaunch when node dies -->
-    <node pkg="continual_planning_executive" type="continual_planning_executive" args="" respawn="false" name="continual_planning_executive" output="screen" required="true">
+    <node pkg="continual_planning_executive" type="continual_planning_executive" args="" respawn="false" name="continual_planning_executive" output="screen" required="false">
         <param name="start_paused" value="$(arg start_paused)" />
         <param name="locations" value="$(arg config_pkg)/config/locations.dat" />
         <param name="tables" value="$(arg config_pkg)/config/tables.dat" />
