@@ -17,7 +17,7 @@
     (:modules
         (robot-near-table ?t - table conditionchecker robot_near_table@libplanner_modules_pr2.so)
         
-        (path-cost ?t - table cost navigation_cost@libplanner_modules_pr2.so)
+        (path-cost ?t - table ?l - manipulation_location cost navigation_cost@libplanner_modules_pr2.so)
         (path-condition ?t - table ?l - manipulation_location conditionchecker navigation_cost@libplanner_modules_pr2.so)
         (update-robot-pose ?t - table ?l - manipulation_location
             (robot-x)
@@ -107,8 +107,8 @@
 
     (:durative-action move-robot-to-table
         :parameters (?t - table ?l - manipulation_location)
-        ;:duration (= ?duration [path-cost ?t])
-        :duration (= ?duration 20.0)
+        :duration (= ?duration [path-cost ?t ?l])
+        ;:duration (= ?duration 20.0)
         :condition
         (and
             (at start (location-near-table ?l ?t))
