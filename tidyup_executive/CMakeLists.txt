@@ -8,16 +8,16 @@ find_package(catkin REQUIRED
 roscpp
 geometry_msgs
 sensor_msgs
-#analyze_object_actions
 object_manipulation_actions
 tidyup_state_creators
-#planner_modules_pr2
+planner_modules_pr2
 #continual_planning_server
 continual_planning_executive
 continual_planning_monitor
 tfd_modules
+gki_3dnav_planner
+gki_global_localization
 screenrun
-m3rsm_global_localization
 )
 
 ###################################
