@@ -115,7 +115,7 @@
         :effect
         (and
             (at start (not (table-inspected-recently ?t)))
-            (at end ([update-robot-pose ?t]))
+            (at end ([update-robot-pose ?t ?l]))
         )
     )
 
