@@ -28,7 +28,14 @@
             effect navigation_effect@libplanner_modules_pr2.so)
          
         (can-pickup ?o - movable_object ?a - arm ?t - table conditionchecker can_pickup@libplanner_modules_pr2.so)
+        (apply-pickup ?o - movable_object ?a - arm ?t - table
+            (x ?o) (y ?o) (z ?o) (qx ?o) (qy ?o) (qz ?o) (qw ?o)
+            effect pickup_effect@libplanner_modules_pr2.so)
+
         (can-putdown ?o - movable_object ?a - arm ?t - table conditionchecker can_putdown@libplanner_modules_pr2.so)
+        (apply-putdown ?o - movable_object ?a - arm ?t - table
+            (x ?o) (y ?o) (z ?o) (qx ?o) (qy ?o) (qz ?o) (qw ?o)
+            effect putdown_effect@libplanner_modules_pr2.so)
     )
 
     (:constants
@@ -131,6 +138,7 @@
             (at start (assign (arm-state ?a) arm_unknown))
             (at end (not (object-on ?o ?t)))
             (at end (object-grasped ?o ?a))
+            (at end ([apply-pickup ?o ?a ?t]))
         )
     )
 
@@ -143,6 +151,7 @@
             (at start (table-inspected-recently ?t))
             (at start (arms-drive-pose))
             (at start (object-grasped ?o ?a))
+            (at start ([can-putdown ?o ?a ?t]))
         )
         :effect
         (and
@@ -150,6 +159,7 @@
             (at start (assign (arm-state ?a) arm_unknown))
             (at end (object-on ?o ?t))
             (at end (not (object-grasped ?o ?a)))
+            (at end ([apply-putdown ?o ?a ?t]))
         )
     )
 

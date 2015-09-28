@@ -43,10 +43,8 @@
     )
 
     (:predicates
-        (robot-at ?l - location)
+        (table-inspected ?t - table)
         (location-near-table ?l - manipulation_location ?t - table)
-
-        (location-inspected ?l - manipulation_location)
         (table-inspected-recently ?t - table)
         (object-inspected ?o - movable_object)
 
@@ -73,20 +71,19 @@
         (robot-torso-position) - number
     )
 
-    (:durative-action inspect-location
-        :parameters (?l - manipulation_location ?t - table)
+    (:durative-action inspect-table
+        :parameters (?t - table)
         :duration (= ?duration 10.0)
         :condition
         (and
-            (at start (robot-at ?l))
             (at start ([robot-near-table ?t]))
             (at start (not (table-inspected-recently ?t)))
             (at start (arms-drive-pose))
         )
         :effect
         (and
-            (at end (location-inspected ?l))
             (at end (table-inspected-recently ?t))
+            (at end (table-inspected ?t))
         )
     )
 
@@ -118,8 +115,7 @@
         :effect
         (and
             (at start (not (table-inspected-recently ?t)))
-            (at end (robot-at ?l))
-            (at end ([update-robot-pose ?t ?l]))
+            (at end ([update-robot-pose ?t]))
         )
     )
 
@@ -142,7 +138,6 @@
             (at start (assign (arm-state ?a) arm_unknown))
             (at end (not (object-on ?o ?t)))
             (at end (object-grasped ?o ?a))
-            ;(at end (object-inspected ?o))
             (at end ([apply-pickup ?o ?a ?t]))
         )
     )
@@ -187,7 +182,6 @@
         :duration (= ?duration 15.0)
         :condition
         (and
-            ;(at start (arms-drive-pose))
             (at start (not (= (arm-state ?a) arm_at_front)))
         )
         :effect
