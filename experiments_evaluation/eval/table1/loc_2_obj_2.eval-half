@@ -1,0 +1,55 @@
+start_time: 1443289710.175
+end_time: 1443291066.066
+execution time: 1355.892
+
+Number of replannings: 17
+
+(RE-)PLANNING 	36.477
+SUC: 1443289854.677 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1443289969.915 	0.000: (move-robot-to-table table1 table1_loc1) [20.000]
+(RE-)PLANNING 	36.082
+SUC: 1443290054.048 	0.000: (inspect-location table1_loc1 table1) [10.000]
+(RE-)PLANNING 	33.150
+SUC: 1443290110.416 	0.000: (arm-to-front left_arm) [15.000]
+SUC: 1443290124.949 	0.000: (inspect-object coke_1 left_arm) [5.000]
+(RE-)PLANNING 	46.419
+SUC: 1443290194.487 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	33.575
+SUC: 1443290306.237 	0.000: (pickup-object coke_2 right_arm table1) [20.000]
+SUC: 1443290327.619 	0.000: (arm-to-front right_arm) [15.000]
+(RE-)PLANNING 	15.562
+SUC: 1443290354.797 	0.000: (inspect-object coke_2 right_arm) [5.000]
+SUC: 1443290377.765 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	34.565
+SUC: 1443290461.917 	0.000: (inspect-location table1_loc1 table1) [10.000]
+SUC: 1443290501.203 	0.000: (putdown-object coke_2 right_arm table1) [20.000]
+(RE-)PLANNING 	42.215
+ERR: 1443290555.698 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	32.425
+ERR: 1443290598.462 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	42.402
+ERR: 1443290651.576 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	42.326
+ERR: 1443290704.339 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	42.874
+ERR: 1443290757.722 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	21.799
+ERR: 1443290790.281 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	22.028
+ERR: 1443290822.737 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	33.281
+ERR: 1443290866.556 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	33.463
+SUC: 1443290915.665 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	41.787
+SUC: 1443290984.676 	0.000: (move-robot-to-table table1 table1_loc1) [20.000]
+SUC: 1443291028.524 	0.000: (inspect-location table1_loc1 table1) [10.000]
+SUC: 1443291063.768 	0.000: (putdown-object coke_1 left_arm table1) [20.000]
+
+
+
+Continual planning ended.
+GOAL REACHED by agent!
+ContinualPlanningState: FinishedAtGoal!
+
+
