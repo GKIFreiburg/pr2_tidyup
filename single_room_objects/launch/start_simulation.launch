@@ -17,7 +17,8 @@
   <include file="$(find single_room_objects)/launch/rviz.launch">
   </include>
 
-  <node pkg="control_robot" type="lift_torso" name="lift_torso" args="0.3"/>
+
+  <node pkg="control_robot" type="lift_torso" name="lift_torso" args="0.15"/>
 
   <!--
   # Until Navigation is fixed

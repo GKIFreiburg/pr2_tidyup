@@ -29,7 +29,7 @@
             -
                 name: lift torso
                 commands:
-                    - rosrun control_robot lift_torso 0.3
+                    - rosrun control_robot lift_torso 0.15
             -
                 name: arms_to_side
                 commands:
