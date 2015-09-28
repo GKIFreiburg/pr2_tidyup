@@ -4,7 +4,7 @@ insert_let_time_pass_only_when_running_operators_not_empty: true
 fetch_next_state_immediately_lets_time_pass: true
 timeout_if_plan_found: 30
 # 0 - no timeout, search until a plan is found
-timeout_while_no_plan_found: 300
+timeout_while_no_plan_found: 600
 min_search_time_after_plan_found: 10
 min_search_time_factor_after_plan_found: 0.15
 greedy: true
