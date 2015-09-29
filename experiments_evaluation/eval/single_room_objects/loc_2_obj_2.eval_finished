@@ -1,0 +1,40 @@
+start_time: 1443372049.429
+end_time: 1443373216.203
+execution time: 1166.773
+
+Number of replannings: 7
+
+(RE-)PLANNING 	51.879
+SUC: 1443372173.333 	0.000: (move-robot-to-table table2 table2_loc1) [109.205]
+SUC: 1443372230.843 	0.000: (inspect-location table2_loc1 table2) [10.000]
+(RE-)PLANNING 	55.447
+SUC: 1443372364.808 	0.000: (pickup-object coke_1 left_arm table2) [20.000]
+ERR: 1443372406.511 	0.000: (arm-to-front left_arm) [15.000]
+(RE-)PLANNING 	43.312
+SUC: 1443372468.181 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1443372575.211 	0.000: (move-robot-to-table table2 table2_loc2) [114.747]
+(RE-)PLANNING 	41.313
+SUC: 1443372669.751 	0.000: (inspect-location table2_loc2 table2) [10.000]
+SUC: 1443372698.789 	0.000: (arm-to-front left_arm) [15.000]
+SUC: 1443372721.014 	0.000: (inspect-object coke_1 left_arm) [5.000]
+(RE-)PLANNING 	48.395
+SUC: 1443372799.473 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1443372848.324 	0.000: (putdown-object coke_1 left_arm table2) [20.000]
+SUC: 1443372879.234 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1443372926.859 	0.000: (inspect-location table2_loc2 table2) [10.000]
+SUC: 1443372976.245 	0.000: (pickup-object coke_2 left_arm table2) [20.000]
+ERR: 1443372997.776 	0.000: (arm-to-front left_arm) [15.000]
+(RE-)PLANNING 	40.967
+SUC: 1443373055.503 	0.000: (arm-to-front left_arm) [15.000]
+SUC: 1443373074.983 	0.000: (inspect-object coke_2 left_arm) [5.000]
+SUC: 1443373101.483 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1443373153.283 	0.000: (inspect-location table2_loc2 table2) [10.000]
+SUC: 1443373198.218 	0.000: (putdown-object coke_2 left_arm table2) [20.000]
+(RE-)PLANNING 	8.910
+
+
+
+Continual planning ended.
+GOAL REACHED by agent!
+
+

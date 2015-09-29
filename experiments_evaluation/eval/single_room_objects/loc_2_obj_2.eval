@@ -1,0 +1,30 @@
+start_time: 1443378880.808
+end_time: 1443379830.088
+execution time: 949.281
+
+Number of replannings: 5
+
+(RE-)PLANNING 	51.076
+SUC: 1443379002.902 	0.000: (move-robot-to-table table2 table2_loc1) [110.428]
+SUC: 1443379058.062 	0.000: (inspect-location table2_loc1 table2) [10.000]
+(RE-)PLANNING 	90.020
+SUC: 1443379226.497 	0.000: (pickup-object coke_2 right_arm table2) [20.000]
+SUC: 1443379265.553 	0.000: (arm-to-front right_arm) [15.000]
+SUC: 1443379296.410 	0.000: (inspect-object coke_2 right_arm) [5.000]
+SUC: 1443379334.157 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	61.645
+SUC: 1443379445.797 	0.000: (inspect-location table2_loc1 table2) [10.000]
+SUC: 1443379497.971 	0.000: (putdown-object coke_2 right_arm table2) [20.000]
+SUC: 1443379534.093 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1443379684.987 	0.000: (move-robot-to-table table2 table2_loc3) [203.079]
+(RE-)PLANNING 	41.675
+SUC: 1443379774.050 	0.000: (inspect-location table2_loc3 table2) [10.000]
+(RE-)PLANNING 	42.758
+Planning failed, result: PR_FAILURE_OTHER
+
+
+
+Continual planning ended.
+GOAL REACHED by agent!
+
+
