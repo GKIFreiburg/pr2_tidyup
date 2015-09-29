@@ -12,10 +12,9 @@
   <build_depend>geometry_msgs</build_depend>
   <build_depend>sensor_msgs</build_depend>
   <build_depend>gki_3dnav_planner</build_depend>
-#  <build_depend>analyze_object_actions</build_depend>
   <build_depend>object_manipulation_actions</build_depend>
   <build_depend>tidyup_state_creators</build_depend>
-#  <build_depend>planner_modules_pr2</build_depend>
+  <build_depend>planner_modules_pr2</build_depend>
 #  <build_depend>continual_planning_server</build_depend>
   <build_depend>continual_planning_executive</build_depend>
   <build_depend>continual_planning_monitor</build_depend>
@@ -26,10 +25,9 @@
   <run_depend>geometry_msgs</run_depend>
   <run_depend>sensor_msgs</run_depend>
   <run_depend>gki_3dnav_planner</run_depend>
-#  <run_depend>analyze_object_actions</run_depend>
   <run_depend>object_manipulation_actions</run_depend>
   <run_depend>tidyup_state_creators</run_depend>
-#  <run_depend>planner_modules_pr2</run_depend>
+  <run_depend>planner_modules_pr2</run_depend>
 #  <run_depend>continual_planning_server</run_depend>
   <run_depend>continual_planning_executive</run_depend>
   <run_depend>continual_planning_monitor</run_depend>
