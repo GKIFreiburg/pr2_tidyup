@@ -26,7 +26,12 @@ int main(int argc, char** argv)
     int num_objects = atoi(argv[3]);
 
     std::stringstream eval;
-    eval << "loc_" << num_locations << "_obj_" << num_objects << ".eval";
+    std::string path = ros::package::getPath("experiments_evaluation");
+    path += "/eval/" + config_pkg;
+    std::string cmd = "mkdir " + path;
+    ROS_INFO("PATH: %s", cmd.c_str());
+    system(cmd.c_str());
+    eval << config_pkg << "/loc_" << num_locations << "_obj_" << num_objects << ".eval";
     ros::param::set("evaluation", eval.str());
 
     // read locations to set
