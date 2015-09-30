@@ -23,6 +23,7 @@
         <param name="start_paused" value="$(arg start_paused)" />
         <param name="locations" value="$(arg config_pkg)/config/locations.dat" />
         <param name="tables" value="$(arg config_pkg)/config/tables.dat" />
+		<param name="wave_head_degrees" value="40" />
         <!-- tolerance to use when determining if navigation has reached a target (i.e. we are AT a target)
             if nav_target_tolerance_relative_to_move_base is true, nav_base_local_planner_ns should give
             the namespace that holds the xy_goal_tolerance parameter the base_local_planner uses.
