@@ -1,0 +1,7 @@
+number_draws: 40
+deviation_x: 0.5
+deviation_y: 0.5
+deviation_z: 0.5
+deviation_theta: 0.785          # =  PI / 4
+min_percent_of_max: 0.0
+min_torso_position: 0.15

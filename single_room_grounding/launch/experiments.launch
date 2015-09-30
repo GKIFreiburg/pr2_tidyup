@@ -1,0 +1,52 @@
+<!-- -->
+<launch>
+    <!-- run on m1 -->
+    <node pkg="screenrun" type="screenrun" name="screenrun_m1" args="b" required="true">
+        <rosparam param="programs">
+            -
+                name: core
+                commands:
+                    - roscore\015
+            -
+                name: robot-sim
+                commands:
+                    - roslaunch --wait tidyup_executive gazebo_robot_single_room.launch config_pkg:=$(rospack find single_room_grounding)\015
+            -
+                <!-- pr2_move_group needs to be started before prerequisites, since it publishes
+                     the robot describtion -->
+                name: pr2_move_group
+                commands:
+                    - roslaunch tidyup_executive pr2_move_group.launch
+            -
+                name: prerequisites
+                commands:
+                    - export ROBOT=sim\015
+                    - roslaunch tidyup_executive prerequisites.launch config_pkg:=$(rospack find single_room_grounding) disable_move_base:=false
+            -
+                name: rviz
+                commands:
+                    - roslaunch single_room_grounding rviz.launch
+            -
+                name: lift torso
+                commands:
+                    - rosrun control_robot lift_torso 0.15
+            -
+                name: arms_to_side
+                commands:
+                    - rosrun control_robot arms_to_side
+            -
+                name: environment
+                commands:
+                    - rosrun experiments_evaluation setLocationsAndObjects single_room_grounding 1 1
+            -
+                name: gui
+                commands:
+                    - rosrun continual_planning_monitor continual_planning_monitor
+            -
+                name: planner
+                commands:
+                    - roslaunch tidyup_executive continual_planning.launch config_pkg:=$(rospack find single_room_grounding) start_paused:=false
+
+        </rosparam>
+    </node>
+</launch>
