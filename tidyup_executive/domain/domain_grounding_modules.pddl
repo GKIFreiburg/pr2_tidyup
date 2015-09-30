@@ -18,14 +18,14 @@
         (determine-drive-pose grounding determine_drive_pose@libplanner_modules_pr2.so)
         (robot-near-table ?t - table conditionchecker robot_near_table@libplanner_modules_pr2.so)
         
-        (path-cost ?t - table cost navigation_cost@libplanner_modules_pr2.so)
-        (path-condition ?t - table conditionchecker navigation_cost@libplanner_modules_pr2.so)
+        (path-cost ?t - table cost navigation_cost_grounding@libplanner_modules_pr2.so)
+        (path-condition ?t - table conditionchecker navigation_cost_grounding@libplanner_modules_pr2.so)
         (update-robot-pose ?t - table
             (robot-x)
             (robot-y)
             (robot-theta)
             (robot-torso-position)
-            effect navigation_effect@libplanner_modules_pr2.so)
+            effect navigation_effect_grounding@libplanner_modules_pr2.so)
          
         (can-pickup ?o - movable_object ?a - arm ?t - table conditionchecker can_pickup@libplanner_modules_pr2.so)
         (apply-pickup ?o - movable_object ?a - arm ?t - table
