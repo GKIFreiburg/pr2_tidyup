@@ -1,0 +1,45 @@
+start_time: 1443874456.739
+end_time: 1443875954.348
+execution time: 1497.609
+
+Number of replannings: 6
+
+(RE-)PLANNING 	40.572
+SUC: 1443874651.858 	0.000: (move-robot-to-table table2 table2_0) [164.442]
+SUC: 1443874704.437 	0.000: (inspect-table table2) [10.000]
+(RE-)PLANNING 	42.198
+SUC: 1443874819.420 	0.000: (pickup-object coke_1 right_arm table2) [20.000]
+SUC: 1443874859.094 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1443874917.528 	0.000: (inspect-table table2) [10.000]
+SUC: 1443874951.340 	0.000: (arm-to-front right_arm) [15.000]
+SUC: 1443874976.915 	0.000: (inspect-object coke_1 right_arm) [5.000]
+SUC: 1443875007.774 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1443875062.257 	0.000: (putdown-object coke_1 right_arm table2) [20.000]
+ERR: 1443875088.286 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	47.599
+SUC: 1443875164.096 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1443875219.649 	0.000: (inspect-table table2) [10.000]
+(RE-)PLANNING 	51.991
+SUC: 1443875345.744 	0.000: (pickup-object coke_2 left_arm table2) [20.000]
+SUC: 1443875375.512 	0.000: (arm-to-front left_arm) [15.000]
+SUC: 1443875396.472 	0.000: (inspect-object coke_2 left_arm) [5.000]
+SUC: 1443875429.408 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1443875488.085 	0.000: (inspect-table table2) [10.000]
+(RE-)PLANNING 	47.748
+SUC: 1443875588.285 	0.000: (putdown-object coke_2 left_arm table2) [20.000]
+SUC: 1443875622.152 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1443875675.077 	0.000: (inspect-table table2) [10.000]
+SUC: 1443875725.593 	0.000: (pickup-object coke_3 left_arm table2) [20.000]
+SUC: 1443875756.559 	0.000: (arm-to-front left_arm) [15.000]
+SUC: 1443875777.196 	0.000: (inspect-object coke_3 left_arm) [5.000]
+SUC: 1443875811.175 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1443875869.294 	0.000: (inspect-table table2) [10.000]
+SUC: 1443875913.403 	0.000: (putdown-object coke_3 left_arm table2) [20.000]
+SUC: 1443875934.256 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	9.716
+
+
+
+Continual planning ended.
+GOAL was NOT REACHED.
+
