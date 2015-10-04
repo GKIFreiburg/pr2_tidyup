@@ -1,0 +1,47 @@
+start_time: 1443990683.660
+end_time: 1443992568.796
+execution time: 1885.136
+
+Number of replannings: 9
+
+(RE-)PLANNING 	51.896
+SUC: 1443990820.875 	0.000: (move-robot-to-table table2 table2_loc2) [141.131]
+SUC: 1443990865.565 	0.000: (inspect-table table2) [10.000]
+(RE-)PLANNING 	65.666
+ERR: 1443990969.271 	0.000: (pickup-object coke_1 left_arm table2) [20.000]
+(RE-)PLANNING 	66.090
+SUC: 1443991052.209 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	66.335
+SUC: 1443991166.370 	0.000: (inspect-table table2) [10.000]
+(RE-)PLANNING 	65.731
+SUC: 1443991293.041 	0.000: (pickup-object coke_1 left_arm table2) [20.000]
+SUC: 1443991337.136 	0.000: (arm-to-front left_arm) [15.000]
+SUC: 1443991366.924 	0.000: (inspect-object coke_1 left_arm) [5.000]
+SUC: 1443991405.949 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	66.072
+SUC: 1443991525.167 	0.000: (inspect-table table2) [10.000]
+(RE-)PLANNING 	63.416
+SUC: 1443991641.614 	0.000: (putdown-object coke_1 left_arm table2) [20.000]
+SUC: 1443991687.647 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1443991754.905 	0.000: (inspect-table table2) [10.000]
+SUC: 1443991888.228 	0.000: (move-robot-to-table table2 table2_loc3) [156.370]
+SUC: 1443991946.458 	0.000: (inspect-table table2) [10.000]
+(RE-)PLANNING 	60.160
+SUC: 1443992136.316 	0.000: (move-robot-to-table table2 table2_loc2) [152.970]
+SUC: 1443992193.039 	0.000: (inspect-table table2) [10.000]
+SUC: 1443992279.516 	0.000: (move-robot-to-table table2 table2_loc1) [98.641]
+SUC: 1443992327.597 	0.000: (inspect-table table2) [10.000]
+SUC: 1443992367.994 	0.000: (pickup-object coke_2 left_arm table2) [20.000]
+SUC: 1443992397.332 	0.000: (arm-to-front left_arm) [15.000]
+SUC: 1443992416.174 	0.000: (inspect-object coke_2 left_arm) [5.000]
+SUC: 1443992442.332 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1443992494.517 	0.000: (inspect-table table2) [10.000]
+SUC: 1443992536.170 	0.000: (putdown-object coke_2 left_arm table2) [20.000]
+SUC: 1443992551.502 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	8.635
+
+
+
+Continual planning ended.
+GOAL was NOT REACHED.
+
