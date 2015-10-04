@@ -150,6 +150,7 @@
             (at start ([robot-near-table ?t]))
             (at start (table-inspected-recently ?t))
             (at start (arms-drive-pose))
+            (at start (object-inspected ?o))
             (at start (object-grasped ?o ?a))
             (at start ([can-putdown ?o ?a ?t]))
         )
