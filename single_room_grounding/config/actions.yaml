@@ -13,4 +13,4 @@ action_executors:
     - object_manipulation_actions/action_executor_inspect_object inspect-object object-inspected
     - object_manipulation_actions/action_executor_pickup_object pickup-object table-inspected-recently
     - object_manipulation_actions/action_executor_putdown_object putdown-object table-inspected-recently
-    - navigation_actions/action_executor_ros_navigation_grounding move-robot-to-table move_base table-inspected-recently sampled-torso-height
+    - navigation_actions/action_executor_ros_navigation_grounding move-robot-to-table move_base table-inspected-recently
