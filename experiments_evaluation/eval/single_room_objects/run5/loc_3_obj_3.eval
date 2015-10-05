@@ -1,0 +1,47 @@
+start_time: 1444043395.623
+end_time: 1444045469.656
+execution time: 2074.033
+
+Number of replannings: 4
+
+(RE-)PLANNING 	51.542
+SUC: 1444043531.990 	0.000: (move-robot-to-table table2 table2_loc2) [139.969]
+SUC: 1444043581.146 	0.000: (inspect-table table2) [10.000]
+(RE-)PLANNING 	84.346
+SUC: 1444043729.210 	0.000: (pickup-object coke_2 left_arm table2) [20.000]
+SUC: 1444043783.385 	0.000: (arm-to-front left_arm) [15.000]
+SUC: 1444043824.941 	0.000: (inspect-object coke_2 left_arm) [5.000]
+SUC: 1444043873.293 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1444043948.448 	0.000: (inspect-table table2) [10.000]
+SUC: 1444044018.942 	0.000: (putdown-object coke_2 left_arm table2) [20.000]
+SUC: 1444044066.508 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1444044135.608 	0.000: (inspect-table table2) [10.000]
+SUC: 1444044274.715 	0.000: (move-robot-to-table table2 table2_loc3) [160.167]
+(RE-)PLANNING 	77.372
+SUC: 1444044401.506 	0.000: (inspect-table table2) [10.000]
+SUC: 1444044471.366 	0.000: (pickup-object coke_1 left_arm table2) [20.000]
+SUC: 1444044523.132 	0.000: (arm-to-front left_arm) [15.000]
+SUC: 1444044563.357 	0.000: (inspect-object coke_1 left_arm) [5.000]
+SUC: 1444044611.071 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1444044684.473 	0.000: (inspect-table table2) [10.000]
+SUC: 1444044835.899 	0.000: (move-robot-to-table table2 table2_loc2) [151.131]
+SUC: 1444044898.914 	0.000: (inspect-table table2) [10.000]
+SUC: 1444044952.626 	0.000: (putdown-object coke_1 left_arm table2) [20.000]
+SUC: 1444044993.614 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1444045052.371 	0.000: (inspect-table table2) [10.000]
+SUC: 1444045143.176 	0.000: (move-robot-to-table table2 table2_loc1) [114.381]
+SUC: 1444045193.941 	0.000: (inspect-table table2) [10.000]
+SUC: 1444045266.250 	0.000: (pickup-object coke_3 right_arm table2) [20.000]
+SUC: 1444045296.381 	0.000: (arm-to-front right_arm) [15.000]
+SUC: 1444045315.562 	0.000: (inspect-object coke_3 right_arm) [5.000]
+SUC: 1444045343.203 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1444045396.460 	0.000: (inspect-table table2) [10.000]
+SUC: 1444045436.414 	0.000: (putdown-object coke_3 right_arm table2) [20.000]
+SUC: 1444045452.021 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	8.811
+
+
+
+Continual planning ended.
+GOAL was NOT REACHED.
+
