@@ -50,7 +50,7 @@ int main(int argc, char** argv)
     if (!file.is_open())
     {
     	ROS_ERROR("Could not open target locations file!");
-    	EXIT_FAILURE;
+    	return EXIT_FAILURE;
     }
 
     // write target file

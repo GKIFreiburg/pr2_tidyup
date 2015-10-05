@@ -129,6 +129,7 @@ include_directories(
 
 ## Declare a C++ executable
 add_executable(setLocationsAndObjects src/setLocationsAndObjects.cpp)
+add_executable(setCansAndCubes src/setCansAndCubes.cpp)
 
 ## Add cmake target dependencies of the executable
 ## same as for the library above
@@ -136,6 +137,10 @@ add_executable(setLocationsAndObjects src/setLocationsAndObjects.cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(setLocationsAndObjects
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(setCansAndCubes
   ${catkin_LIBRARIES}
 )
 
