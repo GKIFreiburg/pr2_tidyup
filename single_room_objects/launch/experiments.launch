@@ -37,7 +37,7 @@
             -
                 name: environment
                 commands:
-                    - rosrun experiments_evaluation setLocationsAndObjects single_room_objects 1 3
+                    - rosrun experiments_evaluation setLocationsAndObjects single_room_objects 3 3
             -
                 name: gui
                 commands:
