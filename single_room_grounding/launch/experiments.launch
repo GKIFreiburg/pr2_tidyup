@@ -27,17 +27,13 @@
                 commands:
                     - roslaunch single_room_grounding rviz.launch
             -
-                name: lift torso
-                commands:
-                    - rosrun control_robot lift_torso 0.15
-            -
                 name: arms_to_side
                 commands:
                     - rosrun control_robot arms_to_side
             -
                 name: environment
                 commands:
-                    - rosrun experiments_evaluation setLocationsAndObjects single_room_grounding 1 1
+                    - rosrun experiments_evaluation setLocationsAndObjects single_room_grounding 3 3
             -
                 name: gui
                 commands:
