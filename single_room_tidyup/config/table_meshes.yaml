@@ -1,0 +1,7 @@
+table_meshes:
+  table1:
+    package: single_room_tidyup
+    path: maps/table1.bag
+  table2: 
+    package: single_room_tidyup
+    path: maps/table2.bag
