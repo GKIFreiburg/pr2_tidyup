@@ -1,74 +1,65 @@
-start_time: 1444136863.505
-end_time: 1444139761.576
-execution time: 2898.070
+start_time: 1444148097.277
+end_time: 1444150607.165
+execution time: 2509.889
 
-Number of replannings: 18
+Number of replannings: 16
 
-(RE-)PLANNING 	42.853
-SUC: 1444137050.909 	0.000: (move-robot-to-table table2 table2_0) [108.307]
-SUC: 1444137103.755 	0.000: (inspect-table table2) [10.000]
-(RE-)PLANNING 	65.748
-SUC: 1444137248.826 	0.000: (pickup-object coke_2 left_arm table2) [20.000]
-SUC: 1444137280.364 	0.000: (arm-to-front left_arm) [15.000]
-SUC: 1444137304.899 	0.000: (inspect-object coke_2 left_arm) [5.000]
-ERR: 1444137327.642 	0.000: (arm-to-side left_arm) [15.000]
-(RE-)PLANNING 	62.981
-ERR: 1444137400.946 	0.000: (arm-to-side left_arm) [15.000]
-(RE-)PLANNING 	59.326
-ERR: 1444137470.452 	0.000: (arm-to-side left_arm) [15.000]
-(RE-)PLANNING 	90.505
-ERR: 1444137571.290 	0.000: (arm-to-side left_arm) [15.000]
-(RE-)PLANNING 	118.980
-ERR: 1444137700.397 	0.000: (arm-to-side left_arm) [15.000]
-(RE-)PLANNING 	70.620
-ERR: 1444137781.206 	0.000: (arm-to-side left_arm) [15.000]
-(RE-)PLANNING 	69.196
-ERR: 1444137860.530 	0.000: (arm-to-side left_arm) [15.000]
-(RE-)PLANNING 	73.911
-SUC: 1444137951.211 	0.000: (arm-to-side left_arm) [15.000]
-SUC: 1444138020.567 	0.000: (inspect-table table2) [10.000]
-SUC: 1444138085.663 	0.000: (putdown-object coke_2 left_arm table2) [20.000]
-SUC: 1444138130.147 	0.000: (arm-to-side left_arm) [15.000]
-SUC: 1444138193.667 	0.000: (inspect-table table2) [10.000]
-SUC: 1444138277.881 	0.000: (pickup-object coke_3 right_arm table2) [20.000]
-(RE-)PLANNING 	44.153
-SUC: 1444138365.072 	0.000: (arm-to-front right_arm) [15.000]
-(RE-)PLANNING 	51.060
-SUC: 1444138428.481 	0.000: (arm-to-front right_arm) [15.000]
-SUC: 1444138450.192 	0.000: (inspect-object coke_3 right_arm) [5.000]
-SUC: 1444138478.311 	0.000: (arm-to-side right_arm) [15.000]
-SUC: 1444138535.315 	0.000: (inspect-table table2) [10.000]
-(RE-)PLANNING 	54.714
-SUC: 1444138635.043 	0.000: (putdown-object coke_3 right_arm table2) [20.000]
-SUC: 1444138668.565 	0.000: (arm-to-side right_arm) [15.000]
-(RE-)PLANNING 	87.537
-SUC: 1444138807.358 	0.000: (inspect-table table2) [10.000]
-(RE-)PLANNING 	58.925
-SUC: 1444138904.348 	0.000: (pickup-object coke_2 right_arm table2) [20.000]
-SUC: 1444138946.232 	0.000: (arm-to-front right_arm) [15.000]
-(RE-)PLANNING 	39.802
-SUC: 1444138998.678 	0.000: (arm-to-front right_arm) [15.000]
-SUC: 1444139020.626 	0.000: (inspect-object coke_2 right_arm) [5.000]
-SUC: 1444139049.006 	0.000: (arm-to-side right_arm) [15.000]
-SUC: 1444139107.615 	0.000: (inspect-table table2) [10.000]
-SUC: 1444139155.817 	0.000: (putdown-object coke_2 right_arm table2) [20.000]
-SUC: 1444139182.757 	0.000: (arm-to-side right_arm) [15.000]
-SUC: 1444139231.779 	0.000: (inspect-table table2) [10.000]
-SUC: 1444139255.501 	0.000: (move-robot-to-table table2 table2_0) [2.593]
-(RE-)PLANNING 	48.414
-SUC: 1444139351.980 	0.000: (inspect-table table2) [10.000]
-SUC: 1444139380.837 	0.000: (move-robot-to-table table2 table2_0) [10.593]
-SUC: 1444139429.776 	0.000: (inspect-table table2) [10.000]
-SUC: 1444139485.393 	0.000: (pickup-object coke_1 right_arm table2) [20.000]
-SUC: 1444139512.890 	0.000: (arm-to-front right_arm) [15.000]
-(RE-)PLANNING 	45.695
-SUC: 1444139571.067 	0.000: (arm-to-front right_arm) [15.000]
-SUC: 1444139591.421 	0.000: (inspect-object coke_1 right_arm) [5.000]
-SUC: 1444139617.269 	0.000: (arm-to-side right_arm) [15.000]
-SUC: 1444139670.333 	0.000: (inspect-table table2) [10.000]
-SUC: 1444139717.223 	0.000: (putdown-object coke_1 right_arm table2) [20.000]
-SUC: 1444139743.330 	0.000: (arm-to-side right_arm) [15.000]
-(RE-)PLANNING 	8.700
+(RE-)PLANNING 	42.130
+SUC: 1444148306.059 	0.000: (move-robot-to-table table2 table2_0) [206.031]
+SUC: 1444148356.368 	0.000: (inspect-table table2) [10.000]
+(RE-)PLANNING 	83.558
+SUC: 1444148503.891 	0.000: (pickup-object coke_3 right_arm table2) [20.000]
+SUC: 1444148547.267 	0.000: (arm-to-front right_arm) [15.000]
+SUC: 1444148581.439 	0.000: (inspect-object coke_3 right_arm) [5.000]
+SUC: 1444148621.375 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1444148688.956 	0.000: (inspect-table table2) [10.000]
+SUC: 1444148752.505 	0.000: (putdown-object coke_3 right_arm table2) [20.000]
+SUC: 1444148789.353 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1444148850.074 	0.000: (inspect-table table2) [10.000]
+SUC: 1444148906.860 	0.000: (pickup-object coke_2 right_arm table2) [20.000]
+SUC: 1444148948.821 	0.000: (arm-to-front right_arm) [15.000]
+SUC: 1444148980.976 	0.000: (inspect-object coke_2 right_arm) [5.000]
+SUC: 1444149018.846 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1444149083.529 	0.000: (inspect-table table2) [10.000]
+SUC: 1444149145.195 	0.000: (putdown-object coke_2 right_arm table2) [20.000]
+SUC: 1444149187.009 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1444149246.410 	0.000: (inspect-table table2) [10.000]
+SUC: 1444149394.429 	0.000: (move-robot-to-table table2 table2_0) [165.280]
+SUC: 1444149443.811 	0.000: (inspect-table table2) [10.000]
+SUC: 1444149562.903 	0.000: (pickup-object coke_1 left_arm table2) [20.000]
+SUC: 1444149609.408 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1444149661.869 	0.000: (inspect-table table2) [10.000]
+(RE-)PLANNING 	39.554
+ERR: 1444149726.228 	0.000: (arm-to-front left_arm) [15.000]
+(RE-)PLANNING 	44.106
+SUC: 1444149802.832 	0.000: (arm-to-front left_arm) [15.000]
+SUC: 1444149823.310 	0.000: (inspect-object coke_1 left_arm) [5.000]
+ERR: 1444149844.049 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	47.752
+ERR: 1444149902.032 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	42.693
+ERR: 1444149955.131 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	40.420
+ERR: 1444150005.875 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	46.545
+ERR: 1444150062.698 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	47.973
+ERR: 1444150120.948 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	47.684
+ERR: 1444150178.977 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	44.123
+ERR: 1444150233.384 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	41.948
+ERR: 1444150285.639 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	40.829
+ERR: 1444150336.768 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	40.404
+ERR: 1444150387.483 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	44.723
+SUC: 1444150459.769 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1444150509.704 	0.000: (putdown-object coke_1 left_arm table2) [20.000]
+SUC: 1444150543.021 	0.000: (arm-to-side left_arm) [15.000]
+(RE-)PLANNING 	8.753
 
 
 
