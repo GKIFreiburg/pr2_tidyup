@@ -1,0 +1,82 @@
+start_time: 1444241839.198
+end_time: 1444249711.214
+execution time: 7872.016
+
+Number of replannings: 18
+
+(RE-)PLANNING 	234.811
+SUC: 1444242247.097 	0.000: (move-robot-to-table table2 table2_0) [202.348]
+SUC: 1444242308.069 	0.000: (inspect-table table2) [10.000]
+(RE-)PLANNING 	321.188
+SUC: 1444242811.324 	0.000: (pickup-object cube_2 right_arm table2) [20.000]
+SUC: 1444242872.868 	0.000: (arm-to-front right_arm) [15.000]
+SUC: 1444242922.847 	0.000: (inspect-object cube_2 right_arm) [5.000]
+(RE-)PLANNING 	339.451
+ERR: 1444243314.623 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	271.017
+SUC: 1444243602.488 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1444243679.328 	0.000: (inspect-table table2) [10.000]
+SUC: 1444243830.009 	0.000: (move-robot-to-table table2 table2_0) [163.539]
+(RE-)PLANNING 	264.747
+SUC: 1444244159.734 	0.000: (inspect-table table2) [10.000]
+SUC: 1444244263.849 	0.000: (pickup-object cube_1 left_arm table2) [20.000]
+SUC: 1444244304.428 	0.000: (arm-to-front left_arm) [15.000]
+SUC: 1444244334.173 	0.000: (inspect-object cube_1 left_arm) [5.000]
+SUC: 1444244371.773 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1444244440.691 	0.000: (inspect-table table2) [10.000]
+SUC: 1444244664.956 	0.000: (move-robot-to-table table1 table1_1) [222.860]
+SUC: 1444244725.035 	0.000: (inspect-table table1) [10.000]
+(RE-)PLANNING 	335.805
+SUC: 1444245126.131 	0.000: (putdown-object cube_1 left_arm table1) [20.000]
+SUC: 1444245185.717 	0.000: (arm-to-side left_arm) [15.000]
+SUC: 1444245275.407 	0.000: (inspect-table table1) [10.000]
+ERR: 1444245350.680 	0.000: (putdown-object cube_2 right_arm table1) [20.000]
+(RE-)PLANNING 	278.893
+ERR: 1444245640.102 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	306.070
+ERR: 1444245956.550 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	296.311
+ERR: 1444246263.335 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	267.585
+SUC: 1444246549.083 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	286.783
+SUC: 1444246885.685 	0.000: (inspect-table table1) [10.000]
+SUC: 1444246970.975 	0.000: (putdown-object cube_2 right_arm table1) [20.000]
+ERR: 1444247019.995 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	266.043
+SUC: 1444247304.649 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	268.316
+SUC: 1444247637.270 	0.000: (inspect-table table1) [10.000]
+(RE-)PLANNING 	252.334
+SUC: 1444247925.598 	0.000: (pickup-object coke_2 right_arm table1) [20.000]
+SUC: 1444247962.053 	0.000: (arm-to-front right_arm) [15.000]
+SUC: 1444247992.563 	0.000: (inspect-object coke_2 right_arm) [5.000]
+(RE-)PLANNING 	260.557
+SUC: 1444248295.566 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1444248359.244 	0.000: (inspect-table table1) [10.000]
+SUC: 1444248517.108 	0.000: (move-robot-to-table table2 table2_1) [217.877]
+(RE-)PLANNING 	252.702
+SUC: 1444248838.466 	0.000: (inspect-table table2) [10.000]
+SUC: 1444248907.743 	0.000: (putdown-object coke_2 right_arm table2) [20.000]
+SUC: 1444248960.729 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1444249030.646 	0.000: (inspect-table table2) [10.000]
+SUC: 1444249184.905 	0.000: (move-robot-to-table table1 table1_0) [237.332]
+SUC: 1444249245.269 	0.000: (inspect-table table1) [10.000]
+SUC: 1444249303.140 	0.000: (pickup-object coke_1 right_arm table1) [20.000]
+SUC: 1444249344.297 	0.000: (arm-to-front right_arm) [15.000]
+SUC: 1444249373.685 	0.000: (inspect-object coke_1 right_arm) [5.000]
+SUC: 1444249416.505 	0.000: (arm-to-side right_arm) [15.000]
+SUC: 1444249557.853 	0.000: (move-robot-to-table table2 table2_0) [185.508]
+SUC: 1444249610.802 	0.000: (inspect-table table2) [10.000]
+SUC: 1444249658.075 	0.000: (putdown-object coke_1 right_arm table2) [20.000]
+ERR: 1444249667.822 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	9.552
+SUC: 1444249692.857 	0.000: (arm-to-side right_arm) [15.000]
+(RE-)PLANNING 	8.765
+
+
+
+Continual planning ended.
+GOAL REACHED by agent!
+
+
