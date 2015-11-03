@@ -1,3 +1,0 @@
-In order to see the grasps execute:
-
-roslaunch pick show_grasps.launch

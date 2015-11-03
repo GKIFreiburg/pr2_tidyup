@@ -10,8 +10,6 @@ action_executors:
     - object_manipulation_actions/action_executor_arm_to_side arm-to-side right_arm_to_side left_arm_to_side
     - object_manipulation_actions/action_executor_arm_to_front arm-to-front right_arm_to_front left_arm_to_front
     - object_manipulation_actions/action_executor_inspect_table inspect-table /ork_to_planning_scene /head_traj_controller/point_head_action head_mount_kinect_rgb_link table-inspected table-inspected-recently
-    - object_manipulation_actions/action_executor_arm_to_side arm-to-side right_arm_to_side left_arm_to_side
-    - object_manipulation_actions/action_executor_arm_to_front arm-to-front right_arm_to_front left_arm_to_front
     - object_manipulation_actions/action_executor_inspect_object inspect-object object-inspected
     - object_manipulation_actions/action_executor_pickup_object pickup-object table-inspected-recently
     - object_manipulation_actions/action_executor_putdown_object putdown-object table-inspected-recently

@@ -35,11 +35,15 @@
   <build_depend>moveit_msgs</build_depend>
   <build_depend>roscpp</build_depend>
   <build_depend>moveit_ros_planning_interface</build_depend>
+  <build_depend>symbolic_planning_utils</build_depend>
+  <build_depend>costmap_2d</build_depend>
 
   <run_depend>manipulation_location_generator_msgs</run_depend>
   <run_depend>moveit_msgs</run_depend>
   <run_depend>roscpp</run_depend>
   <run_depend>moveit_ros_planning_interface</run_depend>
+  <run_depend>symbolic_planning_utils</run_depend>
+  <run_depend>costmap_2d</run_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

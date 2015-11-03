@@ -41,6 +41,18 @@
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
 
+  <build_depend>roscpp</build_depend>
+  <build_depend>roslib</build_depend>
+  <build_depend>rosbag</build_depend>
+  <build_depend>moveit_msgs</build_depend>
+  <build_depend>tidyup_utils</build_depend>
+
+  <run_depend>roscpp</run_depend>
+  <run_depend>roslib</run_depend>
+  <run_depend>rosbag</run_depend>
+  <run_depend>moveit_msgs</run_depend>
+  <run_depend>tidyup_utils</run_depend>
+
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
