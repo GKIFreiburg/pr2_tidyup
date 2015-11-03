@@ -1,9 +1,0 @@
-<launch>
-
- <node name="move_object_main" pkg="move_object" type="move_object_main" output="screen">
-    <rosparam command="load" file="$(find moveit_simple_grasps)/config/pr2_grasp_data.yaml"/>
-    <!-- needed by EE (end-effector) marker -->
-    <!--rosparam command="load" file="$(find pr2_moveit_config)/config/kinematics.yaml"/--> 
- </node>
- 
- </launch>

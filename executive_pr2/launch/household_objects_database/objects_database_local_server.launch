@@ -1,9 +1,0 @@
-<launch>
-
-  <!-- database connection parameters -->
-  <rosparam command="load" file="$(find executive_pr2)/config/household_objects_database/localhost.yaml"/>
-  <!-- start the database wrapper node -->
-  <node pkg="household_objects_database" name="objects_database_node" type="objects_database_node" 
-  	respawn="true" output="screen"/>
-
-</launch>
