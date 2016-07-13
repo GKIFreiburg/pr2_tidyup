@@ -3,6 +3,10 @@ sensors:
     point_cloud_topic: /head_mount_kinect/depth_registered/points_ground_filtered
     max_range: 5.0
     point_subsample: 1
+    shape_padding: 0.01
     padding_offset: 0.1
     padding_scale: 1.0
     filtered_cloud_topic: filtered_cloud
+    self_mask:
+        min_sensor_dist: .5
+        self_see_default_padding: .04

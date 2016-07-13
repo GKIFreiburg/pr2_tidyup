@@ -22,6 +22,10 @@
     <arg name="pipeline" value="ompl" />
   </include>
 
+  <include file="$(find tidyup_pr2_moveit_config)/launch/point_cloud_motion_filter.launch">
+    <arg name="openni_nodelet_manager_name" value="$(arg openni_nodelet_manager_name)" />
+  </include>
+
   <include file="$(find tidyup_pr2_moveit_config)/launch/point_cloud_ground_filter.launch">
     <arg name="openni_nodelet_manager_name" value="$(arg openni_nodelet_manager_name)" />
   </include>

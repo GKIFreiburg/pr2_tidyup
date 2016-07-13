@@ -9,7 +9,7 @@ filter_limit_max: 2.0
 filter_limit_negative: false
 keep_organized: true
 input_frame: /base_link</rosparam>
-		<remap from="~input" to="/head_mount_kinect/depth_registered/points"/>
+		<remap from="~input" to="/head_mount_kinect/depth_registered/points_motion_filtered"/>
 		<remap from="~output" to="/head_mount_kinect/depth_registered/points_ground_filtered"/>
 	</node>
 </launch>
