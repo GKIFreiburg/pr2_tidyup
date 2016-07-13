@@ -6,11 +6,11 @@
             -
                 name: core
                 commands:
-                    - roscore\015
+                    - roscore
             -
                 name: robot-sim
                 commands:
-                    - roslaunch --wait tidyup_executive gazebo_robot_single_room.launch config_pkg:=$(rospack find single_room_objects)\015
+                    - roslaunch --wait tidyup_executive gazebo_robot_single_room.launch config_pkg:=$(rospack find single_room_objects)
             -
                 <!-- pr2_move_group needs to be started before prerequisites, since it publishes
                      the robot describtion -->

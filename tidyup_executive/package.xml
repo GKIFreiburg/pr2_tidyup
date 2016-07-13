@@ -33,6 +33,8 @@
   <run_depend>continual_planning_monitor</run_depend>
   <run_depend>tfd_modules</run_depend>
   <run_depend>screenrun</run_depend>
+  <run_depend>pc_motion_filter</run_depend>
+
 
 </package>
 

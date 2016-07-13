@@ -1,4 +1,4 @@
-<!-- -->
+<?xml version="1.0" ?>
 <launch>
   <arg name="config_pkg"/>
   <arg name="gui" default="true"/>
@@ -16,6 +16,9 @@
     <arg name="paused" value="false" />
   </include>
 
+  <node pkg="joy" type="joy_node" name="joy"/>
+  <include file="$(find tidyup_executive)/launch/warehouse_ros.launch" />
+  
 <!--
   <node name="spawn_coke" pkg="gazebo_ros" type="spawn_model" 
    args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 4.61 -y 5.48 -z 0.90" 

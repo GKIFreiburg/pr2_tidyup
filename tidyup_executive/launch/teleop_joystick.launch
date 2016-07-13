@@ -14,7 +14,7 @@
 
   <node type="teleop_pr2" pkg="pr2_teleop" name="pr2_teleop" output="screen">
     <remap from="cmd_vel" to="base_controller/command" />
-    <rosparam file="$(find tidyup_executive)/config/teleop_logitech.yaml" command="load" />
+    <rosparam file="$(find pr2_teleop)/config/teleop.yaml" command="load" />
   </node>
 
 </launch>

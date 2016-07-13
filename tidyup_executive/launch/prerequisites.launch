@@ -1,4 +1,3 @@
-<!-- -->
 <launch>
   <arg name="config_pkg" />
   <arg name="disable_move_base" default="false"/>
