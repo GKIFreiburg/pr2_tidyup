@@ -19,9 +19,9 @@ int main(int argc, char **argv)
 	control_robot::ControlArms controlArms(&right_arm_group, &left_arm_group, &arms_group);
 	control_robot::ControlTorso controlTorso(&torso_group);
 
-    ros::AsyncSpinner spinner(4); // Use 4 threads
-    spinner.start();
-    ros::waitForShutdown();
+	ros::AsyncSpinner spinner(4); // Use 4 threads
+	spinner.start();
+	ros::waitForShutdown();
 	return 0;
 }
 
