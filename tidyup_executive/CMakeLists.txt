@@ -10,7 +10,7 @@ geometry_msgs
 sensor_msgs
 object_manipulation_actions
 tidyup_state_creators
-planner_modules_pr2
+#planner_modules_pr2
 #continual_planning_server
 continual_planning_executive
 continual_planning_monitor

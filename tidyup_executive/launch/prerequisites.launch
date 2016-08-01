@@ -1,22 +1,49 @@
 <launch>
-  <arg name="config_pkg" />
-  <arg name="disable_move_base" default="false"/>
-  <arg name="sim" default="true"/>
-  <arg name="control_robot" default="true"/>
-
   <include file="$(find pr2_machine)/$(env ROBOT).machine" />
 
-  <include file="$(find pr2_navigation_teleop)/teleop.xml" />
+  <include file="$(find tidyup_executive)/launch/teleop_joystick.launch" />
 
-  <group if="$(arg control_robot)">
-  <!-- Control head and arms of robot using service calls -->
-  <node pkg="control_robot" type="control_robot" name="control_robot" output="screen"/>
-  </group>
+  <node pkg="map_server" name="tidyup_map" type="map_server" args="$(env CONFIG_PKG)/maps/map.yaml" respawn="true" />
 
-  <include file="$(find tidyup_executive)/launch/common.launch">
-     <arg name="config_pkg" value="$(arg config_pkg)" />
-     <arg name="disable_move_base" value="$(arg disable_move_base)"/>
-     <arg name="sim" value="$(arg sim)"/>
-  </include>
+  <node pkg="amcl" type="amcl" name="amcl" output="screen">
+	  <remap from="scan" to="base_scan" />
+	  <param name="odom_frame_id" value="odom_combined"/>
+	  <param name="base_frame_id" value="base_footprint"/>
+	  <param name="odom_model_type" value="omni"/>
+	  <param name="odom_alpha5" value="0.1"/>
+	  <param name="transform_tolerance" value="0.2" />
+	  <param name="gui_publish_rate" value="10.0"/>
+	  <param name="laser_max_beams" value="100"/>
+	  <param name="min_particles" value="500"/>
+	  <param name="max_particles" value="5000"/>
+	  <param name="kld_err" value="0.05"/>
+	  <param name="kld_z" value="0.99"/>
+	  <param name="odom_alpha1" value="0.2"/>
+	  <param name="odom_alpha2" value="0.2"/>
+	  <param name="odom_alpha3" value="0.8"/>
+	  <param name="odom_alpha4" value="0.2"/>
+	  <param name="laser_z_hit" value="0.5"/>
+	  <param name="laser_z_short" value="0.05"/>
+	  <param name="laser_z_max" value="0.05"/>
+	  <param name="laser_z_rand" value="0.5"/>
+	  <param name="laser_sigma_hit" value="0.2"/>
+	  <param name="laser_lambda_short" value="0.1"/>
+	  <param name="laser_lambda_short" value="0.1"/>
+	  <param name="laser_model_type" value="likelihood_field"/>
+	  <param name="laser_likelihood_max_dist" value="2.0"/>
+	  <param name="update_min_d" value="0.1"/>
+	  <param name="update_min_a" value="0.15"/>
+	  <param name="resample_interval" value="1"/>
+	  <param name="recovery_alpha_slow" value="0.0"/>
+	  <param name="recovery_alpha_fast" value="0.0"/>
+  </node>
 
+  <include file="$(find tidyup_executive)/launch/global_localization.launch" />
+
+  <include file="$(find pr2_moveit_config)/launch/pr2_move_group.launch" />
+
+  <node pkg="load_octomap" name="load_octomap" type="load_octomap" args="$(env CONFIG_PKG)/maps/map.bt" output="screen"/>
+<!--
+  <include file="$(find gki_3dnav_planner)/launch/move_base_3dnav.launch"/>
+-->
 </launch>

@@ -1,43 +1,21 @@
-<!-- -->
+<?xml version="1.0" ?>
 <launch>
-  <arg name="config_pkg" />
   <arg name="gui" default="true"/>
-  <arg name="kinect_frame_prefix" default="/openni"/>
-  <arg name="openni_nodelet_manager_name" default="openni_nodelet_manager" />
-  <param name="/use_sim_time" value="true" />
-  <!-- Does not work when using screen, define ROBOT_INITIAL_POSE in bashrc 
-  export ROBOT_INITIAL_POSE="-x 4.25 -y 8.5 -z 0 -R 0 -P 0 -Y -1.57" -->
 
-  <node pkg="nodelet" type="nodelet" name="$(arg openni_nodelet_manager_name)"  args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="openni_nodelet_manager"  args="manager"/>
 
-  <include file="$(find pr2_gazebo)/launch/pr2_empty_world.launch">
-    <arg name="gui" value="$(arg gui)" />
-    <arg name="paused" value="false" />
+  <!-- start gazebo with the world from the config pkg -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(env CONFIG_PKG)/gazebo/world.sdf"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
   </include>
 
-  
-  <node name="spawn_map" pkg="gazebo_ros" type="spawn_model" 
-   args="-urdf -file $(arg config_pkg)/simulation/map.urdf -model map" 
-   respawn="false"/>
+  <!-- start pr2 robot -->
+  <include file="$(find pr2_gazebo)/launch/pr2.launch"/>
 
-  <!-- spawn tables   -->
-  <param name="table1" command="$(find xacro)/xacro.py '$(find gazebo_worlds)/objects/table1.urdf.xacro'" />
-  <node name="spawn_table1" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table1 -model table1 -x 4.81 -y 5.28"
-  respawn="false" output="screen" />
-
-  <param name="table2" 
-   command="$(find xacro)/xacro.py '$(find gazebo_worlds)/objects/table2.urdf.xacro'" />
-  <node name="spawn_table2" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table2 -model table2 -x 0.50 -y 6.44" 
-   respawn="false" output="screen" />
-
-  <param name="table_sink" 
-   command="$(find xacro)/xacro.py '$(find gazebo_worlds)/objects/table_sink.urdf.xacro'" />
-  <node name="spawn_table_sink" pkg="gazebo_ros" type="spawn_model" args="-urdf -param table_sink -model table_sink -x 5.80 -y 6.40" 
-   respawn="false" output="screen" />
-
-  <!-- spawn a coke can (.stl object) -->
-  <node name="spawn_coke" pkg="gazebo_ros" type="spawn_model" 
-   args="-urdf -file $(find object_detection)/objects/coke/coke.urdf -model coke_can -x 4.81 -y 5.28 -z 0.90" 
-   respawn="false"/>
-
+  <node pkg="joy" type="joy_node" name="joy"/>
 </launch>

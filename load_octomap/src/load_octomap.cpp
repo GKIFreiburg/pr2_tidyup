@@ -15,7 +15,11 @@ int main(int argc, char **argv)
 	std::string octomap_path = argv[1];
 
 	// send recorded octomap to move_group
-    ros::ServiceClient client = nh.serviceClient<moveit_msgs::LoadMap>("/move_group/load_map");
+    ros::ServiceClient client = nh.serviceClient<moveit_msgs::LoadMap>("move_group/load_map");
+    while(! client.waitForExistence(ros::Duration(3)))
+    {
+    	ROS_INFO_STREAM("service "<<client.getService()<<" has not been advertized yet...");
+    }
     moveit_msgs::LoadMap srv;
     srv.request.filename = octomap_path;
     if (!client.call(srv))
