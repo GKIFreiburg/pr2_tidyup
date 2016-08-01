@@ -43,7 +43,7 @@
   <include file="$(find pr2_moveit_config)/launch/pr2_move_group.launch" />
 
   <node pkg="load_octomap" name="load_octomap" type="load_octomap" args="$(env CONFIG_PKG)/maps/map.bt" output="screen"/>
-<!--
-  <include file="$(find gki_3dnav_planner)/launch/move_base_3dnav.launch"/>
--->
+<!-- 
+  <include file="$(find pr2_3dnav_config)/launch/move_base_3dnav.launch"/>
+ -->
 </launch>
